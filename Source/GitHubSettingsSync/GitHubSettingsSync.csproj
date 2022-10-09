@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,6 +7,15 @@
     <StripSymbols>true</StripSymbols>
     <IsPublishable>true</IsPublishable>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+    <DebuggerSupport>false</DebuggerSupport>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <IlcDisableUnhandledExceptionExperience>false</IlcDisableUnhandledExceptionExperience>
+    <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+    <EventSourceSupport>false</EventSourceSupport>
+    <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,13 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <RdXmlFile Include="rd.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GitHubSettingsSync.Models\GitHubSettingsSync.Models.csproj" />
     <ProjectReference Include="..\GitHubSettingsSync.Repositories\GitHubSettingsSync.Repositories.csproj" />
     <ProjectReference Include="..\GitHubSettingsSync.Services\GitHubSettingsSync.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="rd.xml" />
   </ItemGroup>
 
 </Project>
