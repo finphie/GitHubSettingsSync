@@ -20,7 +20,7 @@ var builder = ConsoleApp.CreateBuilder(args)
             var environmentVariables = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
             var credentials = new Credentials(environmentVariables.Token);
 
-            return new(new ProductHeaderValue("RepositorySettingsSync"), new InMemoryCredentialStore(credentials));
+            return new(new ProductHeaderValue("GitHubSettingsSync"), new InMemoryCredentialStore(credentials));
         });
 
         // 環境変数
@@ -67,8 +67,7 @@ static async ValueTask<int> CommandAsync(
     [Option("bp-rr", "[ブランチ保護][レビュー]レビューを必須にするかどうか。")] bool branchProtectionRequiredReviews = false,
     [Option("bp-rr-dsr", "[ブランチ保護][レビュー]新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。")] bool branchProtectionRequiredReviewsDismissStaleReviews = false,
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
-    [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1,
-    [Option("l", "ラベルの同期を有効にするかどうか。")] bool labels = false)
+    [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1)
 {
     if (repositories is not { Length: > 0 })
     {
