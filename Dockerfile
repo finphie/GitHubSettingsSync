@@ -4,8 +4,8 @@ WORKDIR /app
 RUN apk add clang gcc lld musl-dev build-base zlib-dev
 COPY . ./
 RUN dotnet publish --runtime linux-musl-x64 --configuration Release --output out -p:DebugType=none -p:GenerateDocumentationFile=false -p:Version=$VERSION
-RUN ./app/GitHubSettingsSync --version
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine
 COPY --from=build /app/out/GitHubSettingsSync .
+RUN ./GitHubSettingsSync --version
 ENTRYPOINT ["./GitHubSettingsSync"]
