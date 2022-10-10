@@ -16,8 +16,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get repository name
+        id: get
+        shell: pwsh
+        run: |
+          $repositoryName = [regex]::replace('${{ github.event.repository.name }}', '(?<=.)(?=[A-Z])', '-').ToLower()
+          Write-Output "::set-output name=repository_name::$repositoryName"
+
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           push: false
-          tags: ghcr.io/${{ github.actor }}/${{ github.event.repository.name }}:v0.01
+          tags: ghcr.io/${{ github.actor }}/${{ steps.get.output.repository_name }}:v0.01
