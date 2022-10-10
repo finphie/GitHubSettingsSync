@@ -1,5 +1,5 @@
 name: GitHub Settings Sync
-description:
+description: GitHubの設定を同期するGitHub Actionsです。
 author: finphie
 branding:
   icon: upload-cloud
