@@ -27,4 +27,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: false
+          build-args: VERSION=0.01
           tags: ghcr.io/${{ github.actor }}/${{ steps.get.outputs.repository_name }}:v0.01
