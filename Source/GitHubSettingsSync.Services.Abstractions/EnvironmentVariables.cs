@@ -7,7 +7,7 @@ namespace GitHubSettingsSync.Services;
 /// 環境変数
 /// </summary>
 [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206:Declaration keywords should follow order", Justification = "StyleCop.Analyzersの不具合。https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3527")]
-[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+
 public sealed record EnvironmentVariables
 {
     /// <summary>
