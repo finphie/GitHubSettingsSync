@@ -114,7 +114,7 @@ jobs:
   docker-dotnet:
     name: Docker(.NET)
     needs: check
-    if: needs.check.outputs.dotnet == 'True' && needs.check.outputs.version != ''
+    if: needs.check.outputs.dotnet == 'True' && needs.check.outputs.version != '' && needs.check.outputs.release == 'True'
     runs-on: ubuntu-latest
 
     steps:
