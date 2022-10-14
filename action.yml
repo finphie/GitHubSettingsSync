@@ -7,7 +7,7 @@ branding:
 
 inputs:
   repositories:
-    description: リポジトリ名のリスト。
+    description: カンマ・半角スペース・改行区切りにしたリポジトリ名のリスト。
     required: true
   has-issues:
     description: Issuesを有効にするかどうか。
