@@ -17,10 +17,10 @@ var builder = ConsoleApp.CreateBuilder(args)
         // Library
         services.AddSingleton<IGitHubClient, GitHubClient>(static provider =>
         {
-            var environmentVariables = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
-            var credentials = new Credentials(environmentVariables.Token);
+            var environments = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
+            var credentials = new Credentials(environments.Token);
 
-            return new(new ProductHeaderValue("GitHubSettingsSync"), new InMemoryCredentialStore(credentials));
+            return new(new("GitHubSettingsSync"), new InMemoryCredentialStore(credentials), new(environments.GitHubApiUrl));
         });
 
         // 環境変数

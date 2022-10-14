@@ -25,6 +25,15 @@ public sealed record EnvironmentVariables
     public required string Token { get; init; }
 
     /// <summary>
+    /// GitHub APIのURLを取得または設定します。
+    /// </summary>
+    /// <value>
+    /// 「GITHUB_API_URL」環境変数を返します。
+    /// </value>
+    [ConfigurationKeyName("GITHUB_API_URL")]
+    public required string GitHubApiUrl { get; init; }
+
+    /// <summary>
     /// GitHubオーナー名を取得または設定します。
     /// </summary>
     /// <value>
