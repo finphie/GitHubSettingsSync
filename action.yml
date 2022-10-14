@@ -103,7 +103,7 @@ runs:
   image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.1.0.2'
   args:
     - '--repositories'
-    - ${{ inputs.repositories }}
+    - "${{ inputs.repositories }}"
 
     - '--has-issues'
     - ${{ inputs.has-issues }}
