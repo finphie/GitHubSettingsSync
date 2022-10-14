@@ -19,7 +19,7 @@ var builder = ConsoleApp.CreateBuilder(args)
         services.AddSingleton<IGitHubClient, GitHubClient>(static provider =>
         {
             var environments = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
-            var credentials = new Credentials(environments.Token);
+            var credentials = new Credentials(environments.GitHubToken);
 
             return new(new("GitHubSettingsSync"), new InMemoryCredentialStore(credentials), new(environments.GitHubApiUrl));
         });

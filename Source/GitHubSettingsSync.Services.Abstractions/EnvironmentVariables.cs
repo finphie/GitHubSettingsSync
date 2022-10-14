@@ -22,7 +22,8 @@ public sealed record EnvironmentVariables
     /// <value>
     /// GitHubの個人用アクセストークンを返します。
     /// </value>
-    public required string Token { get; init; }
+    [ConfigurationKeyName("GITHUB_TOKEN")]
+    public required string GitHubToken { get; init; }
 
     /// <summary>
     /// GitHub APIのURLを取得または設定します。
