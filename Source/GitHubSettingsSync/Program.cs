@@ -1,4 +1,5 @@
-﻿using GitHubSettingsSync.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using GitHubSettingsSync.Models;
 using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Services;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +46,7 @@ app.Run();
 static async ValueTask<int> CommandAsync(
     ConsoleAppContext context,
     IUpdateGitHubSettings github,
-    [Option("r", "リポジトリ名のリスト。")] string[] repositories,
+    [Option("r", "カンマ・半角スペース・改行区切りにしたリポジトリ名のリスト。")] string repositories,
     [Option("i", "Issuesを有効にするかどうか。")] bool hasIssues = true,
     [Option("p", "Projectsを有効にするかどうか。")] bool hasProjects = true,
     [Option("w", "Wikiを有効にするかどうか。")] bool hasWiki = true,
@@ -67,12 +68,12 @@ static async ValueTask<int> CommandAsync(
     [Option("bp-rr", "[ブランチ保護][レビュー]レビューを必須にするかどうか。")] bool branchProtectionRequiredReviews = false,
     [Option("bp-rr-dsr", "[ブランチ保護][レビュー]新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。")] bool branchProtectionRequiredReviewsDismissStaleReviews = false,
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
-    [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1)
+    [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")][Range(1, 6)] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1)
 {
-    if (repositories is not { Length: > 0 })
-    {
-        return 0;
-    }
+    var repositoryList = repositories
+        .TrimStart('[')
+        .TrimEnd(']')
+        .Split(new[] { ",", " ", "\r\n", "\n", "\r" }, StringSplitOptions.None);
 
     var settings = new GitHubSettings
     {
@@ -110,7 +111,7 @@ static async ValueTask<int> CommandAsync(
         }
     };
 
-    await github.ExecuteAsync(repositories, settings, context.CancellationToken).ConfigureAwait(false);
+    await github.ExecuteAsync(repositoryList, settings, context.CancellationToken).ConfigureAwait(false);
 
     return github.IsError ? -1 : 0;
 }
