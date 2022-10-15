@@ -19,9 +19,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
       - name: GitHub Settings Sync
-        uses: finphie/git-hub-settings-sync@main
+        uses: finphie/GitHubSettingsSync@v0.1.0
         with:
           repositories: |
             GitHubSettingsSync
