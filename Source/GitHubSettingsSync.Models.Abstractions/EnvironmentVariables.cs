@@ -34,7 +34,7 @@ public sealed record EnvironmentVariables
     /// 「GITHUB_API_URL」環境変数を返します。
     /// </value>
     [ConfigurationKeyName("GITHUB_API_URL")]
-    public required string GitHubApiUrl { get; init; }
+    public string? GitHubApiUrl { get; init; }
 
     /// <summary>
     /// GitHubオーナー名を取得または設定します。

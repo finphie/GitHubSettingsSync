@@ -20,8 +20,12 @@ var builder = ConsoleApp.CreateBuilder(args)
         {
             var environments = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
             var credentials = new Credentials(environments.GitHubToken);
+            var header = new ProductHeaderValue("GitHubSettingsSync");
+            var store = new InMemoryCredentialStore(credentials);
 
-            return new(new("GitHubSettingsSync"), new InMemoryCredentialStore(credentials), new(environments.GitHubApiUrl));
+            return string.IsNullOrEmpty(environments.GitHubApiUrl)
+                ? new(header, store)
+                : new(header, store, new(environments.GitHubApiUrl));
         });
 
         // 環境変数
