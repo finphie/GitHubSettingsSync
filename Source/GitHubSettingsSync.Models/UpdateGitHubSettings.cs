@@ -48,6 +48,11 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
 
         foreach (var repository in repositories)
         {
+            if (string.IsNullOrEmpty(repository))
+            {
+                continue;
+            }
+
             var (owner, repositoryName) = GitHubRepositoryHelper.GetOwnerAndRepositoryName(repository, _settings.GitHubRepositoryOwner);
             GitHubActionsCommand.GroupStart($"{owner}/{repositoryName}");
 
