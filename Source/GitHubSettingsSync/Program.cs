@@ -79,7 +79,7 @@ static async ValueTask<int> CommandAsync(
     var repositoryList = repositories
         .TrimStart('[')
         .TrimEnd(']')
-        .Split(new[] { ",", " ", "\r\n", "\n", "\r" }, StringSplitOptions.None);
+        .Split(new[] { ",", " ", "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
     var settings = new GitHubSettings
     {
