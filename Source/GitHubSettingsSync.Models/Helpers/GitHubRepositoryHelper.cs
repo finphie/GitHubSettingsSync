@@ -11,6 +11,8 @@ static class GitHubRepositoryHelper
     /// <param name="repository">リポジトリ名または「オーナー名/リポジトリ名」形式の文字列。</param>
     /// <param name="defaultOwner">デフォルトのオーナー名。</param>
     /// <returns>オーナー名とリポジトリ名をタプルで返します。オーナー名が取得できなかった場合は、<paramref name="defaultOwner"/>がオーナー名となります。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="repository"/>または<paramref name="defaultOwner"/>がnullです。</exception>
+    /// <exception cref="ArgumentException"><paramref name="repository"/>または<paramref name="defaultOwner"/>が空です。</exception>
     public static (string Owner, string RepositoryName) GetOwnerAndRepositoryName(string repository, string? defaultOwner = null)
     {
         ArgumentException.ThrowIfNullOrEmpty(repository);
