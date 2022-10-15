@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using GitHubSettingsSync.Models;
 using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Services;
@@ -10,7 +11,7 @@ using Octokit.Internal;
 
 var builder = ConsoleApp.CreateBuilder(args)
     .ConfigureHostConfiguration(static config => config.AddEnvironmentVariables())
-    .ConfigureServices(static (context, services) =>
+    .ConfigureServices([DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(EnvironmentVariables))] static (context, services) =>
     {
         // Library
         services.AddSingleton<IGitHubClient, GitHubClient>(static provider =>
