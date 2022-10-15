@@ -25,7 +25,9 @@ var builder = ConsoleApp.CreateBuilder(args)
         });
 
         // 環境変数
-        services.Configure<EnvironmentVariables>(context.Configuration);
+        services.AddOptions<EnvironmentVariables>()
+            .Bind(context.Configuration)
+            .ValidateDataAnnotations();
 
         // Models
         services.AddSingleton<IUpdateGitHubSettings, UpdateGitHubSettings>();
