@@ -55,7 +55,7 @@ jobs:
 
 引数|必須|デフォルト|説明
 -|-|-|-
-repositories|**true**|-|カンマ・半角スペース・改行区切りにしたリポジトリ名のリスト。
+repositories|**true**|-|カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。
 has-issues|false|true|Issuesを有効にするかどうか。
 has-projects|false|true|Projectsを有効にするかどうか。
 has-wiki|false|true|Wikiを有効にするかどうか。
