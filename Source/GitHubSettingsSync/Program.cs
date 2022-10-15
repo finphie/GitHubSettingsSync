@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using GitHubSettingsSync.Models;
 using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Services;
