@@ -92,7 +92,7 @@ inputs:
 
 runs:
   using: docker
-  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.2.1'
+  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.3.0'
   args:
     - '--repositories'
     - "${{ inputs.repositories }}"
