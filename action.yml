@@ -100,7 +100,7 @@ inputs:
 
 runs:
   using: docker
-  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.1.0.2'
+  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.2.0'
   args:
     - '--repositories'
     - "${{ inputs.repositories }}"
