@@ -1,7 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 
-namespace GitHubSettingsSync.Services;
+namespace GitHubSettingsSync.Models;
 
 /// <summary>
 /// 環境変数
@@ -22,7 +23,18 @@ public sealed record EnvironmentVariables
     /// <value>
     /// GitHubの個人用アクセストークンを返します。
     /// </value>
-    public required string Token { get; init; }
+    [Required]
+    [ConfigurationKeyName("GITHUB_TOKEN")]
+    public required string GitHubToken { get; init; }
+
+    /// <summary>
+    /// GitHub APIのURLを取得または設定します。
+    /// </summary>
+    /// <value>
+    /// 「GITHUB_API_URL」環境変数を返します。
+    /// </value>
+    [ConfigurationKeyName("GITHUB_API_URL")]
+    public string? GitHubApiUrl { get; init; }
 
     /// <summary>
     /// GitHubオーナー名を取得または設定します。
@@ -31,5 +43,5 @@ public sealed record EnvironmentVariables
     /// 「GITHUB_REPOSITORY_OWNER」環境変数を返します。
     /// </value>
     [ConfigurationKeyName("GITHUB_REPOSITORY_OWNER")]
-    public required string GitHubRepositoryOwner { get; init; }
+    public string? GitHubRepositoryOwner { get; init; }
 }

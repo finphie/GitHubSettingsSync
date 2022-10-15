@@ -47,13 +47,15 @@ jobs:
           branch-protection-required-reviews-dismiss-stale-reviews: false
           branch-protection-required-reviews-require-code-owner-review: false
           branch-protection-required-reviews-required-approving-review-count: 1
+        env:
+          GITHUB_TOKEN: {{ secrets.PAT }}
 ```
 
 ## 引数
 
 引数|必須|デフォルト|説明
 -|-|-|-
-repositories|**true**|-|リポジトリ名のリスト。
+repositories|**true**|-|カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。
 has-issues|false|true|Issuesを有効にするかどうか。
 has-projects|false|true|Projectsを有効にするかどうか。
 has-wiki|false|true|Wikiを有効にするかどうか。
@@ -76,6 +78,12 @@ branch-protection-required-reviews|false|false|レビューを必須にするか
 branch-protection-required-reviews-dismiss-stale-reviews|false|false|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。
 branch-protection-required-reviews-require-code-owner-review|false|false|コード所有者のレビューが必須かどうか。
 branch-protection-required-reviews-required-approving-review-count|false|1|プルリクエストの承認に必要なレビュアーの数。（1～6人）
+
+## 環境変数
+
+引数|必須|デフォルト|説明
+-|-|-|-
+GITHUB_TOKEN|**true**|-|public_repoスコープを許可したGitHub Personal Access Token。
 
 ## 作者
 

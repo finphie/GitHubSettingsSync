@@ -7,7 +7,7 @@ branding:
 
 inputs:
   repositories:
-    description: リポジトリ名のリスト。
+    description: カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。
     required: true
   has-issues:
     description: Issuesを有効にするかどうか。
@@ -103,7 +103,7 @@ runs:
   image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v0.1.0.2'
   args:
     - '--repositories'
-    - ${{ inputs.repositories }}
+    - "${{ inputs.repositories }}"
 
     - '--has-issues'
     - ${{ inputs.has-issues }}
