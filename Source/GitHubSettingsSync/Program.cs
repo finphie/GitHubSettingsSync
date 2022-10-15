@@ -12,9 +12,6 @@ var builder = ConsoleApp.CreateBuilder(args)
     .ConfigureHostConfiguration(static config => config.AddEnvironmentVariables())
     .ConfigureServices(static (context, services) =>
     {
-        // Logging
-        services.AddLogging();
-
         // Library
         services.AddSingleton<IGitHubClient, GitHubClient>(static provider =>
         {
