@@ -1,5 +1,7 @@
-﻿using GitHubSettingsSync.Services;
+﻿using GitHubSettingsSync.Models.Helpers;
+using GitHubSettingsSync.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace GitHubSettingsSync.Models;
 
@@ -9,6 +11,7 @@ namespace GitHubSettingsSync.Models;
 public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
 {
     readonly ILogger<UpdateGitHubSettings> _logger;
+    readonly EnvironmentVariables _settings;
     readonly IUpdateGitHubRepositorySettingsService _repositorySettingsService;
     readonly IUpdateGitHubBranchProtectionSettingsService _branchProtectionSettingsService;
 
@@ -16,16 +19,19 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
     /// <see cref="UpdateGitHubSettings"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
+    /// <param name="settings">環境変数。</param>
     /// <param name="repositorySettingsService">GitHub設定の操作を行うクラスのインスタンス。</param>
     /// <param name="branchProtectionSettingsService">GitHubブランチ保護設定の操作を行うクラスのインスタンス。</param>
-    /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="repositorySettingsService"/>、<paramref name="branchProtectionSettingsService"/>がnullです。</exception>
-    public UpdateGitHubSettings(ILogger<UpdateGitHubSettings> logger, IUpdateGitHubRepositorySettingsService repositorySettingsService, IUpdateGitHubBranchProtectionSettingsService branchProtectionSettingsService)
+    /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="settings"/>、<paramref name="repositorySettingsService"/>、<paramref name="branchProtectionSettingsService"/>がnullです。</exception>
+    public UpdateGitHubSettings(ILogger<UpdateGitHubSettings> logger, IOptions<EnvironmentVariables> settings, IUpdateGitHubRepositorySettingsService repositorySettingsService, IUpdateGitHubBranchProtectionSettingsService branchProtectionSettingsService)
     {
         ArgumentNullException.ThrowIfNull(logger);
+        ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(repositorySettingsService);
         ArgumentNullException.ThrowIfNull(branchProtectionSettingsService);
 
         _logger = logger;
+        _settings = settings.Value;
         _repositorySettingsService = repositorySettingsService;
         _branchProtectionSettingsService = branchProtectionSettingsService;
     }
@@ -34,23 +40,25 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
     public bool IsError { get; private set; }
 
     /// <inheritdoc/>
-    public async ValueTask ExecuteAsync(IEnumerable<string> repositoryNames, GitHubSettings settings, CancellationToken cancellationToken = default)
+    public async ValueTask ExecuteAsync(IEnumerable<string> repositories, GitHubSettings settings, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(repositoryNames);
+        ArgumentNullException.ThrowIfNull(repositories);
 
         Starting();
 
-        foreach (var repositoryName in repositoryNames)
+        foreach (var repository in repositories)
         {
-            GitHubActionsCommand.GroupStart(repositoryName);
+            GitHubActionsCommand.GroupStart(repository);
+
+            var (owner, repositoryName) = GitHubRepositoryHelper.GetOwnerAndRepositoryName(repository, _settings.GitHubRepositoryOwner);
 
             try
             {
-                await _repositorySettingsService.ExecuteAsync(repositoryName, settings.Repository, cancellationToken).ConfigureAwait(false);
+                await _repositorySettingsService.ExecuteAsync(owner, repository, settings.Repository, cancellationToken).ConfigureAwait(false);
 
                 if (settings.BranchProtection is { } branchProtection)
                 {
-                    await _branchProtectionSettingsService.ExecuteAsync(repositoryName, settings.Branch, branchProtection, cancellationToken).ConfigureAwait(false);
+                    await _branchProtectionSettingsService.ExecuteAsync(owner, repository, settings.Branch, branchProtection, cancellationToken).ConfigureAwait(false);
                 }
             }
             catch (Exception ex)

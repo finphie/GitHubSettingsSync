@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 
-namespace GitHubSettingsSync.Services;
+namespace GitHubSettingsSync.Models;
 
 /// <summary>
 /// 環境変数
@@ -41,5 +41,5 @@ public sealed record EnvironmentVariables
     /// 「GITHUB_REPOSITORY_OWNER」環境変数を返します。
     /// </value>
     [ConfigurationKeyName("GITHUB_REPOSITORY_OWNER")]
-    public required string GitHubRepositoryOwner { get; init; }
+    public string? GitHubRepositoryOwner { get; init; }
 }

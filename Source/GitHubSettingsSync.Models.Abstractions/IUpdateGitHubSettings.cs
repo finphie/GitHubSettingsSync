@@ -17,9 +17,9 @@ public interface IUpdateGitHubSettings
     /// <summary>
     /// GitHub設定の更新を行います。
     /// </summary>
-    /// <param name="repositoryNames">リポジトリ名のリスト。</param>
+    /// <param name="repositories">リポジトリ名または「オーナー名/リポジトリ名」形式の文字列のリスト。</param>
     /// <param name="settings">GitHubに関する設定。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
-    ValueTask ExecuteAsync(IEnumerable<string> repositoryNames, GitHubSettings settings, CancellationToken cancellationToken = default);
+    ValueTask ExecuteAsync(IEnumerable<string> repositories, GitHubSettings settings, CancellationToken cancellationToken = default);
 }
