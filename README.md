@@ -40,8 +40,6 @@ jobs:
           branch-protection-allow-force-pushes: false
           branch-protection-allow-deletions: false
           branch-protection-required-conversation-resolution: false
-          branch-protection-required-status-checks-strict: false
-          branch-protection-required-status-checks-contexts: null
           branch-protection-required-reviews: false
           branch-protection-required-reviews-dismiss-stale-reviews: false
           branch-protection-required-reviews-require-code-owner-review: false
@@ -71,8 +69,6 @@ branch-protection-required-linear-history|false|false|直線状の履歴を必�
 branch-protection-allow-force-pushes|false|false|強制プッシュを許可するかどうか。
 branch-protection-allow-deletions|false|false|プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。
 branch-protection-required-conversation-resolution|false|false|マージ前にコメントの解決を必須にするかどうか。
-branch-protection-required-status-checks-strict|false|false|マージする前にブランチを最新にする必要があるかどうか。
-branch-protection-required-status-checks-contexts|false|null|合格する必要があるステータスチェックのリスト。
 branch-protection-required-reviews|false|false|レビューを必須にするかどうか。
 branch-protection-required-reviews-dismiss-stale-reviews|false|false|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。
 branch-protection-required-reviews-require-code-owner-review|false|false|コード所有者のレビューが必須かどうか。

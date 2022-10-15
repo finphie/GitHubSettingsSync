@@ -73,14 +73,6 @@ inputs:
     description: '[ブランチ保護]マージ前にコメントの解決を必須にするかどうか。'
     required: false
     default: false
-  branch-protection-required-status-checks-strict:
-    description: '[ブランチ保護][ステータスチェック]マージする前にブランチを最新にする必要があるかどうか。'
-    required: false
-    default: false
-  branch-protection-required-status-checks-contexts:
-    description: '[ブランチ保護][ステータスチェック]合格する必要があるステータスチェックのリスト。'
-    required: false
-    default: null
   branch-protection-required-reviews:
     description: '[ブランチ保護][レビュー]レビューを必須にするかどうか。'
     required: false
@@ -152,12 +144,6 @@ runs:
 
     - '--branch-protection-required-conversation-resolution'
     - ${{ inputs.branch-protection-required-conversation-resolution }}
-
-    - '--branch-protection-required-status-checks-strict'
-    - ${{ inputs.branch-protection-required-status-checks-strict }}
-
-    - '--branch-protection-required-status-checks-contexts'
-    - ${{ inputs.branch-protection-required-status-checks-contexts }}
 
     - '--branch-protection-required-reviews'
     - ${{ inputs.branch-protection-required-reviews }}
