@@ -1,0 +1,48 @@
+<Project>
+  <!-- Blazor WebAssembly関連の設定 -->
+
+  <PropertyGroup>
+    <IsPublishable>true</IsPublishable>
+
+    <!-- タイムゾーンサポートを無効にする。 -->
+    <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+
+    <!-- 照合順序情報を無効にする。 -->
+    <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
+
+    <!-- スレッドサポートを有効にする。 -->
+    <WasmEnableThreads>true</WasmEnableThreads>
+
+    <!-- SIMDサポートを有効にする。 -->
+    <WasmEnableSIMD>true</WasmEnableSIMD>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+    <!-- Emscriptenコンパイラーの設定 -->
+    <EmccCompileOptimizationFlag>-O3</EmccCompileOptimizationFlag>
+    <EmccLinkOptimizationFlag>-O3</EmccLinkOptimizationFlag>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.WebAssembly.Threading" Version="*" />
+  </ItemGroup>
+
+  <!-- repository.json出力の際に使用する。 -->
+  <ItemGroup>
+    <ProjectIdentifier Include="BlazorWebAssembly" />
+  </ItemGroup>
+
+  <Import Project="$(BuildCommonDirectory)/Trimming.targets" />
+
+  <!-- Blazor WebAssembly関連の検証を行うターゲット。 -->
+  <Target Name="CheckBlazorWebAssembly" BeforeTargets="BeforeBuild">
+    <!--
+      RunAOTCompilationは、Directory.Build.targetsだけでtrueに設定した場合、dotnet publish実行時にエラーとなる。
+      そのため、csprojまたはDirectory.Build.propsでtrueに設定する必要がある。
+      Directory.Build.propsでは出力ファイルの種類やフレームワークでの分岐はできないため、RunAOTCompilationの設定を共通化できない。
+      csprojでの設定を強制する必要があるため、true/falseの指定がない場合はコンパイルエラーとする。
+    -->
+    <Error Condition="'$(RunAOTCompilation)' == ''" Text="RunAOTCompilation is required." />
+  </Target>
+
+</Project>

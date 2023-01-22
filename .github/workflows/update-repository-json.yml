@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '**/*.csproj'
+
+permissions:
+  contents: write
+
+jobs:
+  main:
+    uses: finphie/Actions/.github/workflows/update-repository-json.yml@main
