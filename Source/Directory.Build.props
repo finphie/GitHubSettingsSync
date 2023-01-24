@@ -14,4 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)/$(SolutionName).Shared/**/*.cs" LinkBase="Shared" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(Version)' != ''">
+    <!-- デバッグ情報出力を無効にする。 -->
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
 </Project>
