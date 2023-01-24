@@ -4,19 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <PublishAot>true</PublishAot>
-    <StripSymbols>true</StripSymbols>
-    <IsPublishable>true</IsPublishable>
-    <InvariantGlobalization>true</InvariantGlobalization>
-    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
-    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
-    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
-    <DebuggerSupport>false</DebuggerSupport>
-    <UseSystemResourceKeys>true</UseSystemResourceKeys>
-    <IlcDisableUnhandledExceptionExperience>false</IlcDisableUnhandledExceptionExperience>
-    <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
-    <EventSourceSupport>false</EventSourceSupport>
-    <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
-    <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
+    <EnableReflection>true</EnableReflection>
   </PropertyGroup>
 
   <ItemGroup>
