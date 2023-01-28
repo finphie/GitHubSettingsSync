@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <RdXmlFile Include="rd.xml" />
+    <TrimmerRootDescriptor Include="Roots.xml" />
   </ItemGroup>
 
 </Project>
