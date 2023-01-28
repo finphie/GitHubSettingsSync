@@ -36,6 +36,7 @@ jobs:
           target: GetProjectIdentifier
 
       - run: |
+          echo '${{ steps.project-identifier.outputs }}'
           echo '${{ steps.project-identifier.outputs.lines }}'
 
       - name: Update repository.json
