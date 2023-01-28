@@ -23,7 +23,7 @@ jobs:
 
       - name: Get ProjectIdentifier
         id: project-identifier
-        uses: finphie/Actions/.github/actions/run-msbuild-target@main
+        uses: finphie/Actions/.github/actions/run-msbuild-target@202301281610
         with:
           target: GetProjectIdentifier
 
