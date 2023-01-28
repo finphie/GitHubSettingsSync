@@ -1,0 +1,11 @@
+{
+  "Projects": {
+    "Console": [
+      "GitHubSettingsSync"
+    ],
+    "Windows": [],
+    "Android": [],
+    "AspNet": [],
+    "BlazorWebAssembly": []
+  }
+}
