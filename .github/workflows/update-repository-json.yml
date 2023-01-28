@@ -31,9 +31,9 @@ jobs:
         id: project-identifier2
         run: |
           $lines = dotnet msbuild -nologo -target:GetProjectIdentifier | ForEach-Object { $_.Trim() }
-          Write-Output 'lines2<<EOF'
+          Write-Output 'lines2<<EOF' | Out-File $Env:GITHUB_OUTPUT -Append
           Write-Output $lines | ForEach-Object { $_ | Out-File $Env:GITHUB_OUTPUT -Append }
-          Write-Output 'EOF'
+          Write-Output 'EOF' | Out-File $Env:GITHUB_OUTPUT -Append
 
       - run: |
           echo '${{ toJSON(steps.project-identifier.outputs) }}'
