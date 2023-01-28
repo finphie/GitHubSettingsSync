@@ -27,9 +27,18 @@ jobs:
         with:
           target: GetProjectIdentifier
 
+      - shell: pwsh
+        id: project-identifier2
+        run: |
+          $lines = dotnet msbuild -nologo -target:GetProjectIdentifier | ForEach-Object { $_.Trim() }
+          Write-Output 'lines2<<EOF'
+          Write-Output $lines | ForEach-Object { $_ | Out-File $Env:GITHUB_OUTPUT -Append }
+          Write-Output 'EOF'
+
       - run: |
           echo '${{ toJSON(steps.project-identifier.outputs) }}'
-          echo '${{ steps.project-identifier.outputs.lines }}'
+          echo 'lines2: ${{ steps.project-identifier2.outputs.lines2 }}'
+          echo 'lines1: ${{ steps.project-identifier.outputs.lines }}'
 
       # 実行にはPowerShell 7.3以上が必要。
       - name: Update PowerShell
