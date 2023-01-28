@@ -1,3 +1,5 @@
+name: Update repository.json
+
 on:
   workflow_dispatch:
   pull_request:
@@ -10,50 +12,4 @@ permissions:
 jobs:
   main:
     name: Main
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 7.0.x
-
-      - name: Get ProjectIdentifier
-        id: project-identifier
-        uses: finphie/Actions/.github/actions/run-msbuild-target@202301281610
-        with:
-          target: GetProjectIdentifier
-
-      - shell: pwsh
-        id: project-identifier2
-        run: |
-          $lines = dotnet msbuild -nologo -target:GetProjectIdentifier | ForEach-Object { $_.Trim() }
-          Write-Output 'lines2<<EOF' | Out-File $Env:GITHUB_OUTPUT -Append
-          Write-Output $lines | ForEach-Object { $_ | Out-File $Env:GITHUB_OUTPUT -Append }
-          Write-Output 'EOF' | Out-File $Env:GITHUB_OUTPUT -Append
-
-      - run: |
-          echo '${{ toJSON(steps.project-identifier.outputs) }}'
-          echo 'lines2: ${{ steps.project-identifier2.outputs.lines2 }}'
-          echo 'lines1: ${{ steps.project-identifier.outputs.lines }}'
-
-      # 実行にはPowerShell 7.3以上が必要。
-      - name: Update PowerShell
-        working-directory: ${{ runner.temp }}
-        run: |
-          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
-          sudo dpkg -i packages-microsoft-prod.deb
-          sudo apt-get install -y powershell
-
-      - run: |
-          echo '${{ toJSON(steps.project-identifier.outputs) }}'
-          echo '${{ steps.project-identifier.outputs.lines }}'
-
-      - name: Update repository.json
-        uses: finphie/Actions/.github/actions/update-repository-json@main
-        with:
-          solution-name: ${{ github.event.repository.name }}
-          projects: ${{ steps.project-identifier.outputs.lines }}
+    uses: finphie/Actions/.github/workflows/update-repository-json.yml@main
