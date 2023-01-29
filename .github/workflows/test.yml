@@ -1,0 +1,23 @@
+name: Deploy(Docker)
+
+on:
+  workflow_dispatch:
+  push:
+
+permissions: {}
+
+jobs:
+  check:
+    name: Check
+    uses: finphie/Actions/.github/workflows/get-version.yml@main
+
+  main:
+    name: Deploy(Docker)
+    needs: check
+    shell: pwsh
+    run: |
+      echo '${{ needs.check.outputs.version }}'
+      echo '${{ needs.check.outputs.version-major }}'
+      echo '${{ needs.check.outputs.release }}'
+      echo '${{ needs.check.outputs.dotnet }}'
+      echo '${{ needs.check.outputs.docker }}'
