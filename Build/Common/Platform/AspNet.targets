@@ -1,0 +1,29 @@
+<Project>
+  <!--
+    ASP.NET関連の設定
+    Dynamic PGOを有効にしたい場合があるので、ReadyToRunは無効にする。
+  -->
+
+  <PropertyGroup>
+    <IsPublishable>true</IsPublishable>
+  </PropertyGroup>
+
+  <!-- repository.json出力の際に使用する。 -->
+  <ItemGroup>
+    <ProjectIdentifier Include="AspNet" />
+  </ItemGroup>
+
+  <Import Project="$(BuildCommonDirectory)/SingleFile.targets" />
+  <Import Project="$(BuildCommonDirectory)/Runtime.targets" />
+
+  <PropertyGroup>
+    <!-- ASP.NETはトリミング非対応。 -->
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+
+  <!--
+    TODO: [.NET 8]ReadyToRunを有効にする。
+    https://github.com/dotnet/runtime/pull/70941
+  -->
+
+</Project>

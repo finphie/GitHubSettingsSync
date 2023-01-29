@@ -1,8 +1,0 @@
-<Directives>
-    <Application>
-        <Assembly Name="ConsoleAppFramework">
-            <Type Name="ConsoleAppFramework.DefaultCommands" Dynamic="Required All" />
-        </Assembly>
-        <Assembly Name="Octokit" Dynamic="Required All" />
-    </Application>
-</Directives>

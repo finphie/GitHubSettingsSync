@@ -1,0 +1,6 @@
+<linker>
+  <assembly fullname="ConsoleAppFramework">
+    <type fullname="ConsoleAppFramework.DefaultCommands" preserve="all" />
+  </assembly>
+  <assembly fullname="Octokit" preserve="all" />
+</linker>

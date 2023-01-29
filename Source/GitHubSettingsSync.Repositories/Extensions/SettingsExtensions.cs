@@ -14,7 +14,7 @@ static class SettingsExtensions
     /// <returns><see cref="RepositoryUpdate"/>クラスのインスタンスを返します。</returns>
     public static RepositoryUpdate ToRepositoryUpdate(this in GitHubRepositorySettings settings)
     {
-        return new CustomRepositoryUpdate
+        return new RepositoryUpdate
         {
             HasIssues = settings.HasIssues,
             HasProjects = settings.HasProjects,
@@ -45,10 +45,5 @@ static class SettingsExtensions
             settings.AllowDeletions,
             false,
             settings.RequiredConversationResolution);
-    }
-
-    sealed class CustomRepositoryUpdate : RepositoryUpdate
-    {
-        public bool? AllowUpdateBranch { get; set; }
     }
 }
