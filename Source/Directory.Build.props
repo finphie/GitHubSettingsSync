@@ -23,6 +23,7 @@
     <!-- デバッグ情報出力を無効にする。 -->
     <DebugSymbols>false</DebugSymbols>
     <DebugType>none</DebugType>
+    <NativeDebugSymbols>false</NativeDebugSymbols>
   </PropertyGroup>
 
 </Project>

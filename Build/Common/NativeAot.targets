@@ -7,9 +7,6 @@
   -->
 
   <PropertyGroup>
-    <!-- デバッグシンボルをバイナリから削除する。 -->
-    <StripSymbols>true</StripSymbols>
-
     <!-- より小さいコードサイズを優先する。 -->
     <IlcOptimizationPreference>Size</IlcOptimizationPreference>
 
