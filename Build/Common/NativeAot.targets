@@ -48,13 +48,8 @@
       <_PublishFilePath>$(PublishDir)/$(MSBuildProjectName)</_PublishFilePath>
     </PropertyGroup>
 
-    <Delete Condition="$(_TargetOS) == 'linux'" Files="$(_PublishFilePath).dbg" />
-    <Delete Condition="$(_TargetOS) == 'osx'" Files="$(_PublishFilePath).dwarf" />
-  </Target>
-
-  <Target Name="_DeleteDebugSymbolFileMac" AfterTargets="ComputeLinkedFilesToPublish">
-    <Exec Condition="'$(_TargetOS)' == 'osx'"
-          Command="strip -no_code_signature_warning -x &quot;$(PublishDir)/$(MSBuildProjectName)&quot;" />
+    <Delete Condition="'$(Configuration)' != 'Debug' and $(_TargetOS) == 'osx'" Files="$(_PublishFilePath).dwarf" />
+    <Delete Condition="'$(Configuration)' != 'Debug' and $(_TargetOS) == 'linux'" Files="$(_PublishFilePath).dbg" />
   </Target>
 
 </Project>
