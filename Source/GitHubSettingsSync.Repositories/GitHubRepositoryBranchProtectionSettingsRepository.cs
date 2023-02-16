@@ -1,6 +1,4 @@
-﻿using GitHubSettingsSync.Repositories.Extensions;
-using Microsoft.Extensions.Logging;
-using Octokit;
+﻿using Microsoft.Extensions.Logging;
 
 namespace GitHubSettingsSync.Repositories;
 
@@ -34,8 +32,7 @@ public sealed partial class GitHubRepositoryBranchProtectionSettingsRepository :
 
         Updating();
 
-        var update = item.Settings.ToBranchProtectionSettingsUpdate();
-        return _gitHubClient.Repository.Branch.UpdateBranchProtection(item.Owner, item.Name, item.Branch, update);
+        return _gitHubClient.UpdateBranchProtection(item.Owner, item.Name, item.Branch, item.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating branch protection options.")]

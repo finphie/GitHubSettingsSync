@@ -6,27 +6,27 @@ using GitHubSettingsSync.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Octokit;
-using Octokit.Internal;
+using Microsoft.Net.Http.Headers;
 
 var builder = ConsoleApp.CreateBuilder(args)
     .ConfigureHostConfiguration(static config => config.AddEnvironmentVariables())
     .ConfigureServices(static (context, services) =>
     {
-        // Library
-        services.AddSingleton<IGitHubClient, GitHubClient>(static provider =>
+        Bind(services, context.Configuration);
+
+        services.AddHttpClient<IGitHubClient, GitHubClient>(static (provider, client) =>
         {
             var environments = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
-            var credentials = new Credentials(environments.GitHubToken);
-            var header = new ProductHeaderValue("GitHubSettingsSync");
-            var store = new InMemoryCredentialStore(credentials);
+            var url = string.IsNullOrEmpty(environments.GitHubApiUrl)
+                ? new Uri("https://api.github.com/")
+                : new Uri(new(environments.GitHubApiUrl), new Uri("/api/v3/", UriKind.Relative));
 
-            return string.IsNullOrEmpty(environments.GitHubApiUrl)
-                ? new(header, store)
-                : new(header, store, new(environments.GitHubApiUrl));
+            client.BaseAddress = url;
+            client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/vnd.github.v3+json");
+            client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, nameof(GitHubSettingsSync));
+            client.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {environments.GitHubToken}");
+            client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
         });
-
-        Bind(services, context.Configuration);
 
         // Models
         services.AddSingleton<IUpdateGitHubSettings, UpdateGitHubSettings>();
