@@ -1,9 +1,11 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿using System.Text.Json.Serialization;
+
+namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// GitHubブランチ保護に関する設定を表す構造体です。
 /// </summary>
-public readonly record struct GitHubBranchProtectionSettings
+public sealed record GitHubBranchProtectionSettings
 {
     /// <summary>
     /// 管理者にも適用するかどうかを取得または設定します。
@@ -11,6 +13,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("enforce_admins")]
     public bool EnforceAdmins { get; init; }
 
     /// <summary>
@@ -19,6 +22,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("required_linear_history")]
     public bool RequiredLinearHistory { get; init; }
 
     /// <summary>
@@ -27,6 +31,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("allow_force_pushes")]
     public bool AllowForcePushes { get; init; }
 
     /// <summary>
@@ -35,6 +40,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("allow_deletions")]
     public bool AllowDeletions { get; init; }
 
     /// <summary>
@@ -43,6 +49,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("required_conversation_resolution")]
     public bool RequiredConversationResolution { get; init; }
 
     /// <summary>
@@ -51,6 +58,7 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("required_status_checks")]
     public GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks { get; init; }
 
     /// <summary>
@@ -59,5 +67,6 @@ public readonly record struct GitHubBranchProtectionSettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("required_pull_request_reviews")]
     public GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews { get; init; }
 }

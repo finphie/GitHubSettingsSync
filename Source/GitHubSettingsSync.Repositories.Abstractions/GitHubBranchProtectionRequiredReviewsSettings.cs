@@ -1,9 +1,11 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿using System.Text.Json.Serialization;
+
+namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// レビューに関するGitHubブランチ保護の設定を表す構造体です。
 /// </summary>
-public readonly record struct GitHubBranchProtectionRequiredReviewsSettings
+public sealed record GitHubBranchProtectionRequiredReviewsSettings
 {
     /// <summary>
     /// <see cref="GitHubBranchProtectionRequiredReviewsSettings"/>構造体の新しいインスタンスを初期化します。
@@ -18,6 +20,7 @@ public readonly record struct GitHubBranchProtectionRequiredReviewsSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("dismiss_stale_reviews")]
     public bool DismissStaleReviews { get; init; }
 
     /// <summary>
@@ -26,6 +29,7 @@ public readonly record struct GitHubBranchProtectionRequiredReviewsSettings
     /// <value>
     /// デフォルトは<see langword="false"/>です。
     /// </value>
+    [JsonPropertyName("require_code_owner_reviews")]
     public bool RequireCodeOwnerReviews { get; init; }
 
     /// <summary>
@@ -34,5 +38,6 @@ public readonly record struct GitHubBranchProtectionRequiredReviewsSettings
     /// <value>
     /// デフォルトは1人です。
     /// </value>
+    [JsonPropertyName("required_approving_review_count")]
     public RequiredApprovingReviewCount RequiredApprovingReviewCount { get; init; } = RequiredApprovingReviewCount.Default;
 }

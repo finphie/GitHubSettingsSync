@@ -1,9 +1,11 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿using System.Text.Json.Serialization;
+
+namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// GitHubリポジトリに関する設定を表す構造体です。
 /// </summary>
-public readonly record struct GitHubRepositorySettings
+public sealed record GitHubRepositorySettings
 {
     /// <summary>
     /// Issuesを有効にするかどうかを取得または設定します。
@@ -11,6 +13,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("has_issues")]
     public bool? HasIssues { get; init; }
 
     /// <summary>
@@ -19,6 +22,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("has_projects")]
     public bool? HasProjects { get; init; }
 
     /// <summary>
@@ -27,6 +31,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("has_wiki")]
     public bool? HasWiki { get; init; }
 
     /// <summary>
@@ -35,6 +40,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("allow_merge_commit")]
     public bool? AllowMergeCommit { get; init; }
 
     /// <summary>
@@ -43,6 +49,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("allow_rebase_merge")]
     public bool? AllowRebaseMerge { get; init; }
 
     /// <summary>
@@ -51,6 +58,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("allow_squash_merge")]
     public bool? AllowSquashMerge { get; init; }
 
     /// <summary>
@@ -59,6 +67,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("allow_auto_merge")]
     public bool? AllowAutoMerge { get; init; }
 
     /// <summary>
@@ -67,6 +76,7 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("delete_branch_on_merge")]
     public bool? DeleteBranchOnMerge { get; init; }
 
     /// <summary>
@@ -75,5 +85,6 @@ public readonly record struct GitHubRepositorySettings
     /// <value>
     /// デフォルトは<see langword="null"/>（指定なし）です。
     /// </value>
+    [JsonPropertyName("allow_update_branch")]
     public bool? AllowUpdateBranch { get; init; }
 }
