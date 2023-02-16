@@ -25,7 +25,7 @@ public interface IGitHubClient
     /// </summary>
     /// <param name="owner">オーナー。</param>
     /// <param name="name">リポジトリ名。</param>
-    /// <param name="branch">ブランチ。</param>
+    /// <param name="branch">ブランチ名。</param>
     /// <param name="settings">GitHubブランチ保護に関する設定。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <remarks>
