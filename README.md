@@ -101,7 +101,7 @@ MIT
 - Microsoft.Extensions.Hosting
 - Microsoft.Extensions.Logging
 - Microsoft.Extensions.Options
-- [Octokit](https://github.com/octokit/octokit.net)
+- [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 
 ### アナライザー
 
