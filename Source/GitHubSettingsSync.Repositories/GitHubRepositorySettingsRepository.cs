@@ -32,7 +32,7 @@ public sealed partial class GitHubRepositorySettingsRepository : IGitHubReposito
 
         Updating();
 
-        return _gitHubClient.UpdateRepository(item.Owner, item.Name, item.Settings, cancellationToken);
+        return _gitHubClient.UpdateRepositoryAsync(item.Owner, item.Name, item.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository options.")]

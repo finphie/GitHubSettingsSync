@@ -32,7 +32,7 @@ public sealed partial class GitHubRepositoryBranchProtectionSettingsRepository :
 
         Updating();
 
-        return _gitHubClient.UpdateBranchProtection(item.Owner, item.Name, item.Branch, item.Settings, cancellationToken);
+        return _gitHubClient.UpdateBranchProtectionAsync(item.Owner, item.Name, item.Branch, item.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating branch protection options.")]
