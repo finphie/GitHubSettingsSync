@@ -27,25 +27,29 @@ public sealed partial class GitHubClient : IGitHubClient
     }
 
     /// <inheritdoc/>
-    public Task UpdateRepositoryAsync(string owner, string name, GitHubRepositorySettings settings, CancellationToken cancellationToken = default)
+    public async Task UpdateRepositoryAsync(string owner, string name, GitHubRepositorySettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
 
         UpdatingRepositorySettings();
 
-        return _client.PatchAsJsonAsync($"/repos/{owner}/{name}", settings, JsonContext.Default.GitHubRepositorySettings, cancellationToken);
+        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", settings, JsonContext.Default.GitHubRepositorySettings, cancellationToken)
+            .ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
     }
 
     /// <inheritdoc/>
-    public Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtectionSettings settings, CancellationToken cancellationToken = default)
+    public async Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtectionSettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
 
         UpdatingBranchProtectionSettings();
 
-        return _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", settings, JsonContext.Default.GitHubBranchProtectionSettings, cancellationToken);
+        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", settings, JsonContext.Default.GitHubBranchProtectionSettings, cancellationToken)
+            .ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings.")]

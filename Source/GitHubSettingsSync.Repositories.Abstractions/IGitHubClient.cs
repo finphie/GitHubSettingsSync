@@ -18,6 +18,7 @@ public interface IGitHubClient
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="settings"/>がnullです。</exception>
     /// <exception cref="ArgumentException"><paramref name="owner"/>または<paramref name="name"/>が空です。</exception>
+    /// <exception cref="HttpRequestException">HTTPリクエストに失敗しました。</exception>
     Task UpdateRepositoryAsync(string owner, string name, GitHubRepositorySettings settings, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -34,5 +35,6 @@ public interface IGitHubClient
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="branch"/>、<paramref name="settings"/>がnullです。</exception>
     /// <exception cref="ArgumentException"><paramref name="owner"/>または<paramref name="name"/>、<paramref name="branch"/>が空です。</exception>
+    /// <exception cref="HttpRequestException">HTTPリクエストに失敗しました。</exception>
     Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtectionSettings settings, CancellationToken cancellationToken = default);
 }
