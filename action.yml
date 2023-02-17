@@ -81,7 +81,7 @@ inputs:
     description: '[ブランチ保護][レビュー]新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。'
     required: false
     default: false
-  branch-protection-required-reviews-require-code-owner-review:
+  branch-protection-required-reviews-require-code-owner-reviews:
     description: '[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。'
     required: false
     default: false
@@ -151,8 +151,8 @@ runs:
     - '--branch-protection-required-reviews-dismiss-stale-reviews'
     - ${{ inputs.branch-protection-required-reviews-dismiss-stale-reviews }}
 
-    - '--branch-protection-required-reviews-require-code-owner-review'
-    - ${{ inputs.branch-protection-required-reviews-require-code-owner-review }}
+    - '--branch-protection-required-reviews-require-code-owner-reviews'
+    - ${{ inputs.branch-protection-required-reviews-require-code-owner-reviews }}
 
     - '--branch-protection-required-reviews-required-approving-review-count'
     - ${{ inputs.branch-protection-required-reviews-required-approving-review-count }}
