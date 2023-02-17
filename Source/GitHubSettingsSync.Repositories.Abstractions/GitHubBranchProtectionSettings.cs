@@ -19,6 +19,6 @@ public sealed record GitHubBranchProtectionSettings(
     [property: JsonPropertyName("allow_force_pushes")] bool AllowForcePushes = false,
     [property: JsonPropertyName("allow_deletions")] bool AllowDeletions = false,
     [property: JsonPropertyName("required_conversation_resolution")] bool RequiredConversationResolution = false,
-    [property: JsonPropertyName("required_status_checks")] GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks = null,
-    [property: JsonPropertyName("required_pull_request_reviews")] GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews = null,
-    [property: JsonPropertyName("restrictions"), Obsolete("このプロパティは使用できません。", true)] object? Restrictions = null);
+    [property: JsonPropertyName("required_status_checks"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks = null,
+    [property: JsonPropertyName("required_pull_request_reviews"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews = null,
+    [property: JsonPropertyName("restrictions"), JsonIgnore(Condition = JsonIgnoreCondition.Never), Obsolete("このプロパティは使用できません。", true)] object? Restrictions = null);
