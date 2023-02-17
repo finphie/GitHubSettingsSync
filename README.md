@@ -94,14 +94,12 @@ MIT
 
 ### ライブラリ
 
-- [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet)
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
 - Microsoft.Extensions.Configuration
 - Microsoft.Extensions.DependencyInjection
 - Microsoft.Extensions.Hosting
 - Microsoft.Extensions.Logging
 - Microsoft.Extensions.Options
-- [UnitGenerator](https://github.com/Cysharp/UnitGenerator)
 
 ### アナライザー
 

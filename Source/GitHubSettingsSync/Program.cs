@@ -110,7 +110,7 @@ static async ValueTask<int> CommandAsync(
             {
                 DismissStaleReviews = branchProtectionRequiredReviewsDismissStaleReviews,
                 RequireCodeOwnerReviews = branchProtectionRequiredReviewsRequireCodeOwnerReviews,
-                RequiredApprovingReviewCount = new(branchProtectionRequiredReviewsRequiredApprovingReviewCount)
+                RequiredApprovingReviewCount = branchProtectionRequiredReviewsRequiredApprovingReviewCount
             }
         }
     };
