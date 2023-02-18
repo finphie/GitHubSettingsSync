@@ -5,11 +5,21 @@ using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 
 var builder = ConsoleApp.CreateBuilder(args)
-    .ConfigureHostConfiguration(static config => config.AddEnvironmentVariables())
+    .ConfigureHostConfiguration(static x => x.AddEnvironmentVariables())
+    .ConfigureLogging(static logging =>
+    {
+        logging.ClearProviders();
+        logging.AddSimpleConsole(static options =>
+        {
+            options.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+            options.UseUtcTimestamp = true;
+        });
+    })
     .ConfigureServices(static (context, services) =>
     {
         Bind(services, context.Configuration);
