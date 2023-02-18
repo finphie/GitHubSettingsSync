@@ -43,6 +43,7 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
     public async ValueTask ExecuteAsync(IEnumerable<string> repositories, GitHubSettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(repositories);
+        ArgumentNullException.ThrowIfNull(settings);
 
         Starting();
 

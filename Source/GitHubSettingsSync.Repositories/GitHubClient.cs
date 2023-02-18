@@ -31,6 +31,7 @@ public sealed partial class GitHubClient : IGitHubClient
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
+        ArgumentNullException.ThrowIfNull(settings);
 
         UpdatingRepositorySettings();
 
@@ -44,6 +45,7 @@ public sealed partial class GitHubClient : IGitHubClient
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
+        ArgumentNullException.ThrowIfNull(settings);
 
         UpdatingBranchProtectionSettings();
 
