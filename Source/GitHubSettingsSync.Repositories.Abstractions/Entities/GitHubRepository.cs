@@ -14,10 +14,10 @@ namespace GitHubSettingsSync.Repositories.Entities;
 /// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
 /// <param name="DeleteBranchOnMerge">プルリクエストマージ時に、ブランチを自動的に削除するかどうか。</param>
 /// <param name="AllowUpdateBranch">「Update branch」を有効にするかどうか。</param>
-/// <param name="MergeCommitTitle"><inheritdoc cref="MergeCommitTitleType" path="/summary"/></param>
-/// <param name="MergeCommitMessage"><inheritdoc cref="MergeCommitMessageType" path="/summary"/></param>
-/// <param name="SquashMergeCommitTitle"><inheritdoc cref="SquashMergeCommitTitleType" path="/summary"/></param>
-/// <param name="SquashMergeCommitMessage"><inheritdoc cref="SquashMergeCommitMessageType" path="/summary"/></param>
+/// <param name="MergeCommitTitle">マージにおけるコミットタイトルのデフォルトタイプ。</param>
+/// <param name="MergeCommitMessage">マージにおけるコミットメッセージのデフォルトタイプ。</param>
+/// <param name="SquashMergeCommitTitle">スカッシュマージにおけるコミットタイトルのデフォルトタイプ。</param>
+/// <param name="SquashMergeCommitMessage">スカッシュマージにおけるコミットメッセージのデフォルトタイプ。</param>
 public sealed record GitHubRepository(
     [property: JsonPropertyName("has_issues")] bool? HasIssues = null,
     [property: JsonPropertyName("has_projects")] bool? HasProjects = null,
