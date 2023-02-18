@@ -1,5 +1,6 @@
 ﻿using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Repositories.Entities;
+using GitHubSettingsSync.Services.Extensions;
 using GitHubSettingsSync.Services.Settings;
 using Microsoft.Extensions.Logging;
 
