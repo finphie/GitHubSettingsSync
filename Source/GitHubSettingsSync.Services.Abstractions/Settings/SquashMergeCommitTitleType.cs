@@ -1,6 +1,6 @@
 ﻿using GitHubSettingsSync.Repositories.Entities;
 
-namespace GitHubSettingsSync.Services.Entities;
+namespace GitHubSettingsSync.Services.Settings;
 
 /// <inheritdoc cref="GitHubRepository.SquashMergeCommitTitle"/>
 public enum SquashMergeCommitTitleType
