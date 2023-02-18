@@ -1,4 +1,6 @@
 ﻿using GitHubSettingsSync.Repositories;
+using GitHubSettingsSync.Repositories.Entities;
+using GitHubSettingsSync.Services.Entities;
 using Microsoft.Extensions.Logging;
 
 namespace GitHubSettingsSync.Services;
@@ -9,7 +11,7 @@ namespace GitHubSettingsSync.Services;
 public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdateGitHubBranchProtectionSettingsService
 {
     readonly ILogger<UpdateGitHubBranchProtectionSettingsService> _logger;
-    readonly IGitHubRepositoryBranchProtectionSettingsRepository _gitHub;
+    readonly IGitHubRepositoryBranchProtectionRepository _gitHub;
 
     /// <summary>
     /// <see cref="UpdateGitHubBranchProtectionSettingsService"/>クラスの新しいインスタンスを初期化します。
@@ -17,7 +19,7 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
     /// <param name="logger">ロガー。</param>
     /// <param name="gitHub">GitHubブランチ保護設定の操作を行うクラスのインスタンス。</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="gitHub"/>がnullです。</exception>
-    public UpdateGitHubBranchProtectionSettingsService(ILogger<UpdateGitHubBranchProtectionSettingsService> logger, IGitHubRepositoryBranchProtectionSettingsRepository gitHub)
+    public UpdateGitHubBranchProtectionSettingsService(ILogger<UpdateGitHubBranchProtectionSettingsService> logger, IGitHubRepositoryBranchProtectionRepository gitHub)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(gitHub);
@@ -35,9 +37,11 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
 
         Starting();
 
+        var item = new BranchInformation<GitHubBranchProtection>(owner, repositoryName, branch, settings.ToEntity());
+
         try
         {
-            await _gitHub.UpdateAsync(new(owner, repositoryName, branch, settings), cancellationToken).ConfigureAwait(false);
+            await _gitHub.UpdateAsync(item, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

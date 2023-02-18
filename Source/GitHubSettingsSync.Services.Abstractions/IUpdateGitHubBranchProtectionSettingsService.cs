@@ -1,4 +1,4 @@
-﻿using GitHubSettingsSync.Repositories;
+﻿using GitHubSettingsSync.Services.Entities;
 
 namespace GitHubSettingsSync.Services;
 
