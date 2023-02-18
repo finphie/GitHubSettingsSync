@@ -14,5 +14,5 @@ public interface IRepository<T>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="item"/>がnullです。</exception>
-    Task Update(T item, CancellationToken cancellationToken = default);
+    Task UpdateAsync(T item, CancellationToken cancellationToken = default);
 }

@@ -73,7 +73,7 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
         }
     }
 
-    [LoggerMessage(EventId = 1000, Level = LogLevel.Information, Message = $"{nameof(UpdateGitHubSettings)} is starting.")]
+    [LoggerMessage(EventId = 1000, Level = LogLevel.Debug, Message = $"{nameof(UpdateGitHubSettings)} is starting.")]
     partial void Starting();
 
     [LoggerMessage(EventId = 9000, Level = LogLevel.Error)]
