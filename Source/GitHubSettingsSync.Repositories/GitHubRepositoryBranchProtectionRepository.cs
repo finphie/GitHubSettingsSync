@@ -1,22 +1,23 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using GitHubSettingsSync.Repositories.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// GitHubブランチ保護設定に関する操作を行うクラスです。
 /// </summary>
-public sealed partial class GitHubRepositoryBranchProtectionSettingsRepository : IGitHubRepositoryBranchProtectionSettingsRepository
+public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHubRepositoryBranchProtectionRepository
 {
-    readonly ILogger<GitHubRepositoryBranchProtectionSettingsRepository> _logger;
+    readonly ILogger<GitHubRepositoryBranchProtectionRepository> _logger;
     readonly IGitHubClient _gitHubClient;
 
     /// <summary>
-    /// <see cref="GitHubRepositoryBranchProtectionSettingsRepository"/>クラスの新しいインスタンスを初期化します。
+    /// <see cref="GitHubRepositoryBranchProtectionRepository"/>クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
     /// <param name="gitHubClient">GitHubクライアント。</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="gitHubClient"/>がnullです。</exception>
-    public GitHubRepositoryBranchProtectionSettingsRepository(ILogger<GitHubRepositoryBranchProtectionSettingsRepository> logger, IGitHubClient gitHubClient)
+    public GitHubRepositoryBranchProtectionRepository(ILogger<GitHubRepositoryBranchProtectionRepository> logger, IGitHubClient gitHubClient)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(gitHubClient);
@@ -26,7 +27,7 @@ public sealed partial class GitHubRepositoryBranchProtectionSettingsRepository :
     }
 
     /// <inheritdoc/>
-    public Task UpdateAsync(BranchInformation<GitHubBranchProtectionSettings> item, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(BranchInformation<GitHubBranchProtection> item, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(item);
 

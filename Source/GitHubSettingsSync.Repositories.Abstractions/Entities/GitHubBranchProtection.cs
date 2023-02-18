@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GitHubSettingsSync.Repositories;
+namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
 /// GitHubブランチ保護に関する設定を表す構造体です。
@@ -13,12 +13,12 @@ namespace GitHubSettingsSync.Repositories;
 /// <param name="RequiredStatusChecks">ステータスチェックに関するブランチ保護の設定。</param>
 /// <param name="RequiredReviews">レビューに関するブランチ保護の設定。</param>
 /// <param name="Restrictions">保護されたブランチにプッシュできる人のリスト。このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。</param>
-public sealed record GitHubBranchProtectionSettings(
+public sealed record GitHubBranchProtection(
     [property: JsonPropertyName("enforce_admins")] bool EnforceAdmins = false,
     [property: JsonPropertyName("required_linear_history")] bool RequiredLinearHistory = false,
     [property: JsonPropertyName("allow_force_pushes")] bool AllowForcePushes = false,
     [property: JsonPropertyName("allow_deletions")] bool AllowDeletions = false,
     [property: JsonPropertyName("required_conversation_resolution")] bool RequiredConversationResolution = false,
-    [property: JsonPropertyName("required_status_checks"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks = null,
-    [property: JsonPropertyName("required_pull_request_reviews"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews = null,
+    [property: JsonPropertyName("required_status_checks"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecks? RequiredStatusChecks = null,
+    [property: JsonPropertyName("required_pull_request_reviews"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviews? RequiredReviews = null,
     [property: JsonPropertyName("restrictions"), JsonIgnore(Condition = JsonIgnoreCondition.Never), Obsolete("このプロパティは使用できません。", true)] object? Restrictions = null);
