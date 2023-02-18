@@ -26,7 +26,7 @@ public sealed partial class GitHubRepositorySettingsRepository : IGitHubReposito
     }
 
     /// <inheritdoc/>
-    public Task Update(RepositoryInformation<GitHubRepositorySettings> item, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(RepositoryInformation<GitHubRepositorySettings> item, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(item);
 

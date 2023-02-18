@@ -33,7 +33,7 @@ public sealed partial class GitHubClient : IGitHubClient
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(settings);
 
-        UpdatingRepositorySettings();
+        UpdatingRepositorySettings(settings);
 
         var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", settings, JsonContext.Default.GitHubRepositorySettings, cancellationToken)
             .ConfigureAwait(false);
@@ -47,16 +47,16 @@ public sealed partial class GitHubClient : IGitHubClient
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(settings);
 
-        UpdatingBranchProtectionSettings();
+        UpdatingBranchProtectionSettings(settings);
 
         var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", settings, JsonContext.Default.GitHubBranchProtectionSettings, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
 
-    [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings.")]
-    partial void UpdatingRepositorySettings();
+    [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings. {settings}")]
+    partial void UpdatingRepositorySettings(GitHubRepositorySettings settings);
 
-    [LoggerMessage(EventId = 1002, Level = LogLevel.Information, Message = "Updating branch protection settings.")]
-    partial void UpdatingBranchProtectionSettings();
+    [LoggerMessage(EventId = 1002, Level = LogLevel.Information, Message = "Updating branch protection settings. {settings}")]
+    partial void UpdatingBranchProtectionSettings(GitHubBranchProtectionSettings settings);
 }

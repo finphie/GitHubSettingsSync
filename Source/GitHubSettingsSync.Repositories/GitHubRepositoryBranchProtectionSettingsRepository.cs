@@ -26,7 +26,7 @@ public sealed partial class GitHubRepositoryBranchProtectionSettingsRepository :
     }
 
     /// <inheritdoc/>
-    public Task Update(BranchInformation<GitHubBranchProtectionSettings> item, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(BranchInformation<GitHubBranchProtectionSettings> item, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(item);
 

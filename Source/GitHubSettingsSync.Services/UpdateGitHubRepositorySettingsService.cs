@@ -37,7 +37,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
 
         try
         {
-            await _gitHub.Update(new(owner, repositoryName, settings), cancellationToken).ConfigureAwait(false);
+            await _gitHub.UpdateAsync(new(owner, repositoryName, settings), cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -46,7 +46,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
         }
     }
 
-    [LoggerMessage(EventId = 1000, Level = LogLevel.Information, Message = $"{nameof(UpdateGitHubRepositorySettingsService)} is starting.")]
+    [LoggerMessage(EventId = 1000, Level = LogLevel.Debug, Message = $"{nameof(UpdateGitHubRepositorySettingsService)} is starting.")]
     partial void Starting();
 
     [LoggerMessage(EventId = 9000, Level = LogLevel.Error)]
