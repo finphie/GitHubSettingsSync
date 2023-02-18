@@ -2,9 +2,7 @@
 
 namespace GitHubSettingsSync.Services.Entities;
 
-/// <summary>
 /// <inheritdoc cref="GitHubRepository.SquashMergeCommitTitle"/>
-/// </summary>
 public enum SquashMergeCommitTitleType
 {
     /// <summary>

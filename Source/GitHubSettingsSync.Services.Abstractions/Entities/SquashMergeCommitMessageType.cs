@@ -2,9 +2,7 @@
 
 namespace GitHubSettingsSync.Services.Entities;
 
-/// <summary>
 /// <inheritdoc cref="GitHubRepository.SquashMergeCommitMessage"/>
-/// </summary>
 public enum SquashMergeCommitMessageType
 {
     /// <summary>

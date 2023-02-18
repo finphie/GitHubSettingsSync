@@ -2,9 +2,7 @@
 
 namespace GitHubSettingsSync.Services.Entities;
 
-/// <summary>
 /// <inheritdoc cref="GitHubRepository.MergeCommitMessage"/>
-/// </summary>
 public enum MergeCommitMessageType
 {
     /// <summary>
