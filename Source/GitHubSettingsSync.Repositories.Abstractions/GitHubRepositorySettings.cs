@@ -1,79 +1,26 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿using System.Text.Json.Serialization;
+
+namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// GitHubリポジトリに関する設定を表す構造体です。
 /// </summary>
-public readonly record struct GitHubRepositorySettings
-{
-    /// <summary>
-    /// Issuesを有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? HasIssues { get; init; }
-
-    /// <summary>
-    /// Projectsを有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? HasProjects { get; init; }
-
-    /// <summary>
-    /// Wikiを有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? HasWiki { get; init; }
-
-    /// <summary>
-    /// 「Create a merge commit」を有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? AllowMergeCommit { get; init; }
-
-    /// <summary>
-    /// 「Rebase and Merge」を有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? AllowRebaseMerge { get; init; }
-
-    /// <summary>
-    /// 「Squash Merge」を有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? AllowSquashMerge { get; init; }
-
-    /// <summary>
-    /// 自動マージ機能を有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? AllowAutoMerge { get; init; }
-
-    /// <summary>
-    /// プルリクエストマージ時に、ブランチを自動的に削除するかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? DeleteBranchOnMerge { get; init; }
-
-    /// <summary>
-    /// 「Update branch」を有効にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public bool? AllowUpdateBranch { get; init; }
-}
+/// <param name="HasIssues">Issuesを有効にするかどうか。</param>
+/// <param name="HasProjects">Projectsを有効にするかどうか。</param>
+/// <param name="HasWiki">Wikiを有効にするかどうか。</param>
+/// <param name="AllowMergeCommit">「Create a merge commit」を有効にするかどうか。</param>
+/// <param name="AllowRebaseMerge">「Rebase and Merge」を有効にするかどうか。</param>
+/// <param name="AllowSquashMerge">「Squash Merge」を有効にするかどうか。</param>
+/// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
+/// <param name="DeleteBranchOnMerge">プルリクエストマージ時に、ブランチを自動的に削除するかどうか。</param>
+/// <param name="AllowUpdateBranch">「Update branch」を有効にするかどうか。</param>
+public sealed record GitHubRepositorySettings(
+    [property: JsonPropertyName("has_issues")] bool? HasIssues = null,
+    [property: JsonPropertyName("has_projects")] bool? HasProjects = null,
+    [property: JsonPropertyName("has_wiki")] bool? HasWiki = null,
+    [property: JsonPropertyName("allow_merge_commit")] bool? AllowMergeCommit = null,
+    [property: JsonPropertyName("allow_rebase_merge")] bool? AllowRebaseMerge = null,
+    [property: JsonPropertyName("allow_squash_merge")] bool? AllowSquashMerge = null,
+    [property: JsonPropertyName("allow_auto_merge")] bool? AllowAutoMerge = null,
+    [property: JsonPropertyName("delete_branch_on_merge")] bool? DeleteBranchOnMerge = null,
+    [property: JsonPropertyName("allow_update_branch")] bool? AllowUpdateBranch = null);

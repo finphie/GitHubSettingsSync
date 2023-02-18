@@ -42,7 +42,7 @@ jobs:
           branch-protection-required-conversation-resolution: false
           branch-protection-required-reviews: false
           branch-protection-required-reviews-dismiss-stale-reviews: false
-          branch-protection-required-reviews-require-code-owner-review: false
+          branch-protection-required-reviews-require-code-owner-reviews: false
           branch-protection-required-reviews-required-approving-review-count: 1
         env:
           GITHUB_TOKEN: {{ secrets.PAT }}
@@ -71,7 +71,7 @@ branch-protection-allow-deletions|false|false|プッシュアクセス権を持�
 branch-protection-required-conversation-resolution|false|false|マージ前にコメントの解決を必須にするかどうか。
 branch-protection-required-reviews|false|false|レビューを必須にするかどうか。
 branch-protection-required-reviews-dismiss-stale-reviews|false|false|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。
-branch-protection-required-reviews-require-code-owner-review|false|false|コード所有者のレビューが必須かどうか。
+branch-protection-required-reviews-require-code-owner-reviews|false|false|コード所有者のレビューが必須かどうか。
 branch-protection-required-reviews-required-approving-review-count|false|1|プルリクエストの承認に必要なレビュアーの数。（1～6人）
 
 ## 環境変数
@@ -94,14 +94,12 @@ MIT
 
 ### ライブラリ
 
-- [CommunityToolkit.Diagnostics](https://github.com/CommunityToolkit/dotnet)
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
 - Microsoft.Extensions.Configuration
 - Microsoft.Extensions.DependencyInjection
 - Microsoft.Extensions.Hosting
 - Microsoft.Extensions.Logging
 - Microsoft.Extensions.Options
-- [Octokit](https://github.com/octokit/octokit.net)
 
 ### アナライザー
 

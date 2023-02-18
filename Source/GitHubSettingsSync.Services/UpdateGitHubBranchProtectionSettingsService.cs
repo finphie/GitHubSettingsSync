@@ -31,6 +31,7 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
     {
         ArgumentException.ThrowIfNullOrEmpty(repositoryName);
         ArgumentException.ThrowIfNullOrEmpty(branch);
+        ArgumentNullException.ThrowIfNull(settings);
 
         Starting();
 

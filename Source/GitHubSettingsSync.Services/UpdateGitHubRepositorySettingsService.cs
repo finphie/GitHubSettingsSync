@@ -31,6 +31,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(repositoryName);
+        ArgumentNullException.ThrowIfNull(settings);
 
         Starting();
 

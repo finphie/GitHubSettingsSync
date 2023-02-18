@@ -1,63 +1,24 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿using System.Text.Json.Serialization;
+
+namespace GitHubSettingsSync.Repositories;
 
 /// <summary>
 /// GitHubブランチ保護に関する設定を表す構造体です。
 /// </summary>
-public readonly record struct GitHubBranchProtectionSettings
-{
-    /// <summary>
-    /// 管理者にも適用するかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="false"/>です。
-    /// </value>
-    public bool EnforceAdmins { get; init; }
-
-    /// <summary>
-    /// 直線状の履歴を必須にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="false"/>です。
-    /// </value>
-    public bool RequiredLinearHistory { get; init; }
-
-    /// <summary>
-    /// 強制プッシュを許可するかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="false"/>です。
-    /// </value>
-    public bool AllowForcePushes { get; init; }
-
-    /// <summary>
-    /// プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="false"/>です。
-    /// </value>
-    public bool AllowDeletions { get; init; }
-
-    /// <summary>
-    /// マージ前にコメントの解決を必須にするかどうかを取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="false"/>です。
-    /// </value>
-    public bool RequiredConversationResolution { get; init; }
-
-    /// <summary>
-    /// ステータスチェックに関するブランチ保護の設定を取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks { get; init; }
-
-    /// <summary>
-    /// レビューに関するブランチ保護の設定を取得または設定します。
-    /// </summary>
-    /// <value>
-    /// デフォルトは<see langword="null"/>（指定なし）です。
-    /// </value>
-    public GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews { get; init; }
-}
+/// <param name="EnforceAdmins">管理者にも適用するかどうか。</param>
+/// <param name="RequiredLinearHistory">直線状の履歴を必須にするかどうか。</param>
+/// <param name="AllowForcePushes">強制プッシュを許可するかどうか。</param>
+/// <param name="AllowDeletions">プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。</param>
+/// <param name="RequiredConversationResolution">マージ前にコメントの解決を必須にするかどうか。</param>
+/// <param name="RequiredStatusChecks">ステータスチェックに関するブランチ保護の設定。</param>
+/// <param name="RequiredReviews">レビューに関するブランチ保護の設定。</param>
+/// <param name="Restrictions">保護されたブランチにプッシュできる人のリスト。このプロパティは使用していませんが、GitHub APIリクエストの際に必要です。</param>
+public sealed record GitHubBranchProtectionSettings(
+    [property: JsonPropertyName("enforce_admins")] bool EnforceAdmins = false,
+    [property: JsonPropertyName("required_linear_history")] bool RequiredLinearHistory = false,
+    [property: JsonPropertyName("allow_force_pushes")] bool AllowForcePushes = false,
+    [property: JsonPropertyName("allow_deletions")] bool AllowDeletions = false,
+    [property: JsonPropertyName("required_conversation_resolution")] bool RequiredConversationResolution = false,
+    [property: JsonPropertyName("required_status_checks"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredStatusChecksSettings? RequiredStatusChecks = null,
+    [property: JsonPropertyName("required_pull_request_reviews"), JsonIgnore(Condition = JsonIgnoreCondition.Never)] GitHubBranchProtectionRequiredReviewsSettings? RequiredReviews = null,
+    [property: JsonPropertyName("restrictions"), JsonIgnore(Condition = JsonIgnoreCondition.Never), Obsolete("このプロパティは使用できません。", true)] object? Restrictions = null);

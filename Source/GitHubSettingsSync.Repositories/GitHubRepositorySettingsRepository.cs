@@ -1,6 +1,4 @@
-﻿using GitHubSettingsSync.Repositories.Extensions;
-using Microsoft.Extensions.Logging;
-using Octokit;
+﻿using Microsoft.Extensions.Logging;
 
 namespace GitHubSettingsSync.Repositories;
 
@@ -34,8 +32,7 @@ public sealed partial class GitHubRepositorySettingsRepository : IGitHubReposito
 
         Updating();
 
-        var update = item.Settings.ToRepositoryUpdate();
-        return _gitHubClient.Repository.Edit(item.Owner, item.Name, update);
+        return _gitHubClient.UpdateRepositoryAsync(item.Owner, item.Name, item.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository options.")]

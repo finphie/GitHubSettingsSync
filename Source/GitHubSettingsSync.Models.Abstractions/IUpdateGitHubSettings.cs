@@ -21,5 +21,6 @@ public interface IUpdateGitHubSettings
     /// <param name="settings">GitHubに関する設定。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="repositories"/>または<paramref name="settings"/>がnullです。</exception>
     ValueTask ExecuteAsync(IEnumerable<string> repositories, GitHubSettings settings, CancellationToken cancellationToken = default);
 }

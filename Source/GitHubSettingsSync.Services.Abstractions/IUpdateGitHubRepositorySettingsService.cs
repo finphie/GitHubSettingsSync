@@ -15,7 +15,7 @@ public interface IUpdateGitHubRepositorySettingsService
     /// <param name="settings">GitHubリポジトリに関する設定。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="repositoryName"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="settings"/>がnullです。</exception>
     /// <exception cref="ArgumentException"><paramref name="owner"/>または<paramref name="repositoryName"/>が空です。</exception>
     ValueTask ExecuteAsync(string owner, string repositoryName, GitHubRepositorySettings settings, CancellationToken cancellationToken = default);
 }
