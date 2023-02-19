@@ -1,4 +1,7 @@
 ﻿using GitHubSettingsSync.Repositories;
+using GitHubSettingsSync.Repositories.Entities;
+using GitHubSettingsSync.Services.Extensions;
+using GitHubSettingsSync.Services.Settings;
 using Microsoft.Extensions.Logging;
 
 namespace GitHubSettingsSync.Services;
@@ -9,7 +12,7 @@ namespace GitHubSettingsSync.Services;
 public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHubRepositorySettingsService
 {
     readonly ILogger<UpdateGitHubRepositorySettingsService> _logger;
-    readonly IGitHubRepositorySettingsRepository _gitHub;
+    readonly IGitHubRepositoryRepository _gitHub;
 
     /// <summary>
     /// <see cref="UpdateGitHubRepositorySettingsService"/>クラスの新しいインスタンスを初期化します。
@@ -17,7 +20,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
     /// <param name="logger">ロガー。</param>
     /// <param name="gitHub">GitHubリポジトリ設定の操作を行うクラスのインスタンス。</param>
     /// <exception cref="ArgumentNullException"><paramref name="logger"/>または<paramref name="gitHub"/>がnullです。</exception>
-    public UpdateGitHubRepositorySettingsService(ILogger<UpdateGitHubRepositorySettingsService> logger, IGitHubRepositorySettingsRepository gitHub)
+    public UpdateGitHubRepositorySettingsService(ILogger<UpdateGitHubRepositorySettingsService> logger, IGitHubRepositoryRepository gitHub)
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(gitHub);
@@ -27,7 +30,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
     }
 
     /// <inheritdoc/>
-    public async ValueTask ExecuteAsync(string owner, string repositoryName, GitHubRepositorySettings settings, CancellationToken cancellationToken = default)
+    public async ValueTask ExecuteAsync(string owner, string repositoryName, RepositorySettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(repositoryName);
@@ -35,9 +38,11 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
 
         Starting();
 
+        var item = new RepositoryInformation<GitHubRepository>(owner, repositoryName, settings.ToEntity());
+
         try
         {
-            await _gitHub.UpdateAsync(new(owner, repositoryName, settings), cancellationToken).ConfigureAwait(false);
+            await _gitHub.UpdateAsync(item, cancellationToken).ConfigureAwait(false);
         }
         catch (Exception ex)
         {
