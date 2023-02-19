@@ -30,7 +30,7 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
     }
 
     /// <inheritdoc/>
-    public async ValueTask ExecuteAsync(string owner, string repositoryName, string branch, GitHubBranchProtectionSettings settings, CancellationToken cancellationToken = default)
+    public async ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings settings, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(repositoryName);
         ArgumentException.ThrowIfNullOrEmpty(branch);
