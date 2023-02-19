@@ -24,15 +24,19 @@ jobs:
         with:
           repositories: |
             GitHubSettingsSync
-          has-issues: true
-          has-projects: true
-          has-wiki: true
-          allow-merge-commit: true
-          allow-rebase-merge: true
-          allow-squash-merge: true
-          allow-auto-merge: false
-          delete-branch-on-merge: false
-          allow-update-branch: false
+          has-issues: Unchanged
+          has-projects: Unchanged
+          has-wiki: Unchanged
+          allow-merge-commit: Unchanged
+          allow-squash-merge: Unchanged
+          allow-rebase-merge: Unchanged
+          allow-auto-merge: Unchanged
+          delete-branch-on-merge: Unchanged
+          allow-update-branch: Unchanged
+          merge-commit-title: Unchanged
+          merge-commit-message: Unchanged
+          squash-merge-commit-title: Unchanged
+          squash-merge-commit-message: Unchanged
           branch-protection: false
           branch-protection-name: main
           branch-protection-enforce-admins: false
@@ -53,15 +57,15 @@ jobs:
 引数|必須|デフォルト|説明
 -|-|-|-
 repositories|**true**|-|カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。
-has-issues|false|null|Issuesを有効にするかどうか。
-has-projects|false|null|Projectsを有効にするかどうか。
-has-wiki|false|null|Wikiを有効にするかどうか。
-allow-merge-commit|false|null|「Create a merge commit」を有効にするか。
-allow-squash-merge|false|null|「Squash Merge」を有効にするかどうか。
-allow-rebase-merge|false|null|「Rebase and Merge」を有効にするか。
-allow-auto-merge|false|null|自動マージ機能を有効にするか。
-delete-branch-on-merge|false|null|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
-allow-update-branch|false|null|「Update branch」を有効にするかどうか。
+has-issues|false|Unchanged|Issuesを有効にするかどうか。
+has-projects|false|Unchanged|Projectsを有効にするかどうか。
+has-wiki|false|Unchanged|Wikiを有効にするかどうか。
+allow-merge-commit|false|Unchanged|「Create a merge commit」を有効にするか。
+allow-squash-merge|false|Unchanged|「Squash Merge」を有効にするかどうか。
+allow-rebase-merge|false|Unchanged|「Rebase and Merge」を有効にするか。
+allow-auto-merge|false|Unchanged|自動マージ機能を有効にするか。
+delete-branch-on-merge|false|Unchanged|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
+allow-update-branch|false|Unchanged|「Update branch」を有効にするかどうか。
 merge-commit-title|false|Unchanged|マージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・MergeMessageのいずれか。
 merge-commit-message|false|Unchanged|マージにおけるコミットメッセージの種類。Unchanged・PullRequestTitle・PullRequestBody・Blankのいずれか。
 squash-merge-commit-title|false|Unchanged|スカッシュマージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・CommitOrPullRequestTitleのいずれか。

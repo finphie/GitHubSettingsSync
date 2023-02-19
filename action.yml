@@ -12,54 +12,121 @@ inputs:
   has-issues:
     description: Issuesを有効にするかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   has-projects:
     description: Projectsを有効にするかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   has-wiki:
     description: Wikiを有効にするかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   allow-merge-commit:
     description: 「Create a merge commit」を有効にするか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   allow-squash-merge:
     description: 「Squash Merge」を有効にするかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   allow-rebase-merge:
     description: 「Rebase and Merge」を有効にするか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   allow-auto-merge:
     description: 自動マージ機能を有効にするか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   delete-branch-on-merge:
     description: プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   allow-update-branch:
     description: 「Update branch」を有効にするかどうか。
     required: false
-    default: null
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
+    default: Unchanged
   merge-commit-title:
     description: マージにおけるコミットタイトルの種類。
     required: false
+    type: choice
+    options:
+      - Unchanged
+      - PullRequestTitle
+      - MergeMessage
     default: Unchanged
   merge-commit-message:
     description: マージにおけるコミットメッセージの種類。
     required: false
+    type: choice
+    options:
+      - Unchanged
+      - PullRequestTitle
+      - PullRequestBody
+      - Blank
     default: Unchanged
   squash-merge-commit-title:
     description: スカッシュマージにおけるコミットタイトルの種類。
     required: false
+    type: choice
+    options:
+      - Unchanged
+      - PullRequestTitle
+      - CommitOrPullRequestTitle
     default: Unchanged
   squash-merge-commit-message:
     description: スカッシュマージにおけるコミットメッセージの種類。
     required: false
+    type: choice
+    options:
+      - Unchanged
+      - PullRequestBody
+      - CommitMessages
+      - Blank
     default: Unchanged
   branch-protection:
     description: '[ブランチ保護]ブランチ保護を有効にするかどうか。'

@@ -6,27 +6,8 @@ namespace GitHubSettingsSync.Services.Extensions;
 /// <summary>
 /// GitHub設定関連の拡張メソッドです。
 /// </summary>
-public static class GitHubSettingsExtensions
+static class GitHubSettingsExtensions
 {
-    /// <summary>
-    /// 真偽型を<see cref="Status"/>型に変換します。
-    /// </summary>
-    /// <param name="value">値</param>
-    /// <returns>
-    /// <see langword="true"/>の場合は<see cref="Status.Enabled"/>を返します。
-    /// <see langword="false"/>の場合は<see cref="Status.Disabled"/>を返します。
-    /// <see langword="null"/>の場合は<see cref="Status.Unchanged"/>を返します。
-    /// </returns>
-    public static Status ToStatus(this bool? value)
-    {
-        return value switch
-        {
-            true => Status.Enabled,
-            false => Status.Disabled,
-            _ => Status.Unchanged
-        };
-    }
-
     /// <summary>
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
