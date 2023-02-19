@@ -5,8 +5,8 @@ namespace GitHubSettingsSync.Services.Settings;
 /// <inheritdoc cref="GitHubBranchProtection"/>
 public sealed record BranchProtectionSettings(
     bool EnforceAdmins = false,
-    bool RequiredLinearHistory = false,
-    bool AllowForcePushes = false,
-    bool AllowDeletions = false,
-    bool RequiredConversationResolution = false,
+    Status RequiredLinearHistory = Status.Unchanged,
+    Status AllowForcePushes = Status.Unchanged,
+    Status AllowDeletions = Status.Unchanged,
+    Status RequiredConversationResolution = Status.Unchanged,
     BranchProtectionRequiredReviewsSettings? RequiredReviews = null);

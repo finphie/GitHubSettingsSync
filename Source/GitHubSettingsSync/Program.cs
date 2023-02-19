@@ -86,10 +86,10 @@ static async ValueTask<int> CommandAsync(
     [Option("bp", "[ブランチ保護]ブランチ保護を有効にするかどうか。")] bool branchProtection = false,
     [Option("bp-n", "[ブランチ保護]ブランチ名。")] string branchProtectionName = "main",
     [Option("bp-ea", "[ブランチ保護]管理者にも適用するか。")] bool branchProtectionEnforceAdmins = false,
-    [Option("bp-rlh", "[ブランチ保護]直線状の履歴を必須にするかどうか。")] bool branchProtectionRequiredLinearHistory = false,
-    [Option("bp-afp", "[ブランチ保護]強制プッシュを許可するかどうか。")] bool branchProtectionAllowForcePushes = false,
-    [Option("bp-ad", "[ブランチ保護]プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。")] bool branchProtectionAllowDeletions = false,
-    [Option("bp-rcr", "[ブランチ保護]マージ前にコメントの解決を必須にするかどうか。")] bool branchProtectionRequiredConversationResolution = false,
+    [Option("bp-rlh", "[ブランチ保護]直線状の履歴を必須にするかどうか。")] bool? branchProtectionRequiredLinearHistory = null,
+    [Option("bp-afp", "[ブランチ保護]強制プッシュを許可するかどうか。")] bool? branchProtectionAllowForcePushes = null,
+    [Option("bp-ad", "[ブランチ保護]プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。")] bool? branchProtectionAllowDeletions = null,
+    [Option("bp-rcr", "[ブランチ保護]マージ前にコメントの解決を必須にするかどうか。")] bool? branchProtectionRequiredConversationResolution = null,
     [Option("bp-rr", "[ブランチ保護][レビュー]レビューを必須にするかどうか。")] bool branchProtectionRequiredReviews = false,
     [Option("bp-rr-dsr", "[ブランチ保護][レビュー]新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。")] bool branchProtectionRequiredReviewsDismissStaleReviews = false,
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
@@ -118,10 +118,10 @@ static async ValueTask<int> CommandAsync(
         BranchProtection = !branchProtection ? null : new()
         {
             EnforceAdmins = branchProtectionEnforceAdmins,
-            RequiredLinearHistory = branchProtectionRequiredLinearHistory,
-            AllowForcePushes = branchProtectionAllowForcePushes,
-            AllowDeletions = branchProtectionAllowDeletions,
-            RequiredConversationResolution = branchProtectionRequiredConversationResolution,
+            RequiredLinearHistory = branchProtectionRequiredLinearHistory.ToStatus(),
+            AllowForcePushes = branchProtectionAllowForcePushes.ToStatus(),
+            AllowDeletions = branchProtectionAllowDeletions.ToStatus(),
+            RequiredConversationResolution = branchProtectionRequiredConversationResolution.ToStatus(),
             RequiredReviews = !branchProtectionRequiredReviews ? null : new()
             {
                 DismissStaleReviews = branchProtectionRequiredReviewsDismissStaleReviews,

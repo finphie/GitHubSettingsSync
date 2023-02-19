@@ -32,6 +32,7 @@ public static class GitHubSettingsExtensions
     /// </summary>
     /// <param name="settings">GitHubリポジトリに関する設定。</param>
     /// <returns>リポジトリに関する設定を表すクラスのインスタンスを返します。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="settings"/>がnullです。</exception>
     internal static GitHubRepository ToEntity(this RepositorySettings settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
@@ -73,16 +74,17 @@ public static class GitHubSettingsExtensions
     /// </summary>
     /// <param name="settings">GitHubブランチ保護に関する設定。</param>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="settings"/>がnullです。</exception>
     internal static GitHubBranchProtection ToEntity(this BranchProtectionSettings settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
 
         return new(
             EnforceAdmins: settings.EnforceAdmins,
-            RequiredLinearHistory: settings.RequiredLinearHistory,
-            AllowForcePushes: settings.AllowForcePushes,
-            AllowDeletions: settings.AllowDeletions,
-            RequiredConversationResolution: settings.RequiredConversationResolution,
+            RequiredLinearHistory: settings.RequiredLinearHistory.ToBoolean(),
+            AllowForcePushes: settings.AllowForcePushes.ToBoolean(),
+            AllowDeletions: settings.AllowDeletions.ToBoolean(),
+            RequiredConversationResolution: settings.RequiredConversationResolution.ToBoolean(),
             RequiredStatusChecks: null,
             RequiredReviews: settings.RequiredReviews?.ToEntity());
     }
