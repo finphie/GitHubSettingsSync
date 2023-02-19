@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using GitHubSettingsSync;
+using GitHubSettingsSync.Extensions;
 using GitHubSettingsSync.Models;
 using GitHubSettingsSync.Repositories;
 using GitHubSettingsSync.Services;
+using GitHubSettingsSync.Services.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -46,8 +49,8 @@ var builder = ConsoleApp.CreateBuilder(args)
         services.AddSingleton<IUpdateGitHubBranchProtectionSettingsService, UpdateGitHubBranchProtectionSettingsService>();
 
         // Repositories
-        services.AddSingleton<IGitHubRepositorySettingsRepository, GitHubRepositorySettingsRepository>();
-        services.AddSingleton<IGitHubRepositoryBranchProtectionSettingsRepository, GitHubRepositoryBranchProtectionSettingsRepository>();
+        services.AddSingleton<IGitHubRepositoryRepository, GitHubRepositoryRepository>();
+        services.AddSingleton<IGitHubRepositoryBranchProtectionRepository, GitHubRepositoryBranchProtectionRepository>();
     });
 
 var app = builder.Build();
@@ -66,24 +69,28 @@ static void Bind(IServiceCollection services, IConfiguration configuration)
 
 static async ValueTask<int> CommandAsync(
     ConsoleAppContext context,
-    IUpdateGitHubSettings github,
+    IUpdateGitHubSettings gitHub,
     [Option("r", "カンマ・半角スペース・改行区切りにしたリポジトリ名のリスト。")] string repositories,
-    [Option("i", "Issuesを有効にするかどうか。")] bool hasIssues = true,
-    [Option("p", "Projectsを有効にするかどうか。")] bool hasProjects = true,
-    [Option("w", "Wikiを有効にするかどうか。")] bool hasWiki = true,
-    [Option("amc", "「Create a merge commit」を有効にするか。")] bool allowMergeCommit = true,
-    [Option("arm", "「Rebase and Merge」を有効にするか。")] bool allowRebaseMerge = true,
-    [Option("asm", "「Squash Merge」を有効にするかどうか。")] bool allowSquashMerge = true,
-    [Option("aam", "自動マージ機能を有効にするか。")] bool allowAutoMerge = false,
-    [Option("db", "プルリクエストマージ時に、ブランチを自動的に削除するかどうか。")] bool deleteBranchOnMerge = false,
-    [Option("aub", "「Update branch」を有効にするかどうか。")] bool allowUpdateBranch = false,
+    [Option("i", "Issuesを有効にするかどうか。")] BooleanParameter hasIssues = BooleanParameter.Unchanged,
+    [Option("p", "Projectsを有効にするかどうか。")] BooleanParameter hasProjects = BooleanParameter.Unchanged,
+    [Option("w", "Wikiを有効にするかどうか。")] BooleanParameter hasWiki = BooleanParameter.Unchanged,
+    [Option("amc", "「Create a merge commit」を有効にするか。")] BooleanParameter allowMergeCommit = BooleanParameter.Unchanged,
+    [Option("asm", "「Squash Merge」を有効にするかどうか。")] BooleanParameter allowSquashMerge = BooleanParameter.Unchanged,
+    [Option("arm", "「Rebase and Merge」を有効にするか。")] BooleanParameter allowRebaseMerge = BooleanParameter.Unchanged,
+    [Option("aam", "自動マージ機能を有効にするか。")] BooleanParameter allowAutoMerge = BooleanParameter.Unchanged,
+    [Option("db", "プルリクエストマージ時に、ブランチを自動的に削除するかどうか。")] BooleanParameter deleteBranchOnMerge = BooleanParameter.Unchanged,
+    [Option("aub", "「Update branch」を有効にするかどうか。")] BooleanParameter allowUpdateBranch = BooleanParameter.Unchanged,
+    [Option("mct", "マージにおけるコミットタイトルの種類。")] MergeCommitTitleType mergeCommitTitle = MergeCommitTitleType.Unchanged,
+    [Option("mcm", "マージにおけるコミットメッセージの種類。")] MergeCommitMessageType mergeCommitMessage = MergeCommitMessageType.Unchanged,
+    [Option("smct", "スカッシュマージにおけるコミットタイトルの種類。")] SquashMergeCommitTitleType squashMergeCommitTitle = SquashMergeCommitTitleType.Unchanged,
+    [Option("smcm", "スカッシュマージにおけるコミットメッセージの種類。")] SquashMergeCommitMessageType squashMergeCommitMessage = SquashMergeCommitMessageType.Unchanged,
     [Option("bp", "[ブランチ保護]ブランチ保護を有効にするかどうか。")] bool branchProtection = false,
     [Option("bp-n", "[ブランチ保護]ブランチ名。")] string branchProtectionName = "main",
     [Option("bp-ea", "[ブランチ保護]管理者にも適用するか。")] bool branchProtectionEnforceAdmins = false,
-    [Option("bp-rlh", "[ブランチ保護]直線状の履歴を必須にするかどうか。")] bool branchProtectionRequiredLinearHistory = false,
-    [Option("bp-afp", "[ブランチ保護]強制プッシュを許可するかどうか。")] bool branchProtectionAllowForcePushes = false,
-    [Option("bp-ad", "[ブランチ保護]プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。")] bool branchProtectionAllowDeletions = false,
-    [Option("bp-rcr", "[ブランチ保護]マージ前にコメントの解決を必須にするかどうか。")] bool branchProtectionRequiredConversationResolution = false,
+    [Option("bp-rlh", "[ブランチ保護]直線状の履歴を必須にするかどうか。")] BooleanParameter branchProtectionRequiredLinearHistory = BooleanParameter.Unchanged,
+    [Option("bp-afp", "[ブランチ保護]強制プッシュを許可するかどうか。")] BooleanParameter branchProtectionAllowForcePushes = BooleanParameter.Unchanged,
+    [Option("bp-ad", "[ブランチ保護]プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。")] BooleanParameter branchProtectionAllowDeletions = BooleanParameter.Unchanged,
+    [Option("bp-rcr", "[ブランチ保護]マージ前にコメントの解決を必須にするかどうか。")] BooleanParameter branchProtectionRequiredConversationResolution = BooleanParameter.Unchanged,
     [Option("bp-rr", "[ブランチ保護][レビュー]レビューを必須にするかどうか。")] bool branchProtectionRequiredReviews = false,
     [Option("bp-rr-dsr", "[ブランチ保護][レビュー]新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。")] bool branchProtectionRequiredReviewsDismissStaleReviews = false,
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
@@ -98,24 +105,24 @@ static async ValueTask<int> CommandAsync(
     {
         Repository = new()
         {
-            HasIssues = hasIssues,
-            HasProjects = hasProjects,
-            HasWiki = hasWiki,
-            AllowMergeCommit = allowMergeCommit,
-            AllowRebaseMerge = allowRebaseMerge,
-            AllowSquashMerge = allowSquashMerge,
-            AllowAutoMerge = allowAutoMerge,
-            DeleteBranchOnMerge = deleteBranchOnMerge,
-            AllowUpdateBranch = allowUpdateBranch
+            HasIssues = hasIssues.ToStatus(),
+            HasProjects = hasProjects.ToStatus(),
+            HasWiki = hasWiki.ToStatus(),
+            MergeCommit = allowMergeCommit == BooleanParameter.True ? new(mergeCommitTitle, mergeCommitMessage) : null,
+            SquashMergeCommit = allowSquashMerge == BooleanParameter.True ? new(squashMergeCommitTitle, squashMergeCommitMessage) : null,
+            AllowRebaseMerge = allowRebaseMerge.ToStatus(),
+            AllowAutoMerge = allowAutoMerge.ToStatus(),
+            DeleteBranchOnMerge = deleteBranchOnMerge.ToStatus(),
+            AllowUpdateBranch = allowUpdateBranch.ToStatus(),
         },
         Branch = branchProtectionName,
         BranchProtection = !branchProtection ? null : new()
         {
             EnforceAdmins = branchProtectionEnforceAdmins,
-            RequiredLinearHistory = branchProtectionRequiredLinearHistory,
-            AllowForcePushes = branchProtectionAllowForcePushes,
-            AllowDeletions = branchProtectionAllowDeletions,
-            RequiredConversationResolution = branchProtectionRequiredConversationResolution,
+            RequiredLinearHistory = branchProtectionRequiredLinearHistory.ToStatus(),
+            AllowForcePushes = branchProtectionAllowForcePushes.ToStatus(),
+            AllowDeletions = branchProtectionAllowDeletions.ToStatus(),
+            RequiredConversationResolution = branchProtectionRequiredConversationResolution.ToStatus(),
             RequiredReviews = !branchProtectionRequiredReviews ? null : new()
             {
                 DismissStaleReviews = branchProtectionRequiredReviewsDismissStaleReviews,
@@ -125,7 +132,7 @@ static async ValueTask<int> CommandAsync(
         }
     };
 
-    await github.ExecuteAsync(repositoryList, settings, context.CancellationToken).ConfigureAwait(false);
+    await gitHub.ExecuteAsync(repositoryList, settings, context.CancellationToken).ConfigureAwait(false);
 
-    return github.IsError ? -1 : 0;
+    return gitHub.IsError ? -1 : 0;
 }

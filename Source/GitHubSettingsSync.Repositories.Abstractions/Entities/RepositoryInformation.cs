@@ -1,4 +1,4 @@
-﻿namespace GitHubSettingsSync.Repositories;
+﻿namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
 /// リポジトリ情報を表すクラスです。

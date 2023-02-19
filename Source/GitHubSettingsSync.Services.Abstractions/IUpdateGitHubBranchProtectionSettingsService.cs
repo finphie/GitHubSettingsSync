@@ -1,4 +1,4 @@
-﻿using GitHubSettingsSync.Repositories;
+﻿using GitHubSettingsSync.Services.Settings;
 
 namespace GitHubSettingsSync.Services;
 
@@ -18,5 +18,5 @@ public interface IUpdateGitHubBranchProtectionSettingsService
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="branch"/>、<paramref name="settings"/>がnullです。</exception>
     /// <exception cref="ArgumentException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="branch"/>が空です。</exception>
-    ValueTask ExecuteAsync(string owner, string repositoryName, string branch, GitHubBranchProtectionSettings settings, CancellationToken cancellationToken = default);
+    ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings settings, CancellationToken cancellationToken = default);
 }

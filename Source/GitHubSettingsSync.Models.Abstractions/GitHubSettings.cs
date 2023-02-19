@@ -1,18 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using GitHubSettingsSync.Repositories;
+using GitHubSettingsSync.Services.Settings;
 
 namespace GitHubSettingsSync.Models;
 
 /// <summary>
-/// GitHub設定を表す構造体です。
+/// GitHub設定を表すクラスです。
 /// </summary>
 [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206:Declaration keywords should follow order", Justification = "StyleCop.Analyzersの不具合。https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3527")]
 public sealed record GitHubSettings
 {
     /// <summary>
-    /// GitHubリポジトリに関する設定を表す構造体のインスタンスを取得または設定します。
+    /// GitHubリポジトリに関する設定を表すクラスのインスタンスを取得または設定します。
     /// </summary>
-    public required GitHubRepositorySettings Repository { get; init; }
+    public required RepositorySettings Repository { get; init; }
 
     /// <summary>
     /// ブランチ名を取得または設定します。
@@ -20,7 +20,7 @@ public sealed record GitHubSettings
     public required string Branch { get; init; }
 
     /// <summary>
-    /// GitHubブランチ保護に関する設定を表す構造体のインスタンスを取得または設定します。
+    /// GitHubブランチ保護に関する設定を表すクラスのインスタンスを取得または設定します。
     /// </summary>
-    public required GitHubBranchProtectionSettings? BranchProtection { get; init; }
+    public required BranchProtectionSettings? BranchProtection { get; init; }
 }
