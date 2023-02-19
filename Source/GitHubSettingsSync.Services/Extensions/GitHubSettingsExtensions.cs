@@ -6,14 +6,33 @@ namespace GitHubSettingsSync.Services.Extensions;
 /// <summary>
 /// GitHub設定関連の拡張メソッドです。
 /// </summary>
-static class GitHubSettingsExtensions
+public static class GitHubSettingsExtensions
 {
+    /// <summary>
+    /// 真偽型を<see cref="Status"/>型に変換します。
+    /// </summary>
+    /// <param name="value">値</param>
+    /// <returns>
+    /// <see langword="true"/>の場合は<see cref="Status.Enabled"/>を返します。
+    /// <see langword="false"/>の場合は<see cref="Status.Disabled"/>を返します。
+    /// <see langword="null"/>の場合は<see cref="Status.Unchanged"/>を返します。
+    /// </returns>
+    public static Status ToStatus(this bool? value)
+    {
+        return value switch
+        {
+            true => Status.Enabled,
+            false => Status.Disabled,
+            _ => Status.Unchanged
+        };
+    }
+
     /// <summary>
     /// GitHub APIリクエスト時に必要となるクラスのインスタンスを取得します。
     /// </summary>
     /// <param name="settings">GitHubリポジトリに関する設定。</param>
     /// <returns>リポジトリに関する設定を表すクラスのインスタンスを返します。</returns>
-    public static GitHubRepository ToEntity(this RepositorySettings settings)
+    internal static GitHubRepository ToEntity(this RepositorySettings settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
 
@@ -54,7 +73,7 @@ static class GitHubSettingsExtensions
     /// </summary>
     /// <param name="settings">GitHubブランチ保護に関する設定。</param>
     /// <returns>ブランチ保護に関する設定を表すクラスのインスタンスを返します。</returns>
-    public static GitHubBranchProtection ToEntity(this BranchProtectionSettings settings)
+    internal static GitHubBranchProtection ToEntity(this BranchProtectionSettings settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
 
