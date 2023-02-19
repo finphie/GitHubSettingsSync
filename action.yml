@@ -12,39 +12,55 @@ inputs:
   has-issues:
     description: Issuesを有効にするかどうか。
     required: false
-    default: true
+    default: null
   has-projects:
     description: Projectsを有効にするかどうか。
     required: false
-    default: true
+    default: null
   has-wiki:
     description: Wikiを有効にするかどうか。
     required: false
-    default: true
+    default: null
   allow-merge-commit:
     description: 「Create a merge commit」を有効にするか。
     required: false
-    default: true
-  allow-rebase-merge:
-    description: 「Rebase and Merge」を有効にするか。
-    required: false
-    default: true
+    default: null
   allow-squash-merge:
     description: 「Squash Merge」を有効にするかどうか。
     required: false
-    default: true
+    default: null
+  allow-rebase-merge:
+    description: 「Rebase and Merge」を有効にするか。
+    required: false
+    default: null
   allow-auto-merge:
     description: 自動マージ機能を有効にするか。
     required: false
-    default: false
+    default: null
   delete-branch-on-merge:
     description: プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
     required: false
-    default: false
+    default: null
   allow-update-branch:
     description: 「Update branch」を有効にするかどうか。
     required: false
-    default: false
+    default: null
+  merge-commit-title:
+    description: マージにおけるコミットタイトルの種類。
+    required: false
+    default: Unchanged
+  merge-commit-message:
+    description: マージにおけるコミットメッセージの種類。
+    required: false
+    default: Unchanged
+  squash-merge-commit-title:
+    description: スカッシュマージにおけるコミットタイトルの種類。
+    required: false
+    default: Unchanged
+  squash-merge-commit-message:
+    description: スカッシュマージにおけるコミットメッセージの種類。
+    required: false
+    default: Unchanged
   branch-protection:
     description: '[ブランチ保護]ブランチ保護を有効にするかどうか。'
     required: false
@@ -123,6 +139,18 @@ runs:
 
     - '--allow-update-branch'
     - ${{ inputs.allow-update-branch }}
+
+    - '--merge-commit-title'
+    - ${{ inputs.merge-commit-title }}
+
+    - '--merge-commit-message'
+    - ${{ inputs.merge-commit-message }}
+
+    - '--squash-merge-commit-title'
+    - ${{ inputs.squash-merge-commit-title }}
+
+    - '--squash-merge-commit-message'
+    - ${{ inputs.squash-merge-commit-message }}
 
     - '--branch-protection'
     - ${{ inputs.branch-protection }}

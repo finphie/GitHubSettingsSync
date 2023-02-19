@@ -53,15 +53,19 @@ jobs:
 引数|必須|デフォルト|説明
 -|-|-|-
 repositories|**true**|-|カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。
-has-issues|false|true|Issuesを有効にするかどうか。
-has-projects|false|true|Projectsを有効にするかどうか。
-has-wiki|false|true|Wikiを有効にするかどうか。
-allow-merge-commit|false|true|「Create a merge commit」を有効にするか。
-allow-rebase-merge|false|true|「Rebase and Merge」を有効にするか。
-allow-squash-merge|false|true|「Squash Merge」を有効にするかどうか。
-allow-auto-merge|false|false|自動マージ機能を有効にするか。
-delete-branch-on-merge|false|false|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
-allow-update-branch|false|false|「Update branch」を有効にするかどうか。
+has-issues|false|null|Issuesを有効にするかどうか。
+has-projects|false|null|Projectsを有効にするかどうか。
+has-wiki|false|null|Wikiを有効にするかどうか。
+allow-merge-commit|false|null|「Create a merge commit」を有効にするか。
+allow-squash-merge|false|null|「Squash Merge」を有効にするかどうか。
+allow-rebase-merge|false|null|「Rebase and Merge」を有効にするか。
+allow-auto-merge|false|null|自動マージ機能を有効にするか。
+delete-branch-on-merge|false|null|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。
+allow-update-branch|false|null|「Update branch」を有効にするかどうか。
+merge-commit-title|false|Unchanged|マージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・MergeMessageのいずれか。
+merge-commit-message|false|Unchanged|マージにおけるコミットメッセージの種類。Unchanged・PullRequestTitle・PullRequestBody・Blankのいずれか。
+squash-merge-commit-title|false|Unchanged|スカッシュマージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・CommitOrPullRequestTitleのいずれか。
+squash-merge-commit-message|false|Unchanged|スカッシュマージにおけるコミットメッセージの種類。Unchanged・PullRequestBody・CommitMessages・Blankのいずれか。
 branch-protection|false|false|ブランチ保護を有効にするかどうか。
 branch-protection-name|false|main|ブランチ保護の対象ブランチ名。
 branch-protection-enforce-admins|false|false|ブランチ保護を管理者にも適用するか。
@@ -100,6 +104,8 @@ MIT
 - Microsoft.Extensions.Hosting
 - Microsoft.Extensions.Logging
 - Microsoft.Extensions.Options
+- Microsoft.Extensions.Options.DataAnnotations
+- Microsoft.Net.Http.Headers
 
 ### アナライザー
 
