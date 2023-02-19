@@ -84,7 +84,7 @@ static async ValueTask<int> CommandAsync(
     [Option("mcm", "マージにおけるコミットメッセージの種類。")] MergeCommitMessageType mergeCommitMessage = MergeCommitMessageType.Unchanged,
     [Option("smct", "スカッシュマージにおけるコミットタイトルの種類。")] SquashMergeCommitTitleType squashMergeCommitTitle = SquashMergeCommitTitleType.Unchanged,
     [Option("smcm", "スカッシュマージにおけるコミットメッセージの種類。")] SquashMergeCommitMessageType squashMergeCommitMessage = SquashMergeCommitMessageType.Unchanged,
-    [Option("bp", "[ブランチ保護]ブランチ保護を有効にするかどうか。")] bool branchProtection = false,
+    [Option("bp", "[ブランチ保護]ブランチ保護を有効にするかどうか。")] BooleanParameter branchProtection = BooleanParameter.Unchanged,
     [Option("bp-n", "[ブランチ保護]ブランチ名。")] string branchProtectionName = "main",
     [Option("bp-ea", "[ブランチ保護]管理者にも適用するか。")] bool branchProtectionEnforceAdmins = false,
     [Option("bp-rlh", "[ブランチ保護]直線状の履歴を必須にするかどうか。")] BooleanParameter branchProtectionRequiredLinearHistory = BooleanParameter.Unchanged,
@@ -116,7 +116,8 @@ static async ValueTask<int> CommandAsync(
             AllowUpdateBranch = allowUpdateBranch.ToStatus(),
         },
         Branch = branchProtectionName,
-        BranchProtection = !branchProtection ? null : new()
+        IsBranchProtection = branchProtection != BooleanParameter.Unchanged,
+        BranchProtection = branchProtection != BooleanParameter.True ? null : new()
         {
             EnforceAdmins = branchProtectionEnforceAdmins,
             RequiredLinearHistory = branchProtectionRequiredLinearHistory.ToStatus(),

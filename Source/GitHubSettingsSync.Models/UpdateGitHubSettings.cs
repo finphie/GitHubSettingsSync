@@ -56,10 +56,12 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
             {
                 await _repositorySettingsService.ExecuteAsync(owner, repositoryName, settings.Repository, cancellationToken).ConfigureAwait(false);
 
-                if (settings.BranchProtection is { } branchProtection)
+                if (!settings.IsBranchProtection)
                 {
-                    await _branchProtectionSettingsService.ExecuteAsync(owner, repositoryName, settings.Branch, branchProtection, cancellationToken).ConfigureAwait(false);
+                    return;
                 }
+
+                await _branchProtectionSettingsService.ExecuteAsync(owner, repositoryName, settings.Branch, settings.BranchProtection, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
