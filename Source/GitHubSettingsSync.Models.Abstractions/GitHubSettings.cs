@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using GitHubSettingsSync.Repositories;
+using GitHubSettingsSync.Services.Settings;
 
 namespace GitHubSettingsSync.Models;
 
@@ -12,7 +12,7 @@ public sealed record GitHubSettings
     /// <summary>
     /// GitHubリポジトリに関する設定を表す構造体のインスタンスを取得または設定します。
     /// </summary>
-    public required GitHubRepositorySettings Repository { get; init; }
+    public required RepositorySettings Repository { get; init; }
 
     /// <summary>
     /// ブランチ名を取得または設定します。
@@ -22,5 +22,5 @@ public sealed record GitHubSettings
     /// <summary>
     /// GitHubブランチ保護に関する設定を表す構造体のインスタンスを取得または設定します。
     /// </summary>
-    public required GitHubBranchProtectionSettings? BranchProtection { get; init; }
+    public required BranchProtectionSettings? BranchProtection { get; init; }
 }
