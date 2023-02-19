@@ -6,6 +6,11 @@ namespace GitHubSettingsSync.Services.Settings;
 public enum SquashMergeCommitTitleType
 {
     /// <summary>
+    /// 変更なし。
+    /// </summary>
+    Unchanged,
+
+    /// <summary>
     /// プルリクエストのタイトル。
     /// </summary>
     PullRequestTitle,
