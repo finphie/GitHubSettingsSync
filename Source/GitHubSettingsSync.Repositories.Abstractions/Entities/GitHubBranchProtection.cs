@@ -3,7 +3,7 @@
 namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
-/// GitHubブランチ保護に関する設定を表す構造体です。
+/// GitHubブランチ保護に関する設定を表すクラスです。
 /// </summary>
 /// <param name="EnforceAdmins">管理者にも適用するかどうか。</param>
 /// <param name="RequiredLinearHistory">直線状の履歴を必須にするかどうか。</param>

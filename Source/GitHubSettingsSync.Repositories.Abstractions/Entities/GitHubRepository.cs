@@ -3,7 +3,7 @@
 namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
-/// GitHubリポジトリに関する設定を表す構造体です。
+/// GitHubリポジトリに関する設定を表すクラスです。
 /// </summary>
 /// <param name="HasIssues">Issuesを有効にするかどうか。</param>
 /// <param name="HasProjects">Projectsを有効にするかどうか。</param>

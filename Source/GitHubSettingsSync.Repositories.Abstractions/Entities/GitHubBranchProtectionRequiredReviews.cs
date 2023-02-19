@@ -3,7 +3,7 @@
 namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
-/// レビューに関するGitHubブランチ保護の設定を表す構造体です。
+/// レビューに関するGitHubブランチ保護の設定を表すクラスです。
 /// </summary>
 /// <param name="DismissStaleReviews">新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。</param>
 /// <param name="RequireCodeOwnerReviews">コード所有者のレビューが必須かどうか。</param>

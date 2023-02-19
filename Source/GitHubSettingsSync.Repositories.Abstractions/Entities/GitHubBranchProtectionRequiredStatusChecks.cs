@@ -3,7 +3,7 @@
 namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
-/// ステータスチェックに関するGitHubブランチ保護の設定を表す構造体です。
+/// ステータスチェックに関するGitHubブランチ保護の設定を表すクラスです。
 /// </summary>
 /// <param name="Strict">マージする前にブランチを最新にする必要があるかどうか。</param>
 /// <param name="Contexts">合格する必要があるステータスチェックのリスト。</param>
