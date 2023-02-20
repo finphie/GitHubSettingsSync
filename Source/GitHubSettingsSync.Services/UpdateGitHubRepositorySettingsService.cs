@@ -38,7 +38,7 @@ public sealed partial class UpdateGitHubRepositorySettingsService : IUpdateGitHu
 
         Starting();
 
-        var item = new RepositoryInformation<GitHubRepository>(owner, repositoryName, settings.ToEntity());
+        var item = new Request<GitHubRepository>(owner, repositoryName, settings.ToEntity());
 
         try
         {
