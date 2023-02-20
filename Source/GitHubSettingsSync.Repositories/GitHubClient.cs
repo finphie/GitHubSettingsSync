@@ -28,36 +28,36 @@ public sealed partial class GitHubClient : IGitHubClient
     }
 
     /// <inheritdoc/>
-    public async Task UpdateRepositoryAsync(string owner, string name, GitHubRepository settings, CancellationToken cancellationToken = default)
+    public async Task UpdateRepositoryAsync(string owner, string name, GitHubRepository entity, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
-        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        UpdatingRepositorySettings(settings);
+        UpdatingRepositorySettings(entity);
 
-        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", settings, JsonContext.Default.GitHubRepository, cancellationToken)
+        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", entity, JsonContext.Default.GitHubRepository, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
 
     /// <inheritdoc/>
-    public async Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtection settings, CancellationToken cancellationToken = default)
+    public async Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtection entity, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
-        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        UpdatingBranchProtectionSettings(settings);
+        UpdatingBranchProtectionSettings(entity);
 
-        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", settings, JsonContext.Default.GitHubBranchProtection, cancellationToken)
+        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", entity, JsonContext.Default.GitHubBranchProtection, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
 
-    [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings. {settings}")]
-    partial void UpdatingRepositorySettings(GitHubRepository settings);
+    [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings. {entity}")]
+    partial void UpdatingRepositorySettings(GitHubRepository entity);
 
-    [LoggerMessage(EventId = 1002, Level = LogLevel.Information, Message = "Updating branch protection settings. {settings}")]
-    partial void UpdatingBranchProtectionSettings(GitHubBranchProtection settings);
+    [LoggerMessage(EventId = 1002, Level = LogLevel.Information, Message = "Updating branch protection settings. {entity}")]
+    partial void UpdatingBranchProtectionSettings(GitHubBranchProtection entity);
 }
