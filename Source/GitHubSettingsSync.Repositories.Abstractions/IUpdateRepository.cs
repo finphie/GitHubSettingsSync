@@ -10,7 +10,7 @@ public interface IUpdateRepository<T> : IRepository<T>
     where T : notnull, Request
 {
     /// <summary>
-    /// 指定されたリクエスト情報で更新します。
+    /// 指定されたリクエスト情報で更新処理を実行します。
     /// </summary>
     /// <param name="request">リクエスト情報。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
