@@ -5,9 +5,9 @@ namespace GitHubSettingsSync.Repositories;
 /// <summary>
 /// 更新関連のRepositoryインターフェイスです。
 /// </summary>
-/// <inheritdoc cref="IRepository{T}"/>
+/// <typeparam name="T">リクエスト情報を表すクラスの型。</typeparam>
 public interface IUpdateRepository<T> : IRepository<T>
-    where T : notnull, Request<T>
+    where T : notnull, Request
 {
     /// <summary>
     /// 指定されたリクエスト情報で更新します。
