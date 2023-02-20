@@ -7,7 +7,7 @@ namespace GitHubSettingsSync.Repositories;
 /// </summary>
 /// <typeparam name="T">リクエスト情報を表すクラスの型。</typeparam>
 public interface IUpdateRepository<T> : IRepository<T>
-    where T : notnull, Request
+    where T : notnull, IRequest
 {
     /// <summary>
     /// 指定されたリクエスト情報で更新処理を実行します。
