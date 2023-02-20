@@ -27,13 +27,13 @@ public sealed partial class GitHubRepositoryBranchProtectionRepository : IGitHub
     }
 
     /// <inheritdoc/>
-    public Task UpdateAsync(BranchInformation<GitHubBranchProtection> item, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(BranchRequest<GitHubBranchProtection> request, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(item);
+        ArgumentNullException.ThrowIfNull(request);
 
         Updating();
 
-        return _gitHubClient.UpdateBranchProtectionAsync(item.Owner, item.Name, item.Branch, item.Settings, cancellationToken);
+        return _gitHubClient.UpdateBranchProtectionAsync(request.Owner, request.Name, request.Branch, request.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Debug, Message = "Starting, Update branch protection settings.")]

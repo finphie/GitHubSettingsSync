@@ -27,13 +27,13 @@ public sealed partial class GitHubRepositoryRepository : IGitHubRepositoryReposi
     }
 
     /// <inheritdoc/>
-    public Task UpdateAsync(RepositoryInformation<GitHubRepository> item, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(Request<GitHubRepository> request, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(item);
+        ArgumentNullException.ThrowIfNull(request);
 
         Updating();
 
-        return _gitHubClient.UpdateRepositoryAsync(item.Owner, item.Name, item.Settings, cancellationToken);
+        return _gitHubClient.UpdateRepositoryAsync(request.Owner, request.Name, request.Settings, cancellationToken);
     }
 
     [LoggerMessage(EventId = 1001, Level = LogLevel.Debug, Message = "Starting, Update repository settings.")]
