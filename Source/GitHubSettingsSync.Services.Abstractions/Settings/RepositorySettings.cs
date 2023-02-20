@@ -1,10 +1,17 @@
-﻿using GitHubSettingsSync.Repositories.Entities;
+﻿namespace GitHubSettingsSync.Services.Settings;
 
-namespace GitHubSettingsSync.Services.Settings;
-
-/// <inheritdoc cref="GitHubRepository"/>
-/// <param name="MergeCommit"><inheritdoc cref="Settings.MergeCommit" path="/summary"/></param>
-/// <param name="SquashMergeCommit"><inheritdoc cref="Settings.SquashMergeCommit" path="/summary"/></param>
+/// <summary>
+/// GitHubリポジトリに関する設定を表すクラスです。
+/// </summary>
+/// <param name="HasIssues">Issuesを有効にするかどうか。</param>
+/// <param name="HasProjects">Projectsを有効にするかどうか。</param>
+/// <param name="HasWiki">Wikiを有効にするかどうか。</param>
+/// <param name="MergeCommit">マージにおけるコミットタイトル・メッセージの種類。</param>
+/// <param name="SquashMergeCommit">スカッシュマージにおけるコミットメッセージの種類。</param>
+/// <param name="AllowRebaseMerge">「Rebase and Merge」を有効にするかどうか。</param>
+/// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
+/// <param name="DeleteBranchOnMerge">プルリクエストマージ時に、ブランチを自動的に削除するかどうか。</param>
+/// <param name="AllowUpdateBranch">「Update branch」を有効にするかどうか。</param>
 public sealed record RepositorySettings(
     Status HasIssues = Status.Unchanged,
     Status HasProjects = Status.Unchanged,

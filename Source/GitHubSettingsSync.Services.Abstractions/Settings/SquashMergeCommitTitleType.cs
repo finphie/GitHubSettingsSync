@@ -1,8 +1,8 @@
-﻿using GitHubSettingsSync.Repositories.Entities;
+﻿namespace GitHubSettingsSync.Services.Settings;
 
-namespace GitHubSettingsSync.Services.Settings;
-
-/// <inheritdoc cref="GitHubRepository.SquashMergeCommitTitle"/>
+/// <summary>
+/// スカッシュマージにおけるコミットタイトルの種類。
+/// </summary>
 public enum SquashMergeCommitTitleType
 {
     /// <summary>
