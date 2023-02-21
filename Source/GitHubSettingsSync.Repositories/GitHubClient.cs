@@ -68,13 +68,21 @@ public sealed partial class GitHubClient : IGitHubClient
 
         var response = await _client.DeleteAsync($"/repos/{owner}/{name}/branches/{branch}/protection", cancellationToken)
             .ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
 
-        // 指定されたブランチが存在しない場合
         if (response.StatusCode == HttpStatusCode.NoContent)
         {
-            DeletingBranchProtectionSettingsNoContent();
+            DeletingBranchProtectionSettingsNoContent(owner, name, branch);
+            return;
         }
+
+        // 指定されたブランチ名の保護が存在しない場合
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            DeletingBranchProtectionSettingsNotFound(owner, name, branch);
+            return;
+        }
+
+        response.EnsureSuccessStatusCode();
     }
 
     [LoggerMessage(EventId = 1100, Level = LogLevel.Information, Message = "Updating repository settings. {entity}")]
@@ -86,6 +94,9 @@ public sealed partial class GitHubClient : IGitHubClient
     [LoggerMessage(EventId = 1300, Level = LogLevel.Information, Message = "Deleting branch protection settings.")]
     partial void DeletingBranchProtectionSettings();
 
-    [LoggerMessage(EventId = 1301, Level = LogLevel.Information, Message = "No Content.")]
-    partial void DeletingBranchProtectionSettingsNoContent();
+    [LoggerMessage(EventId = 1301, Level = LogLevel.Information, Message = "No content: {owner}/{name}, {branch}")]
+    partial void DeletingBranchProtectionSettingsNoContent(string owner, string name, string branch);
+
+    [LoggerMessage(EventId = 1302, Level = LogLevel.Information, Message = "Not found: {owner}/{name}, {branch}")]
+    partial void DeletingBranchProtectionSettingsNotFound(string owner, string name, string branch);
 }
