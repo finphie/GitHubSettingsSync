@@ -30,15 +30,31 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
     }
 
     /// <inheritdoc/>
-    public async ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings settings, CancellationToken cancellationToken = default)
+    public async ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings? settings, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(repositoryName);
         ArgumentException.ThrowIfNullOrEmpty(branch);
-        ArgumentNullException.ThrowIfNull(settings);
 
         Starting();
 
-        var item = new BranchInformation<GitHubBranchProtection>(owner, repositoryName, branch, settings.ToEntity());
+        if (settings is null)
+        {
+            var request = new BranchRequest(owner, repositoryName, branch);
+
+            try
+            {
+                await _gitHub.DeleteAsync(request, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+
+            return;
+        }
+
+        var item = new BranchRequest<GitHubBranchProtection>(owner, repositoryName, branch, settings.ToEntity());
 
         try
         {
