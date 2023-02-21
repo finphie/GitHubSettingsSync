@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 namespace GitHubSettingsSync.Models;
 
 /// <summary>
-/// 環境変数
+/// 環境変数を表すクラスです。
 /// </summary>
 [SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206:Declaration keywords should follow order", Justification = "StyleCop.Analyzersの不具合。https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3527")]
 public sealed record EnvironmentVariables

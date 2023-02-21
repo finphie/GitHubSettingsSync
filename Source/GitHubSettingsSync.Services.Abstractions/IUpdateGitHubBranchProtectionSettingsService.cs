@@ -16,7 +16,7 @@ public interface IUpdateGitHubBranchProtectionSettingsService
     /// <param name="settings">GitHubブランチ保護に関する設定。</param>
     /// <param name="cancellationToken">キャンセル要求を行うためのトークン。</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="branch"/>、<paramref name="settings"/>がnullです。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="branch"/>がnullです。</exception>
     /// <exception cref="ArgumentException"><paramref name="owner"/>または<paramref name="repositoryName"/>、<paramref name="branch"/>が空です。</exception>
-    ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings settings, CancellationToken cancellationToken = default);
+    ValueTask ExecuteAsync(string owner, string repositoryName, string branch, BranchProtectionSettings? settings, CancellationToken cancellationToken = default);
 }

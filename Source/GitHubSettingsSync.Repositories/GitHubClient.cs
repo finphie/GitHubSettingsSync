@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 using GitHubSettingsSync.Repositories.Entities;
 using Microsoft.Extensions.Logging;
 
@@ -28,36 +29,74 @@ public sealed partial class GitHubClient : IGitHubClient
     }
 
     /// <inheritdoc/>
-    public async Task UpdateRepositoryAsync(string owner, string name, GitHubRepository settings, CancellationToken cancellationToken = default)
+    public async Task UpdateRepositoryAsync(string owner, string name, GitHubRepository entity, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
-        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        UpdatingRepositorySettings(settings);
+        UpdatingRepositorySettings(entity);
 
-        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", settings, JsonContext.Default.GitHubRepository, cancellationToken)
+        var response = await _client.PatchAsJsonAsync($"/repos/{owner}/{name}", entity, JsonContext.Default.GitHubRepository, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
 
     /// <inheritdoc/>
-    public async Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtection settings, CancellationToken cancellationToken = default)
+    public async Task UpdateBranchProtectionAsync(string owner, string name, string branch, GitHubBranchProtection entity, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrEmpty(owner);
         ArgumentException.ThrowIfNullOrEmpty(name);
-        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentException.ThrowIfNullOrEmpty(branch);
+        ArgumentNullException.ThrowIfNull(entity);
 
-        UpdatingBranchProtectionSettings(settings);
+        UpdatingBranchProtectionSettings(entity);
 
-        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", settings, JsonContext.Default.GitHubBranchProtection, cancellationToken)
+        var response = await _client.PutAsJsonAsync($"/repos/{owner}/{name}/branches/{branch}/protection", entity, JsonContext.Default.GitHubBranchProtection, cancellationToken)
             .ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
     }
 
-    [LoggerMessage(EventId = 1001, Level = LogLevel.Information, Message = "Updating repository settings. {settings}")]
-    partial void UpdatingRepositorySettings(GitHubRepository settings);
+    /// <inheritdoc/>
+    public async Task DeleteBranchProtectionAsync(string owner, string name, string branch, CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(owner);
+        ArgumentException.ThrowIfNullOrEmpty(name);
+        ArgumentException.ThrowIfNullOrEmpty(branch);
 
-    [LoggerMessage(EventId = 1002, Level = LogLevel.Information, Message = "Updating branch protection settings. {settings}")]
-    partial void UpdatingBranchProtectionSettings(GitHubBranchProtection settings);
+        DeletingBranchProtectionSettings();
+
+        var response = await _client.DeleteAsync($"/repos/{owner}/{name}/branches/{branch}/protection", cancellationToken)
+            .ConfigureAwait(false);
+
+        if (response.StatusCode == HttpStatusCode.NoContent)
+        {
+            DeletingBranchProtectionSettingsNoContent(owner, name, branch);
+            return;
+        }
+
+        // 指定されたブランチ名の保護が存在しない場合
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            DeletingBranchProtectionSettingsNotFound(owner, name, branch);
+            return;
+        }
+
+        response.EnsureSuccessStatusCode();
+    }
+
+    [LoggerMessage(EventId = 1100, Level = LogLevel.Information, Message = "Updating repository settings. {entity}")]
+    partial void UpdatingRepositorySettings(GitHubRepository entity);
+
+    [LoggerMessage(EventId = 1200, Level = LogLevel.Information, Message = "Updating branch protection settings. {entity}")]
+    partial void UpdatingBranchProtectionSettings(GitHubBranchProtection entity);
+
+    [LoggerMessage(EventId = 1300, Level = LogLevel.Information, Message = "Deleting branch protection settings.")]
+    partial void DeletingBranchProtectionSettings();
+
+    [LoggerMessage(EventId = 1301, Level = LogLevel.Information, Message = "No content: {owner}/{name}, {branch}")]
+    partial void DeletingBranchProtectionSettingsNoContent(string owner, string name, string branch);
+
+    [LoggerMessage(EventId = 1302, Level = LogLevel.Information, Message = "Not found: {owner}/{name}, {branch}")]
+    partial void DeletingBranchProtectionSettingsNotFound(string owner, string name, string branch);
 }
