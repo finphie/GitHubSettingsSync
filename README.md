@@ -70,7 +70,7 @@ merge-commit-title|false|Unchanged|マージにおけるコミットタイトル
 merge-commit-message|false|Unchanged|マージにおけるコミットメッセージの種類。Unchanged・PullRequestTitle・PullRequestBody・Blankのいずれか。
 squash-merge-commit-title|false|Unchanged|スカッシュマージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・CommitOrPullRequestTitleのいずれか。
 squash-merge-commit-message|false|Unchanged|スカッシュマージにおけるコミットメッセージの種類。Unchanged・PullRequestBody・CommitMessages・Blankのいずれか。
-branch-protection|false|false|ブランチ保護を有効にするかどうか。
+branch-protection|false|Unchanged|ブランチ保護を有効にするかどうか。
 branch-protection-name|false|main|ブランチ保護の対象ブランチ名。
 branch-protection-enforce-admins|false|false|ブランチ保護を管理者にも適用するか。
 branch-protection-required-linear-history|false|false|直線状の履歴を必須にするかどうか。
