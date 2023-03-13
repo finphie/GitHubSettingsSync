@@ -2,13 +2,19 @@
 
 [![Build(.NET)](https://github.com/finphie/GitHubSettingsSync/actions/workflows/build-dotnet.yml/badge.svg)](https://github.com/finphie/GitHubSettingsSync/actions/workflows/build-dotnet.yml)
 
-GitHubの設定を同期するGitHub Actionsです。
+GitHubの設定を同期するアプリケーションです。
 
 ## 説明
 
-GitHubSettingsSyncは、GitHubリポジトリの設定を行うGitHub Actionsです。C#/.NET 7で実装しています。
+GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケーションです。
+
+- [GitHubアクション](https://github.com/marketplace/actions/github-settings-sync)
+- [バイナリ](https://github.com/finphie/GitHubSettingsSync/releases/latest)
+- [Dockerイメージ](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
 
 ## 使い方
+
+### GitHubアクション
 
 ```yml
 on:
@@ -50,6 +56,37 @@ jobs:
           branch-protection-required-reviews-required-approving-review-count: 1
         env:
           GITHUB_TOKEN: {{ secrets.PAT }}
+```
+
+### .NETツール
+
+```shell
+GitHubSettingsSync \
+    --repositories GitHubSettingsSync \
+    --has-issues Unchanged \
+    --has-projects Unchanged \
+    --has-wiki Unchanged \
+    --allow-merge-commit Unchanged \
+    --allow-squash-merge Unchanged \
+    --allow-rebase-merge Unchanged \
+    --allow-auto-merge Unchanged \
+    --delete-branch-on-merge Unchanged \
+    --allow-update-branch Unchanged \
+    --merge-commit-title Unchanged \
+    --merge-commit-message Unchanged \
+    --squash-merge-commit-title Unchanged \
+    --squash-merge-commit-message Unchanged \
+    --branch-protection false \
+    --branch-protection-name main \
+    --branch-protection-enforce-admins false \
+    --branch-protection-required-linear-history false \
+    --branch-protection-allow-force-pushes false \
+    --branch-protection-allow-deletions false \
+    --branch-protection-required-conversation-resolution false \
+    --branch-protection-required-reviews false \
+    --branch-protection-required-reviews-dismiss-stale-reviews false \
+    --branch-protection-required-reviews-require-code-owner-reviews false \
+    --branch-protection-required-reviews-required-approving-review-count 1
 ```
 
 ## 引数
