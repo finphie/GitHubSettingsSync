@@ -1,8 +1,0 @@
-<Project>
-  <!-- ベンチマークプロジェクト関連の設定 -->
-
-  <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="*" />
-  </ItemGroup>
-
-</Project>
