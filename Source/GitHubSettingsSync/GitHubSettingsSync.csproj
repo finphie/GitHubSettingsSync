@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <PublishAot>true</PublishAot>
+    <Aot>true</Aot>
     <EnableReflection>true</EnableReflection>
   </PropertyGroup>
 
@@ -24,5 +24,7 @@
   <ItemGroup>
     <TrimmerRootDescriptor Include="Roots.xml" />
   </ItemGroup>
+
+  <Import Project="$(BuildCommonDirectory)Exe.props" />
 
 </Project>
