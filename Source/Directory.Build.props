@@ -1,28 +1,9 @@
 <Project>
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
-  <PropertyGroup>
-    <!--
-      'self-contained'または'no-self-contained'が指定されていない場合に出力される警告を無効化。
-      理由: Directory.Build.targetsでのSelfContainedプロパティの指定では、警告が出る不具合があるため。
-    -->
-    <NoWarn>$(NoWarn);NETSDK1179</NoWarn>
-  </PropertyGroup>
-
   <ItemGroup>
     <!-- 「ソリューション名.Shared」ディレクトリに存在するC#ファイルを、全プロジェクトで共有する。 -->
     <Compile Include="$(MSBuildThisFileDirectory)/$(SolutionName).Shared/**/*.cs" LinkBase="Shared" />
   </ItemGroup>
-
-  <!--
-    dotnet publish実行時にのみ条件をtrueにしたいが、
-    BeforePublishターゲットでは、無視されるプロパティが存在する。
-    そのため、Versionが空以外であればdotnet publish実行と判断する。
-  -->
-  <PropertyGroup Condition="'$(Version)' != ''">
-    <!-- デバッグ情報出力を無効にする。 -->
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>none</DebugType>
-  </PropertyGroup>
 
 </Project>
