@@ -1,6 +1,8 @@
 # GitHubSettingsSync
 
 [![Build(.NET)](https://github.com/finphie/GitHubSettingsSync/actions/workflows/build-dotnet.yml/badge.svg)](https://github.com/finphie/GitHubSettingsSync/actions/workflows/build-dotnet.yml)
+[![NuGet](https://img.shields.io/nuget/v/GitHubSettingsSync?color=0078d4&label=NuGet)](https://www.nuget.org/packages/GitHubSettingsSync/)
+[![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/f8147011-dc70-430b-ba72-56ee4008f90e/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
 
 GitHubの設定を同期するアプリケーションです。
 
@@ -9,6 +11,8 @@ GitHubの設定を同期するアプリケーションです。
 GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケーションです。
 
 - [GitHubアクション](https://github.com/marketplace/actions/github-settings-sync)
+- [NuGet](https://www.nuget.org/packages/GitHubSettingsSync)
+- [Azure Artifacts](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
 - [バイナリ](https://github.com/finphie/GitHubSettingsSync/releases/latest)
 - [Dockerイメージ](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
 
