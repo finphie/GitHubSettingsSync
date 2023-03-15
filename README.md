@@ -20,7 +20,7 @@ GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケー�
 
 ### GitHubアクション
 
-```yml
+```yaml
 on:
   workflow_dispatch:
 
@@ -128,6 +128,7 @@ branch-protection-required-reviews-required-approving-review-count|false|1|プ�
 引数|必須|デフォルト|説明
 -|-|-|-
 GITHUB_TOKEN|**true**|-|public_repoスコープを許可したGitHub Personal Access Token。
+GITHUB_REPOSITORY_OWNER|false|${{ github.repository_owner }}|GitHubオーナー名。
 
 ## 作者
 
