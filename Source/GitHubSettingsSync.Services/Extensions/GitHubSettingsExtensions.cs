@@ -22,6 +22,7 @@ static class GitHubSettingsExtensions
             HasIssues: settings.HasIssues.ToBoolean(),
             HasProjects: settings.HasProjects.ToBoolean(),
             HasWiki: settings.HasWiki.ToBoolean(),
+            HasDiscussions: settings.HasDiscussions.ToBoolean(),
             AllowRebaseMerge: settings.AllowRebaseMerge.ToBoolean(),
             AllowAutoMerge: settings.AllowAutoMerge.ToBoolean(),
             DeleteBranchOnMerge: settings.DeleteBranchOnMerge.ToBoolean(),
