@@ -208,7 +208,7 @@ runs:
     - '--has-wiki'
     - ${{ inputs.has-wiki }}
 
-    -- '--has-discussions'
+    - '--has-discussions'
     - ${{ inputs.has-discussions }}
 
     - '--allow-merge-commit'
