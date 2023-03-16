@@ -37,6 +37,14 @@ inputs:
       - true
       - false
     default: Unchanged
+  has-discussions:
+    description: Discussionsを有効にするかどうか。
+    required: false
+    type: choice
+    options:
+      - Unchanged
+      - true
+      - false
   allow-merge-commit:
     description: 「Create a merge commit」を有効にするか。
     required: false
@@ -199,6 +207,9 @@ runs:
 
     - '--has-wiki'
     - ${{ inputs.has-wiki }}
+
+    -- '--has-discussions'
+    - ${{ inputs.has-discussions }}
 
     - '--allow-merge-commit'
     - ${{ inputs.allow-merge-commit }}
