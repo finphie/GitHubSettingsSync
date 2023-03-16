@@ -37,6 +37,7 @@ jobs:
           has-issues: Unchanged
           has-projects: Unchanged
           has-wiki: Unchanged
+          has-discussions: Unchanged
           allow-merge-commit: Unchanged
           allow-squash-merge: Unchanged
           allow-rebase-merge: Unchanged
@@ -70,6 +71,7 @@ GitHubSettingsSync \
     --has-issues Unchanged \
     --has-projects Unchanged \
     --has-wiki Unchanged \
+    --has-discussions Unchanged \
     --allow-merge-commit Unchanged \
     --allow-squash-merge Unchanged \
     --allow-rebase-merge Unchanged \
@@ -101,6 +103,7 @@ repositories|**true**|-|カンマ・半角スペース・改行区切りにし�
 has-issues|false|Unchanged|Issuesを有効にするかどうか。
 has-projects|false|Unchanged|Projectsを有効にするかどうか。
 has-wiki|false|Unchanged|Wikiを有効にするかどうか。
+has-discussions|false|Unchanged|Discussionsを有効にするかどうか。
 allow-merge-commit|false|Unchanged|「Create a merge commit」を有効にするか。
 allow-squash-merge|false|Unchanged|「Squash Merge」を有効にするかどうか。
 allow-rebase-merge|false|Unchanged|「Rebase and Merge」を有効にするか。
