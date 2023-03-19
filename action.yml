@@ -194,7 +194,7 @@ inputs:
 
 runs:
   using: docker
-  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v1.1.0'
+  image: 'docker://ghcr.io/finphie/git-hub-settings-sync:v1.1.1'
   args:
     - '--repositories'
     - '${{ inputs.repositories }}'

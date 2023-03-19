@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: GitHub Settings Sync
-        uses: finphie/GitHubSettingsSync@v1.1.0
+        uses: finphie/GitHubSettingsSync@v1.1.1
         with:
           repositories: |
             GitHubSettingsSync
