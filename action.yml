@@ -45,6 +45,7 @@ inputs:
       - Unchanged
       - true
       - false
+    default: Unchanged
   allow-merge-commit:
     description: 「Create a merge commit」を有効にするか。
     required: false
