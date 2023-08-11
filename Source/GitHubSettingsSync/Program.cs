@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using GitHubSettingsSync;
 using GitHubSettingsSync.Extensions;
 using GitHubSettingsSync.Models;
@@ -10,7 +9,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
 
 var builder = ConsoleApp.CreateBuilder(args)
     .ConfigureHostConfiguration(static x => x.AddEnvironmentVariables())
@@ -25,7 +23,12 @@ var builder = ConsoleApp.CreateBuilder(args)
     })
     .ConfigureServices(static (context, services) =>
     {
-        Bind(services, context.Configuration);
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+#pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
+        services.Configure<EnvironmentVariables>(context.Configuration);
+#pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+        services.AddSingleton<IValidateOptions<EnvironmentVariables>, EnvironmentVariablesValidator>();
 
         services.AddHttpClient<IGitHubClient, GitHubClient>(static (provider, client) =>
         {
@@ -35,9 +38,9 @@ var builder = ConsoleApp.CreateBuilder(args)
                 : new Uri(new(environments.GitHubApiUrl), new Uri("/api/v3/", UriKind.Relative));
 
             client.BaseAddress = url;
-            client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/vnd.github.v3+json");
-            client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, nameof(GitHubSettingsSync));
-            client.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {environments.GitHubToken}");
+            client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+            client.DefaultRequestHeaders.Add("User-Agent", nameof(GitHubSettingsSync));
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {environments.GitHubToken}");
             client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
         });
 
@@ -56,16 +59,6 @@ var builder = ConsoleApp.CreateBuilder(args)
 var app = builder.Build();
 app.AddRootCommand(CommandAsync);
 app.Run();
-
-[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "警告を無効にしても問題ない。")]
-[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "警告を無効にしても問題ない。")]
-static void Bind(IServiceCollection services, IConfiguration configuration)
-{
-    // 環境変数
-    services.AddOptions<EnvironmentVariables>()
-        .Bind(configuration)
-        .ValidateDataAnnotations();
-}
 
 static async ValueTask<int> CommandAsync(
     ConsoleAppContext context,

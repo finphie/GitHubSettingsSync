@@ -67,9 +67,9 @@ public sealed partial class UpdateGitHubBranchProtectionSettingsService : IUpdat
         }
     }
 
-    [LoggerMessage(EventId = 1000, Level = LogLevel.Debug, Message = $"{nameof(UpdateGitHubBranchProtectionSettingsService)} is starting.")]
+    [LoggerMessage(Level = LogLevel.Debug, Message = $"{nameof(UpdateGitHubBranchProtectionSettingsService)} is starting.")]
     partial void Starting();
 
-    [LoggerMessage(EventId = 9000, Level = LogLevel.Error)]
+    [LoggerMessage(Level = LogLevel.Error)]
     partial void Error(Exception ex);
 }
