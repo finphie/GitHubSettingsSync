@@ -1,12 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using GitHubSettingsSync.Services.Settings;
+﻿using GitHubSettingsSync.Services.Settings;
 
 namespace GitHubSettingsSync.Models;
 
 /// <summary>
 /// GitHub設定を表すクラスです。
 /// </summary>
-[SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1206:Declaration keywords should follow order", Justification = "StyleCop.Analyzersの不具合。https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3527")]
 public sealed record GitHubSettings
 {
     /// <summary>
