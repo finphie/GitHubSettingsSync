@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using GitHubSettingsSync;
 using GitHubSettingsSync.Extensions;
 using GitHubSettingsSync.Models;
@@ -24,7 +23,8 @@ var builder = ConsoleApp.CreateBuilder(args)
     })
     .ConfigureServices(static (context, services) =>
     {
-        Bind(services, context.Configuration);
+        services.Configure<EnvironmentVariables>(context.Configuration);
+        services.AddSingleton<IValidateOptions<EnvironmentVariables>, EnvironmentVariablesValidator>();
 
         services.AddHttpClient<IGitHubClient, GitHubClient>(static (provider, client) =>
         {
@@ -55,16 +55,6 @@ var builder = ConsoleApp.CreateBuilder(args)
 var app = builder.Build();
 app.AddRootCommand(CommandAsync);
 app.Run();
-
-[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "警告を無効にしても問題ない。")]
-[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "警告を無効にしても問題ない。")]
-static void Bind(IServiceCollection services, IConfiguration configuration)
-{
-    // 環境変数
-    services.AddOptions<EnvironmentVariables>()
-        .Bind(configuration)
-        .ValidateDataAnnotations();
-}
 
 static async ValueTask<int> CommandAsync(
     ConsoleAppContext context,
