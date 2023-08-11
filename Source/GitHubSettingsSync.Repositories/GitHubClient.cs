@@ -85,18 +85,18 @@ public sealed partial class GitHubClient : IGitHubClient
         response.EnsureSuccessStatusCode();
     }
 
-    [LoggerMessage(EventId = 1100, Level = LogLevel.Information, Message = "Updating repository settings. {entity}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "Updating repository settings. {entity}")]
     partial void UpdatingRepositorySettings(GitHubRepository entity);
 
-    [LoggerMessage(EventId = 1200, Level = LogLevel.Information, Message = "Updating branch protection settings. {entity}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "Updating branch protection settings. {entity}")]
     partial void UpdatingBranchProtectionSettings(GitHubBranchProtection entity);
 
-    [LoggerMessage(EventId = 1300, Level = LogLevel.Information, Message = "Deleting branch protection settings.")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "Deleting branch protection settings.")]
     partial void DeletingBranchProtectionSettings();
 
-    [LoggerMessage(EventId = 1301, Level = LogLevel.Information, Message = "No content: {owner}/{name}, {branch}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "No content: {owner}/{name}, {branch}")]
     partial void DeletingBranchProtectionSettingsNoContent(string owner, string name, string branch);
 
-    [LoggerMessage(EventId = 1302, Level = LogLevel.Information, Message = "Not found: {owner}/{name}, {branch}")]
+    [LoggerMessage(Level = LogLevel.Information, Message = "Not found: {owner}/{name}, {branch}")]
     partial void DeletingBranchProtectionSettingsNotFound(string owner, string name, string branch);
 }
