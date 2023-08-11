@@ -32,7 +32,7 @@ static class GitHubSettingsExtensions
         {
             entity = entity with
             {
-                AllowMerge = true,
+                AllowMergeCommit = true,
                 MergeCommitTitle = settings.MergeCommit.Title.GetName(),
                 MergeCommitMessage = settings.MergeCommit.Message.GetName()
             };
@@ -68,7 +68,7 @@ static class GitHubSettingsExtensions
             AllowDeletions: settings.AllowDeletions.ToBoolean(),
             RequiredConversationResolution: settings.RequiredConversationResolution.ToBoolean(),
             RequiredStatusChecks: null,
-            RequiredReviews: settings.RequiredReviews?.ToEntity());
+            RequiredPullRequestReviews: settings.RequiredReviews?.ToEntity());
     }
 
     static GitHubBranchProtectionRequiredReviews ToEntity(this BranchProtectionRequiredReviewsSettings settings)

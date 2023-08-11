@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace GitHubSettingsSync.Repositories.Entities;
+﻿namespace GitHubSettingsSync.Repositories.Entities;
 
 /// <summary>
 /// GitHubリポジトリに関する設定を表すクラスです。
@@ -9,7 +7,7 @@ namespace GitHubSettingsSync.Repositories.Entities;
 /// <param name="HasProjects">Projectsを有効にするかどうか。</param>
 /// <param name="HasWiki">Wikiを有効にするかどうか。</param>
 /// <param name="HasDiscussions">Discussionsを有効にするかどうか。</param>
-/// <param name="AllowMerge">「Create a merge commit」を有効にするかどうか。</param>
+/// <param name="AllowMergeCommit">「Create a merge commit」を有効にするかどうか。</param>
 /// <param name="AllowSquashMerge">「Squash Merge」を有効にするかどうか。</param>
 /// <param name="AllowRebaseMerge">「Rebase and Merge」を有効にするかどうか。</param>
 /// <param name="AllowAutoMerge">自動マージ機能を有効にするかどうか。</param>
@@ -20,17 +18,17 @@ namespace GitHubSettingsSync.Repositories.Entities;
 /// <param name="SquashMergeCommitTitle">スカッシュマージにおけるコミットタイトルの種類。</param>
 /// <param name="SquashMergeCommitMessage">スカッシュマージにおけるコミットメッセージの種類。</param>
 public sealed record GitHubRepository(
-    [property: JsonPropertyName("has_issues")] bool? HasIssues = null,
-    [property: JsonPropertyName("has_projects")] bool? HasProjects = null,
-    [property: JsonPropertyName("has_wiki")] bool? HasWiki = null,
-    [property: JsonPropertyName("has_discussions")] bool? HasDiscussions = null,
-    [property: JsonPropertyName("allow_merge_commit")] bool? AllowMerge = null,
-    [property: JsonPropertyName("allow_squash_merge")] bool? AllowSquashMerge = null,
-    [property: JsonPropertyName("allow_rebase_merge")] bool? AllowRebaseMerge = null,
-    [property: JsonPropertyName("allow_auto_merge")] bool? AllowAutoMerge = null,
-    [property: JsonPropertyName("delete_branch_on_merge")] bool? DeleteBranchOnMerge = null,
-    [property: JsonPropertyName("allow_update_branch")] bool? AllowUpdateBranch = null,
-    [property: JsonPropertyName("merge_commit_title")] string? MergeCommitTitle = null,
-    [property: JsonPropertyName("merge_commit_message")] string? MergeCommitMessage = null,
-    [property: JsonPropertyName("squash_merge_commit_title")] string? SquashMergeCommitTitle = null,
-    [property: JsonPropertyName("squash_merge_commit_message")] string? SquashMergeCommitMessage = null);
+    bool? HasIssues = null,
+    bool? HasProjects = null,
+    bool? HasWiki = null,
+    bool? HasDiscussions = null,
+    bool? AllowMergeCommit = null,
+    bool? AllowSquashMerge = null,
+    bool? AllowRebaseMerge = null,
+    bool? AllowAutoMerge = null,
+    bool? DeleteBranchOnMerge = null,
+    bool? AllowUpdateBranch = null,
+    string? MergeCommitTitle = null,
+    string? MergeCommitMessage = null,
+    string? SquashMergeCommitTitle = null,
+    string? SquashMergeCommitMessage = null);
