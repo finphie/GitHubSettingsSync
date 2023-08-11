@@ -153,8 +153,6 @@ MIT
 - Microsoft.Extensions.Hosting
 - Microsoft.Extensions.Logging
 - Microsoft.Extensions.Options
-- Microsoft.Extensions.Options.DataAnnotations
-- Microsoft.Net.Http.Headers
 
 ### アナライザー
 
