@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
+    <!--<EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>-->
     <Aot>true</Aot>
     <EnableReflection>true</EnableReflection>
   </PropertyGroup>
