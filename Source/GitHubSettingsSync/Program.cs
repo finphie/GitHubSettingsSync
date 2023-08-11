@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Net.Http.Headers;
 
 var builder = ConsoleApp.CreateBuilder(args)
     .ConfigureHostConfiguration(static x => x.AddEnvironmentVariables())
@@ -35,9 +34,9 @@ var builder = ConsoleApp.CreateBuilder(args)
                 : new Uri(new(environments.GitHubApiUrl), new Uri("/api/v3/", UriKind.Relative));
 
             client.BaseAddress = url;
-            client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/vnd.github.v3+json");
-            client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, nameof(GitHubSettingsSync));
-            client.DefaultRequestHeaders.Add(HeaderNames.Authorization, $"Bearer {environments.GitHubToken}");
+            client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+            client.DefaultRequestHeaders.Add("User-Agent", nameof(GitHubSettingsSync));
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {environments.GitHubToken}");
             client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
         });
 

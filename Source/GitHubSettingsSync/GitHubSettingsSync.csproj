@@ -19,7 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0-preview.7.23375.6" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0-preview.7.23375.6" />
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0-preview.7.23375.6" />
-    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
   </ItemGroup>
 
   <ItemGroup>
