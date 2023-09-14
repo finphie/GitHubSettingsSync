@@ -9,21 +9,17 @@ namespace GitHubSettingsSync.Models;
 public sealed record EnvironmentVariables
 {
     /// <summary>
-    /// <see cref="EnvironmentVariables"/>クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    public EnvironmentVariables()
-    {
-    }
-
-    /// <summary>
     /// トークンを取得または設定します。
     /// </summary>
     /// <value>
     /// GitHubの個人用アクセストークンを返します。
     /// </value>
+    /// <remarks>
+    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// </remarks>
     [Required]
     [ConfigurationKeyName("GITHUB_TOKEN")]
-    public required string GitHubToken { get; init; }
+    public required string GitHubToken { get; set; }
 
     /// <summary>
     /// GitHub APIのURLを取得または設定します。
@@ -31,8 +27,11 @@ public sealed record EnvironmentVariables
     /// <value>
     /// 「GITHUB_API_URL」環境変数を返します。
     /// </value>
+    /// <remarks>
+    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// </remarks>
     [ConfigurationKeyName("GITHUB_API_URL")]
-    public string? GitHubApiUrl { get; init; }
+    public string? GitHubApiUrl { get; set; }
 
     /// <summary>
     /// GitHubオーナー名を取得または設定します。
@@ -40,6 +39,9 @@ public sealed record EnvironmentVariables
     /// <value>
     /// 「GITHUB_REPOSITORY_OWNER」環境変数を返します。
     /// </value>
+    /// <remarks>
+    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// </remarks>
     [ConfigurationKeyName("GITHUB_REPOSITORY_OWNER")]
-    public string? GitHubRepositoryOwner { get; init; }
+    public string? GitHubRepositoryOwner { get; set; }
 }
