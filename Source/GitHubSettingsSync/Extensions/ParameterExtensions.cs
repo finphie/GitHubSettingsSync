@@ -1,4 +1,4 @@
-﻿using GitHubSettingsSync.Services.Settings;
+﻿using FToolkit.Net.GitHub.Services.Settings;
 
 namespace GitHubSettingsSync.Extensions;
 

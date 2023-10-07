@@ -1,5 +1,5 @@
-﻿using GitHubSettingsSync.Models.Helpers;
-using GitHubSettingsSync.Services;
+﻿using FToolkit.Helpers.GitHub;
+using FToolkit.Net.GitHub.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 

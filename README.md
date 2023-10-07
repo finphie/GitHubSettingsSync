@@ -148,14 +148,11 @@ MIT
 ### ライブラリ
 
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
-- Microsoft.Extensions.Configuration
-- Microsoft.Extensions.DependencyInjection
+- [FToolkit](https://github.com/finphie/FToolkit)
 - Microsoft.Extensions.Hosting
-- Microsoft.Extensions.Logging
-- Microsoft.Extensions.Options
 
 ### アナライザー
 
-- Microsoft.CodeAnalysis.NetAnalyzers (SDK組み込み)
+- [Microsoft.CodeAnalysis.NetAnalyzers](https://github.com/dotnet/roslyn-analyzers)
 - [Microsoft.VisualStudio.Threading.Analyzers](https://github.com/Microsoft/vs-threading)
 - [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)

@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FToolkit.Net.GitHub.Client;
+using FToolkit.Net.GitHub.Repositories;
+using FToolkit.Net.GitHub.Services;
+using FToolkit.Net.GitHub.Services.Settings;
 using GitHubSettingsSync;
 using GitHubSettingsSync.Extensions;
 using GitHubSettingsSync.Models;
-using GitHubSettingsSync.Repositories;
-using GitHubSettingsSync.Services;
-using GitHubSettingsSync.Services.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -117,7 +118,7 @@ static async ValueTask<int> CommandAsync(
             AllowForcePushes = branchProtectionAllowForcePushes.ToStatus(),
             AllowDeletions = branchProtectionAllowDeletions.ToStatus(),
             RequiredConversationResolution = branchProtectionRequiredConversationResolution.ToStatus(),
-            RequiredReviews = !branchProtectionRequiredReviews ? null : new()
+            RequiredPullRequestReviews = !branchProtectionRequiredReviews ? null : new()
             {
                 DismissStaleReviews = branchProtectionRequiredReviewsDismissStaleReviews,
                 RequireCodeOwnerReviews = branchProtectionRequiredReviewsRequireCodeOwnerReviews,
