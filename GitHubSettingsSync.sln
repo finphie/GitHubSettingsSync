@@ -5,21 +5,13 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubSettingsSync", "Source\GitHubSettingsSync\GitHubSettingsSync.csproj", "{36034A78-68D3-4A25-821E-DBA13E56571D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Models", "Source\GitHubSettingsSync.Models\GitHubSettingsSync.Models.csproj", "{1E153674-6481-40E3-8A33-C328C39CF35A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Repositories", "Source\GitHubSettingsSync.Repositories\GitHubSettingsSync.Repositories.csproj", "{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubSettingsSync.Models", "Source\GitHubSettingsSync.Models\GitHubSettingsSync.Models.csproj", "{1E153674-6481-40E3-8A33-C328C39CF35A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Repositories.Abstractions", "Source\GitHubSettingsSync.Repositories.Abstractions\GitHubSettingsSync.Repositories.Abstractions.csproj", "{A349551B-B21C-4B16-8D02-D3111A7E5791}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8A671991-4BBE-4A06-A337-E33395645836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Services", "Source\GitHubSettingsSync.Services\GitHubSettingsSync.Services.csproj", "{F37F74D5-BB03-426A-A481-0B486689E51A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Services.Abstractions", "Source\GitHubSettingsSync.Services.Abstractions\GitHubSettingsSync.Services.Abstractions.csproj", "{EE6FFA14-E4AA-458E-8031-D93A30A76D45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubSettingsSync.Models.Abstractions", "Source\GitHubSettingsSync.Models.Abstractions\GitHubSettingsSync.Models.Abstractions.csproj", "{567ED9A5-0730-4EC6-9F16-AE910D6E8526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubSettingsSync.Models.Abstractions", "Source\GitHubSettingsSync.Models.Abstractions\GitHubSettingsSync.Models.Abstractions.csproj", "{567ED9A5-0730-4EC6-9F16-AE910D6E8526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,22 +27,6 @@ Global
 		{1E153674-6481-40E3-8A33-C328C39CF35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E153674-6481-40E3-8A33-C328C39CF35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E153674-6481-40E3-8A33-C328C39CF35A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A349551B-B21C-4B16-8D02-D3111A7E5791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A349551B-B21C-4B16-8D02-D3111A7E5791}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A349551B-B21C-4B16-8D02-D3111A7E5791}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A349551B-B21C-4B16-8D02-D3111A7E5791}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F37F74D5-BB03-426A-A481-0B486689E51A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F37F74D5-BB03-426A-A481-0B486689E51A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F37F74D5-BB03-426A-A481-0B486689E51A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F37F74D5-BB03-426A-A481-0B486689E51A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE6FFA14-E4AA-458E-8031-D93A30A76D45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE6FFA14-E4AA-458E-8031-D93A30A76D45}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE6FFA14-E4AA-458E-8031-D93A30A76D45}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE6FFA14-E4AA-458E-8031-D93A30A76D45}.Release|Any CPU.Build.0 = Release|Any CPU
 		{567ED9A5-0730-4EC6-9F16-AE910D6E8526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{567ED9A5-0730-4EC6-9F16-AE910D6E8526}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{567ED9A5-0730-4EC6-9F16-AE910D6E8526}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,10 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{36034A78-68D3-4A25-821E-DBA13E56571D} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
 		{1E153674-6481-40E3-8A33-C328C39CF35A} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
-		{2EBD976E-C6A1-4B53-A26B-CF5EF87CCE8A} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
-		{A349551B-B21C-4B16-8D02-D3111A7E5791} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
-		{F37F74D5-BB03-426A-A481-0B486689E51A} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
-		{EE6FFA14-E4AA-458E-8031-D93A30A76D45} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
 		{567ED9A5-0730-4EC6-9F16-AE910D6E8526} = {5CE17AB5-0ECB-48A8-9B65-F0BE148CDBDE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
