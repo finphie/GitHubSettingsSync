@@ -30,9 +30,9 @@ var builder = ConsoleApp.CreateBuilder(args)
         services.AddHttpClient<IGitHubClient, GitHubClient>(static (provider, client) =>
         {
             var environments = provider.GetRequiredService<IOptions<EnvironmentVariables>>().Value;
-            var url = string.IsNullOrEmpty(environments.GitHubApiUrl)
+            var url = environments.GitHubApiUrl is null
                 ? new Uri("https://api.github.com/")
-                : new Uri(new(environments.GitHubApiUrl), new Uri("/api/v3/", UriKind.Relative));
+                : new Uri(environments.GitHubApiUrl, new Uri("/api/v3/", UriKind.Relative));
 
             client.BaseAddress = url;
             client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
