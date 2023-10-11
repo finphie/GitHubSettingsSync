@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="FToolkit.Helpers.GitHub" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.1.23419.4" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0-rc.1.23419.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.2.23479.6" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0-rc.2.23479.6" />
   </ItemGroup>
 
   <ItemGroup>

@@ -31,7 +31,7 @@ public sealed record EnvironmentVariables
     /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
     /// </remarks>
     [ConfigurationKeyName("GITHUB_API_URL")]
-    public string? GitHubApiUrl { get; set; }
+    public Uri? GitHubApiUrl { get; set; }
 
     /// <summary>
     /// GitHubオーナー名を取得または設定します。

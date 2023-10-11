@@ -63,7 +63,7 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
 
                 await _branchProtectionSettingsService.ExecuteAsync(owner, repositoryName, settings.Branch, settings.BranchProtection, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception ex)
+            catch (OperationCanceledException ex)
             {
                 Error(ex);
                 IsError = true;
@@ -79,5 +79,5 @@ public sealed partial class UpdateGitHubSettings : IUpdateGitHubSettings
     partial void Starting();
 
     [LoggerMessage(Level = LogLevel.Error)]
-    partial void Error(Exception ex);
+    partial void Error(OperationCanceledException ex);
 }
