@@ -150,9 +150,16 @@ MIT
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
 - [FToolkit](https://github.com/finphie/FToolkit)
 - Microsoft.Extensions.Hosting
+- Microsoft.Extensions.Http
 
 ### アナライザー
 
+- [DocumentationAnalyzers](https://github.com/DotNetAnalyzers/DocumentationAnalyzers)
+- [IDisposableAnalyzers](https://github.com/DotNetAnalyzers/IDisposableAnalyzers)
 - [Microsoft.CodeAnalysis.NetAnalyzers](https://github.com/dotnet/roslyn-analyzers)
 - [Microsoft.VisualStudio.Threading.Analyzers](https://github.com/Microsoft/vs-threading)
 - [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
+
+### その他
+
+- [Microsoft.SourceLink.GitHub](https://github.com/dotnet/sourcelink)
