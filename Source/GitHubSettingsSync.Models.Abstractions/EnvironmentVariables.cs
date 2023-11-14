@@ -15,7 +15,7 @@ public sealed record EnvironmentVariables
     /// GitHubの個人用アクセストークンを返します。
     /// </value>
     /// <remarks>
-    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// <para>initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。</para>
     /// </remarks>
     [Required]
     [ConfigurationKeyName("GITHUB_TOKEN")]
@@ -28,7 +28,7 @@ public sealed record EnvironmentVariables
     /// 「GITHUB_API_URL」環境変数を返します。
     /// </value>
     /// <remarks>
-    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// <para>initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。</para>
     /// </remarks>
     [ConfigurationKeyName("GITHUB_API_URL")]
     public Uri? GitHubApiUrl { get; set; }
@@ -40,7 +40,7 @@ public sealed record EnvironmentVariables
     /// 「GITHUB_REPOSITORY_OWNER」環境変数を返します。
     /// </value>
     /// <remarks>
-    /// initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。
+    /// <para>initアクセサにするとソースジェネレーター使用時、バインドされないので注意する。</para>
     /// </remarks>
     [ConfigurationKeyName("GITHUB_REPOSITORY_OWNER")]
     public string? GitHubRepositoryOwner { get; set; }
