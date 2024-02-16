@@ -87,10 +87,11 @@ static async ValueTask<int> CommandAsync(
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
     [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")][Range(1, 6)] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1)
 {
+    var separator = new[] { ',', ' ', '\n', '\r' };
     var repositoryList = repositories
         .TrimStart('[')
         .TrimEnd(']')
-        .Split([',', ' ', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries);
+        .Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
     var settings = new GitHubSettings
     {
