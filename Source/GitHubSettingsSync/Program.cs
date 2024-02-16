@@ -90,9 +90,7 @@ static async ValueTask<int> CommandAsync(
     var repositoryList = repositories
         .TrimStart('[')
         .TrimEnd(']')
-#pragma warning disable CA1861 // 引数として定数配列を使用しない
-        .Split(new[] { ',', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-#pragma warning restore CA1861 // 引数として定数配列を使用しない
+        .Split([',', ' ', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries);
 
     var settings = new GitHubSettings
     {
