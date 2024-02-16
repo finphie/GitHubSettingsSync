@@ -87,12 +87,11 @@ static async ValueTask<int> CommandAsync(
     [Option("bp-rr-rcor", "[ブランチ保護][レビュー]コード所有者のレビューが必須かどうか。")] bool branchProtectionRequiredReviewsRequireCodeOwnerReviews = false,
     [Option("bp-rr-rarc", "[ブランチ保護][レビュー]プルリクエストの承認に必要なレビュアーの数。")][Range(1, 6)] int branchProtectionRequiredReviewsRequiredApprovingReviewCount = 1)
 {
+    var separator = new[] { ',', ' ', '\n', '\r' };
     var repositoryList = repositories
         .TrimStart('[')
         .TrimEnd(']')
-#pragma warning disable CA1861 // 引数として定数配列を使用しない
-        .Split(new[] { ',', ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-#pragma warning restore CA1861 // 引数として定数配列を使用しない
+        .Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
     var settings = new GitHubSettings
     {
