@@ -106,7 +106,7 @@ static async ValueTask<int> CommandAsync(
             AllowRebaseMerge = allowRebaseMerge.ToStatus(),
             AllowAutoMerge = allowAutoMerge.ToStatus(),
             DeleteBranchOnMerge = deleteBranchOnMerge.ToStatus(),
-            AllowUpdateBranch = allowUpdateBranch.ToStatus(),
+            AllowUpdateBranch = allowUpdateBranch.ToStatus()
         },
         Branch = branchProtectionName,
         IsBranchProtection = branchProtection != BooleanParameter.Unchanged,

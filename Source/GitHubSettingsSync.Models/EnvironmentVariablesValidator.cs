@@ -6,6 +6,4 @@ namespace GitHubSettingsSync.Models;
 /// 環境変数に関する検証クラスです。
 /// </summary>
 [OptionsValidator]
-public sealed partial class EnvironmentVariablesValidator : IValidateOptions<EnvironmentVariables>
-{
-}
+public sealed partial class EnvironmentVariablesValidator : IValidateOptions<EnvironmentVariables>;
