@@ -158,8 +158,6 @@ MIT
 - [IDisposableAnalyzers](https://github.com/DotNetAnalyzers/IDisposableAnalyzers)
 - [Microsoft.CodeAnalysis.NetAnalyzers](https://github.com/dotnet/roslyn-analyzers)
 - [Microsoft.VisualStudio.Threading.Analyzers](https://github.com/Microsoft/vs-threading)
+- [Roslynator.Analyzers](https://github.com/dotnet/roslynator)
+- [Roslynator.Formatting.Analyzers](https://github.com/dotnet/roslynator)
 - [StyleCop.Analyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
-
-### その他
-
-- [Microsoft.SourceLink.GitHub](https://github.com/dotnet/sourcelink)
