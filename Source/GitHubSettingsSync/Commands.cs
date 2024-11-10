@@ -26,27 +26,27 @@ static class Commands
     /// <param name="allowUpdateBranch">Whether to allow branch updates.</param>
     /// <param name="mergeCommitTitle">
     /// The title of the merge commit.
-    /// 値によって"--merge-commit-message"の指定に制限があります。
-    /// PullRequestTitleでは、PullRequestBodyやBlankを指定してください。
-    /// MergeMessageでは、PullRequestTitleを指定してください。
+    /// Depending on the value, there are restrictions on specifying "--merge-commit-message".
+    /// For PullRequestTitle, specify PullRequestBody or Blank.
+    /// For MergeMessage, specify PullRequestTitle.
     /// </param>
     /// <param name="mergeCommitMessage">
     /// The message of the merge commit.
-    /// 値によって"--merge-commit-title"の指定に制限があります。
-    /// PullRequestTitleでは、MergeMessageを指定してください。
-    /// PullRequestBodyやBlankでは、PullRequestTitleを指定してください。
+    /// Depending on the value, there are restrictions on specifying "--merge-commit-title".
+    /// For PullRequestTitle, specify MergeMessage.
+    /// For PullRequestBody or Blank, specify PullRequestTitle.
     /// </param>
     /// <param name="squashMergeCommitTitle">
     /// The title of the squash merge commit.
-    /// 値によって"--squash-merge-commit-message"の指定に制限があります。
-    /// PullRequestTitleでは、PullRequestBodyやCommitMessages、Blankを指定してください。
-    /// CommitOrPullRequestTitleでは、CommitMessagesを指定してください。
+    /// Depending on the value, there are restrictions on specifying "--squash-merge-commit-message".
+    /// For PullRequestTitle, specify PullRequestBody, CommitMessages, or Blank.
+    /// For CommitOrPullRequestTitle, specify CommitMessages.
     /// </param>
     /// <param name="squashMergeCommitMessage">
     /// The message of the squash merge commit.
-    /// 値によって"--squash-merge-commit-title"の指定に制限があります。
-    /// PullRequestBodyやBlankでは、PullRequestTitleを指定してください。
-    /// CommitMessagesでは、PullRequestTitleやCommitOrPullRequestTitleを指定してください。
+    /// Depending on the value, there are restrictions on specifying "--squash-merge-commit-title".
+    /// For PullRequestBody or Blank, specify PullRequestTitle.
+    /// For CommitMessages, specify PullRequestTitle or CommitOrPullRequestTitle.
     /// </param>
     /// <param name="secretScanning">Whether to enable secret scanning.</param>
     /// <param name="secretScanningPushProtection">Whether to enable secret scanning push protection.</param>
