@@ -5,7 +5,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <Aot>true</Aot>
     <EnableReflection>true</EnableReflection>
-    <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -15,21 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
-    <PackageReference Include="FToolkit.Net.GitHub.Client" Version="1.0.1" />
-    <PackageReference Include="FToolkit.Net.GitHub.Repositories" Version="1.0.1" />
-    <PackageReference Include="FToolkit.Net.GitHub.Services" Version="1.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GitHubSettingsSync.Models\GitHubSettingsSync.Models.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TrimmerRootDescriptor Include="Roots.xml" />
+    <PackageReference Include="ConsoleAppFramework" Version="5.2.4" />
+    <PackageReference Include="FToolkit.Helpers.GitHub" Version="2.0.0" />
+    <PackageReference Include="FToolkit.Net.GitHub.Client" Version="2.0.0" />
   </ItemGroup>
 
   <Import Project="$(BuildCommonDirectory)Exe.props" />
