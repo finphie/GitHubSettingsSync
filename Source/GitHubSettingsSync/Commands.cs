@@ -51,7 +51,7 @@ static class Commands
     /// <param name="secretScanning">Whether to enable secret scanning.</param>
     /// <param name="secretScanningPushProtection">Whether to enable secret scanning push protection.</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
-    public static Task RepositoryAsync(
+    public static Task UpdateRepositoryAsync(
         string repository,
         bool hasIssues = true,
         bool hasProjects = true,
@@ -102,7 +102,7 @@ static class Commands
             MergeCommitTitle = mergeCommitTitle,
             MergeCommitMessage = mergeCommitMessage,
             SquashMergeCommitTitle = squashMergeCommitTitle,
-            SquashMergeCommitMessage = squashMergeCommitMessage,
+            SquashMergeCommitMessage = squashMergeCommitMessage
         };
 
         return client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings);
@@ -123,7 +123,7 @@ static class Commands
     /// <param name="requiredApprovingReviewCount">The number of reviewers required to approve a pull request.</param>
     /// <param name="requireLastPushApproval">Whether to require approval from someone other than the person who pushed the latest commit.</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
-    public static Task BranchProtectionAsync(
+    public static Task UpdateBranchProtectionAsync(
         string repository,
         string branch,
         bool enforceAdmins = false,
@@ -160,5 +160,23 @@ static class Commands
         };
 
         return client.Branches.BranchProtection.UpdateAsync(repositoryOwner, repositoryName, branch, settings);
+    }
+
+    /// <summary>
+    /// Deletes branch protection settings.
+    /// </summary>
+    /// <param name="repository">-r, "owner/repo" format repository name.</param>
+    /// <param name="branch">Branch name.</param>
+    /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
+    public static Task DeleteBranchProtectionAsync(string repository, string branch)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(repository);
+        ArgumentException.ThrowIfNullOrEmpty(branch);
+
+        var (repositoryOwner, repositoryName) = RepositoryHelper.GetRepositoryOwnerAndName(repository);
+        var token = GitHubEnvironment.GetGitHubToken();
+        var client = GitHubClient.Create(token);
+
+        return client.Branches.BranchProtection.DeleteAsync(repositoryOwner, repositoryName, branch);
     }
 }
