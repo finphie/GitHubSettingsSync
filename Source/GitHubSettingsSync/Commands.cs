@@ -11,7 +11,7 @@ namespace GitHubSettingsSync;
 static class Commands
 {
     /// <summary>
-    /// リポジトリの設定を更新します。
+    /// Updates repository settings.
     /// </summary>
     /// <param name="repository">-r, "owner/repo" format repository name.</param>
     /// <param name="hasIssues">Whether to enable issues.</param>
@@ -24,27 +24,51 @@ static class Commands
     /// <param name="allowAutoMerge">Whether to allow auto merges.</param>
     /// <param name="deleteBranchOnMerge">Whether to delete the branch after merging.</param>
     /// <param name="allowUpdateBranch">Whether to allow branch updates.</param>
-    /// <param name="mergeCommitTitle">The title of the merge commit.</param>
-    /// <param name="mergeCommitMessage">The message of the merge commit.</param>
-    /// <param name="squashMergeCommitTitle">The title of the squash merge commit.</param>
-    /// <param name="squashMergeCommitMessage">The message of the squash merge commit.</param>
+    /// <param name="mergeCommitTitle">
+    /// The title of the merge commit.
+    /// 値によって"--merge-commit-message"の指定に制限があります。
+    /// PullRequestTitleでは、PullRequestBodyやBlankを指定してください。
+    /// MergeMessageでは、PullRequestTitleを指定してください。
+    /// </param>
+    /// <param name="mergeCommitMessage">
+    /// The message of the merge commit.
+    /// 値によって"--merge-commit-title"の指定に制限があります。
+    /// PullRequestTitleでは、MergeMessageを指定してください。
+    /// PullRequestBodyやBlankでは、PullRequestTitleを指定してください。
+    /// </param>
+    /// <param name="squashMergeCommitTitle">
+    /// The title of the squash merge commit.
+    /// 値によって"--squash-merge-commit-message"の指定に制限があります。
+    /// PullRequestTitleでは、PullRequestBodyやCommitMessages、Blankを指定してください。
+    /// CommitOrPullRequestTitleでは、CommitMessagesを指定してください。
+    /// </param>
+    /// <param name="squashMergeCommitMessage">
+    /// The message of the squash merge commit.
+    /// 値によって"--squash-merge-commit-title"の指定に制限があります。
+    /// PullRequestBodyやBlankでは、PullRequestTitleを指定してください。
+    /// CommitMessagesでは、PullRequestTitleやCommitOrPullRequestTitleを指定してください。
+    /// </param>
+    /// <param name="secretScanning">Whether to enable secret scanning.</param>
+    /// <param name="secretScanningPushProtection">Whether to enable secret scanning push protection.</param>
     /// <returns>このメソッドが完了すると、オブジェクトまたは値は返されません。</returns>
     public static Task RepositoryAsync(
         string repository,
-        bool? hasIssues = null,
-        bool? hasProjects = null,
-        bool? hasWiki = null,
-        bool? hasDiscussions = null,
-        bool? allowMergeCommit = null,
-        bool? allowSquashMerge = null,
-        bool? allowRebaseMerge = null,
-        bool? allowAutoMerge = null,
-        bool? deleteBranchOnMerge = null,
-        bool? allowUpdateBranch = null,
-        MergeCommitTitle? mergeCommitTitle = null,
-        MergeCommitMessage? mergeCommitMessage = null,
-        SquashMergeCommitTitle? squashMergeCommitTitle = null,
-        SquashMergeCommitMessage? squashMergeCommitMessage = null)
+        bool hasIssues = true,
+        bool hasProjects = true,
+        bool hasWiki = true,
+        bool hasDiscussions = true,
+        bool allowMergeCommit = true,
+        bool allowSquashMerge = true,
+        bool allowRebaseMerge = true,
+        bool allowAutoMerge = false,
+        bool deleteBranchOnMerge = false,
+        bool allowUpdateBranch = false,
+        MergeCommitTitle mergeCommitTitle = MergeCommitTitle.MergeMessage,
+        MergeCommitMessage mergeCommitMessage = MergeCommitMessage.PullRequestTitle,
+        SquashMergeCommitTitle squashMergeCommitTitle = SquashMergeCommitTitle.CommitOrPullRequestTitle,
+        SquashMergeCommitMessage squashMergeCommitMessage = SquashMergeCommitMessage.CommitMessages,
+        bool secretScanning = false,
+        bool secretScanningPushProtection = false)
     {
         ArgumentException.ThrowIfNullOrEmpty(repository);
 
@@ -54,6 +78,17 @@ static class Commands
         var client = GitHubClient.Create(token);
         var settings = new Repository
         {
+            SecurityAndAnalysis = new()
+            {
+                SecretScanning = new()
+                {
+                    Status = secretScanning ? Status.Enabled : Status.Disabled
+                },
+                SecretScanningPushProtection = new()
+                {
+                    Status = secretScanningPushProtection ? Status.Enabled : Status.Disabled
+                }
+            },
             HasIssues = hasIssues,
             HasProjects = hasProjects,
             HasWiki = hasWiki,
@@ -67,14 +102,14 @@ static class Commands
             MergeCommitTitle = mergeCommitTitle,
             MergeCommitMessage = mergeCommitMessage,
             SquashMergeCommitTitle = squashMergeCommitTitle,
-            SquashMergeCommitMessage = squashMergeCommitMessage
+            SquashMergeCommitMessage = squashMergeCommitMessage,
         };
 
         return client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings);
     }
 
     /// <summary>
-    /// ブランチ保護の設定を更新します。
+    /// Updates branch protection settings.
     /// </summary>
     /// <param name="repository">-r, "owner/repo" format repository name.</param>
     /// <param name="branch">Branch name.</param>
@@ -108,16 +143,6 @@ static class Commands
         var token = GitHubEnvironment.GetGitHubToken();
 
         var client = GitHubClient.Create(token);
-
-        var requiredPullRequestReviews = dismissStaleReviews is null && requireCodeOwnerReviews is null && requiredApprovingReviewCount is null && requireLastPushApproval is null
-            ? null
-            : new RequiredPullRequestReviews
-            {
-                DismissStaleReviews = dismissStaleReviews,
-                RequireCodeOwnerReviews = requireCodeOwnerReviews,
-                RequiredApprovingReviewCount = requiredApprovingReviewCount,
-                RequireLastPushApproval = requireLastPushApproval
-            };
         var settings = new BranchProtection
         {
             EnforceAdmins = enforceAdmins,
@@ -125,7 +150,13 @@ static class Commands
             AllowForcePushes = allowForcePushes,
             AllowDeletions = allowDeletions,
             RequiredConversationResolution = requiredConversationResolution,
-            RequiredPullRequestReviews = requiredPullRequestReviews
+            RequiredPullRequestReviews = new()
+            {
+                DismissStaleReviews = dismissStaleReviews,
+                RequireCodeOwnerReviews = requireCodeOwnerReviews,
+                RequiredApprovingReviewCount = requiredApprovingReviewCount,
+                RequireLastPushApproval = requireLastPushApproval
+            }
         };
 
         return client.Branches.BranchProtection.UpdateAsync(repositoryOwner, repositoryName, branch, settings);
