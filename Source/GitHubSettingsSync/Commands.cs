@@ -126,15 +126,15 @@ static class Commands
     public static Task BranchProtectionAsync(
         string repository,
         string branch,
-        bool? enforceAdmins = null,
-        bool? requiredLinearHistory = null,
-        bool? allowForcePushes = null,
-        bool? allowDeletions = null,
-        bool? requiredConversationResolution = null,
-        bool? dismissStaleReviews = null,
-        bool? requireCodeOwnerReviews = null,
-        int? requiredApprovingReviewCount = null,
-        bool? requireLastPushApproval = null)
+        bool enforceAdmins = false,
+        bool requiredLinearHistory = false,
+        bool allowForcePushes = false,
+        bool allowDeletions = false,
+        bool requiredConversationResolution = false,
+        bool dismissStaleReviews = false,
+        bool requireCodeOwnerReviews = false,
+        int requiredApprovingReviewCount = 0,
+        bool requireLastPushApproval = false)
     {
         ArgumentException.ThrowIfNullOrEmpty(repository);
         ArgumentException.ThrowIfNullOrEmpty(branch);
