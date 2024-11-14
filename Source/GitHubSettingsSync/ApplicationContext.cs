@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
+using GitHubSettingsSync.Settings;
 
-namespace GitHubSettingsSync.Settings;
+namespace GitHubSettingsSync;
 
 /// <inheritdoc/>
 [JsonSourceGenerationOptions(
