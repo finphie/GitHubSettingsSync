@@ -1,7 +1,9 @@
-﻿using FToolkit.Helpers.GitHub;
+﻿using System.Text.Json;
+using FToolkit.Helpers.GitHub;
 using FToolkit.Net.GitHub.Client;
 using FToolkit.Net.GitHub.Client.Branches.BranchProtection;
 using FToolkit.Net.GitHub.Client.Repositories;
+using GitHubSettingsSync.Settings;
 
 namespace GitHubSettingsSync;
 
@@ -178,5 +180,26 @@ static class Commands
         var client = GitHubClient.Create(token);
 
         return client.Branches.BranchProtection.DeleteAsync(repositoryOwner, repositoryName, branch);
+    }
+
+    public static async Task FileAsync(string repository, string path)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(repository);
+        ArgumentException.ThrowIfNullOrEmpty(path);
+
+        var (repositoryOwner, repositoryName) = RepositoryHelper.GetRepositoryOwnerAndName(repository);
+
+        var bytes = File.ReadAllBytes(path);
+        var settings = JsonSerializer.Deserialize(bytes, ApplicationContext.Default.GitHubSettings);
+
+        var token = GitHubEnvironment.GetGitHubToken();
+        var client = GitHubClient.Create(token);
+
+        await client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings.Repository).ConfigureAwait(false);
+
+        foreach (var branch in settings.Branches)
+        {
+            await client.Branches.BranchProtection.UpdateAsync(repositoryOwner, repositoryName, branch.Name, branch.BranchProtection).ConfigureAwait(false);
+        }
     }
 }
