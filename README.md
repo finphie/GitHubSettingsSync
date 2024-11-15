@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: GitHub Settings Sync
-        uses: finphie/GitHubSettingsSync@v2.0.0
+        uses: finphie/GitHubSettingsSync@v3.0.0
         with:
           repository: GitHubSettingsSync
           path: github-settings.json
@@ -148,7 +148,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |-|-|-|-|
 |name|**true**|-|Branch name.|
 
-#### branch_protection
+##### branch_protection
 
 |Key|Required|Default|Description|
 |-|-|-|-|
