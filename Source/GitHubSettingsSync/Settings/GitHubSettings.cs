@@ -7,4 +7,4 @@ namespace GitHubSettingsSync.Settings;
 /// </summary>
 /// <param name="Repository">リポジトリに関する設定</param>
 /// <param name="Branches">ブランチに関する設定</param>
-sealed record GitHubSettings(Repository Repository, IReadOnlyList<Branch> Branches);
+sealed record GitHubSettings(Repository? Repository, IReadOnlyList<Branch>? Branches);
