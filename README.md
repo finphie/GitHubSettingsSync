@@ -132,7 +132,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |allow_update_branch|false|null|Enable or disable "Update branch".|
 |merge_commit_title|false|null|Type of commit title for merge. Either PR_TITLE or MERGE_MESSAGE. If PR_TITLE, specify PR_BODY or BLANK for merge_commit_message. If MERGE_MESSAGE, specify PR_TITLE for merge_commit_message.|
 |merge_commit_message|false|null|Type of commit message for merge. Either PR_TITLE, PR_BODY, or BLANK.|
-|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE.|
+|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE. If PR_TITLE, specify PR_BODY, COMMIT_MESSAGES, or BLANK for squash_merge_commit_message. If COMMIT_OR_PR_TITLE, specify COMMIT_MESSAGES.|
 |squash_merge_commit_message|false|null|Type of commit message for squash merge. Either PR_BODY, COMMIT_MESSAGES, or BLANK.|
 
 ##### security_and_analysis
