@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Description>GitHubの設定を同期するアプリケーションです。</Description>
+    <Description>This is an application to synchronize GitHub settings.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>GitHub;settings;sync</PackageTags>
   </PropertyGroup>
