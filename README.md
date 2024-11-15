@@ -4,21 +4,23 @@
 [![NuGet](https://img.shields.io/nuget/v/GitHubSettingsSync?color=0078d4&label=NuGet)](https://www.nuget.org/packages/GitHubSettingsSync/)
 [![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/f8147011-dc70-430b-ba72-56ee4008f90e/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
 
-GitHubの設定を同期するアプリケーションです。
+[日本語 (Japanese)](README.ja.md)
+
+This is an application to synchronize GitHub settings.
 
 ## 説明
 
-GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケーションです。
+GitHubSettingsSync is an application for configuring GitHub repository settings.
 
-- [GitHubアクション](https://github.com/marketplace/actions/github-settings-sync)
+- [Action](https://github.com/marketplace/actions/github-settings-sync)
 - [NuGet](https://www.nuget.org/packages/GitHubSettingsSync)
 - [Azure Artifacts](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
-- [バイナリ](https://github.com/finphie/GitHubSettingsSync/releases/latest)
-- [Dockerイメージ](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
+- [Binary](https://github.com/finphie/GitHubSettingsSync/releases/latest)
+- [Docker](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
 
-## 使い方
+## Usage
 
-### GitHubアクション
+### Action
 
 ```yaml
 on:
@@ -32,127 +34,151 @@ jobs:
       - name: GitHub Settings Sync
         uses: finphie/GitHubSettingsSync@v2.0.0
         with:
-          repositories: |
-            GitHubSettingsSync
-          has-issues: Unchanged
-          has-projects: Unchanged
-          has-wiki: Unchanged
-          has-discussions: Unchanged
-          allow-merge-commit: Unchanged
-          allow-squash-merge: Unchanged
-          allow-rebase-merge: Unchanged
-          allow-auto-merge: Unchanged
-          delete-branch-on-merge: Unchanged
-          allow-update-branch: Unchanged
-          merge-commit-title: Unchanged
-          merge-commit-message: Unchanged
-          squash-merge-commit-title: Unchanged
-          squash-merge-commit-message: Unchanged
-          branch-protection: false
-          branch-protection-name: main
-          branch-protection-enforce-admins: false
-          branch-protection-required-linear-history: false
-          branch-protection-allow-force-pushes: false
-          branch-protection-allow-deletions: false
-          branch-protection-required-conversation-resolution: false
-          branch-protection-required-reviews: false
-          branch-protection-required-reviews-dismiss-stale-reviews: false
-          branch-protection-required-reviews-require-code-owner-reviews: false
-          branch-protection-required-reviews-required-approving-review-count: 1
+          repository: GitHubSettingsSync
+          path: github-settings.json
         env:
-          GITHUB_TOKEN: {{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 ```
 
-### .NETツール
+### .NET tool
 
 ```shell
 GitHubSettingsSync \
-    --repositories GitHubSettingsSync \
-    --has-issues Unchanged \
-    --has-projects Unchanged \
-    --has-wiki Unchanged \
-    --has-discussions Unchanged \
-    --allow-merge-commit Unchanged \
-    --allow-squash-merge Unchanged \
-    --allow-rebase-merge Unchanged \
-    --allow-auto-merge Unchanged \
-    --delete-branch-on-merge Unchanged \
-    --allow-update-branch Unchanged \
-    --merge-commit-title Unchanged \
-    --merge-commit-message Unchanged \
-    --squash-merge-commit-title Unchanged \
-    --squash-merge-commit-message Unchanged \
-    --branch-protection false \
-    --branch-protection-name main \
-    --branch-protection-enforce-admins false \
-    --branch-protection-required-linear-history false \
-    --branch-protection-allow-force-pushes false \
-    --branch-protection-allow-deletions false \
-    --branch-protection-required-conversation-resolution false \
-    --branch-protection-required-reviews false \
-    --branch-protection-required-reviews-dismiss-stale-reviews false \
-    --branch-protection-required-reviews-require-code-owner-reviews false \
-    --branch-protection-required-reviews-required-approving-review-count 1
+    --repository GitHubSettingsSync \
+    --path github-settings.json
 ```
 
-## 引数
+## Arguments
 
-|引数|必須|デフォルト|説明|
+|Argument|Required|Default|Description|
 |-|-|-|-|
-|repositories|**true**|-|カンマ・半角スペース・改行区切りにした「オーナー名/リポジトリ名」形式のリスト。オーナー名を省略した場合は、「GITHUB_REPOSITORY_OWNER」環境変数を使用。|
-|has-issues|false|Unchanged|Issuesを有効にするかどうか。|
-|has-projects|false|Unchanged|Projectsを有効にするかどうか。|
-|has-wiki|false|Unchanged|Wikiを有効にするかどうか。|
-|has-discussions|false|Unchanged|Discussionsを有効にするかどうか。|
-|allow-merge-commit|false|Unchanged|「Create a merge commit」を有効にするか。|
-|allow-squash-merge|false|Unchanged|「Squash Merge」を有効にするかどうか。|
-|allow-rebase-merge|false|Unchanged|「Rebase and Merge」を有効にするか。|
-|allow-auto-merge|false|Unchanged|自動マージ機能を有効にするか。|
-|delete-branch-on-merge|false|Unchanged|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。|
-|allow-update-branch|false|Unchanged|「Update branch」を有効にするかどうか。|
-|merge-commit-title|false|Unchanged|マージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・MergeMessageのいずれか。|
-|merge-commit-message|false|Unchanged|マージにおけるコミットメッセージの種類。Unchanged・PullRequestTitle・PullRequestBody・Blankのいずれか。|
-|squash-merge-commit-title|false|Unchanged|スカッシュマージにおけるコミットタイトルの種類。Unchanged・PullRequestTitle・CommitOrPullRequestTitleのいずれか。|
-|squash-merge-commit-message|false|Unchanged|スカッシュマージにおけるコミットメッセージの種類。Unchanged・PullRequestBody・CommitMessages・Blankのいずれか。|
-|branch-protection|false|Unchanged|ブランチ保護を有効にするかどうか。|
-|branch-protection-name|false|main|ブランチ保護の対象ブランチ名。|
-|branch-protection-enforce-admins|false|false|ブランチ保護を管理者にも適用するか。|
-|branch-protection-required-linear-history|false|false|直線状の履歴を必須にするかどうか。|
-|branch-protection-allow-force-pushes|false|false|強制プッシュを許可するかどうか。|
-|branch-protection-allow-deletions|false|false|プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。|
-|branch-protection-required-conversation-resolution|false|false|マージ前にコメントの解決を必須にするかどうか。|
-|branch-protection-required-reviews|false|false|レビューを必須にするかどうか。|
-|branch-protection-required-reviews-dismiss-stale-reviews|false|false|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。|
-|branch-protection-required-reviews-require-code-owner-reviews|false|false|コード所有者のレビューが必須かどうか。|
-|branch-protection-required-reviews-required-approving-review-count|false|1|プルリクエストの承認に必要なレビュアーの数。（1～6人）|
+|repository|**true**|-|"owner/repo" format repository name.|
+|path|**true**|-|File path of the configuration file.|
 
-## 環境変数
+## Environment Variables
 
-|引数|必須|デフォルト|説明|
+|Variable Name|Required|Default|Description|
 |-|-|-|-|
-|GITHUB_TOKEN|**true**|-|public_repoスコープを許可したGitHub Personal Access Token。|
-|GITHUB_REPOSITORY_OWNER|false|${{ github.repository_owner }}|GitHubオーナー名。|
+|GITHUB_TOKEN|**true**|-|Token with write permission to Administration.|
 
-## 作者
+## Configuration File
+
+The file is in JSON format. By setting the value to `null` or omitting the key, the setting will be retained without changes.
+
+### Configuration Example
+
+```json
+{
+  "repository": {
+    "security_and_analysis": {
+      "secret_scanning": {
+        "status": "disabled"
+      },
+      "secret_scanning_push_protection": {
+        "status": "disabled"
+      }
+    },
+    "has_issues": true,
+    "has_projects": true,
+    "has_wiki": true,
+    "has_discussions": true,
+    "allow_merge_commit": true,
+    "allow_squash_merge": true,
+    "allow_rebase_merge": true,
+    "allow_auto_merge": false,
+    "delete_branch_on_merge": false,
+    "allow_update_branch": false,
+    "merge_commit_title": "MERGE_MESSAGE",
+    "merge_commit_message": "PR_TITLE",
+    "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
+    "squash_merge_commit_message": "COMMIT_MESSAGES"
+  },
+  "branches": [
+    {
+      "name": "main",
+      "branch_protection": {
+        "enforce_admins": false,
+        "required_linear_history": false,
+        "allow_force_pushes": false,
+        "allow_deletions": false,
+        "required_conversation_resolution": false,
+        "required_pull_request_reviews": {
+          "dismiss_stale_reviews": false,
+          "require_code_owner_reviews": false,
+          "required_approving_review_count": 0,
+          "require_last_push_approval": false
+        }
+      }
+    }
+  ]
+}
+```
+
+### Configuration Details
+
+#### repository
+
+|Key|Required|Default|Description|
+|-|-|-|-|
+|has_issues|false|null|Enable or disable Issues.|
+|has_projects|false|null|Enable or disable Projects.|
+|has_wiki|false|null|Enable or disable Wiki.|
+|has_discussions|false|null|Enable or disable Discussions.|
+|allow_merge_commit|false|null|Enable or disable "Create a merge commit".|
+|allow_squash_merge|false|null|Enable or disable "Squash Merge".|
+|allow_rebase_merge|false|null|Enable or disable "Rebase and Merge".|
+|allow_auto_merge|false|null|Enable or disable auto-merge feature.|
+|delete_branch_on_merge|false|null|Automatically delete branch after pull request merge.|
+|allow_update_branch|false|null|Enable or disable "Update branch".|
+|merge_commit_title|false|null|Type of commit title for merge. Either PR_TITLE or MERGE_MESSAGE. If PR_TITLE, specify PR_BODY or BLANK for merge_commit_message. If MERGE_MESSAGE, specify PR_TITLE for merge_commit_message.|
+|merge_commit_message|false|null|Type of commit message for merge. Either PR_TITLE, PR_BODY, or BLANK.|
+|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE.|
+|squash_merge_commit_message|false|null|Type of commit message for squash merge. Either PR_BODY, COMMIT_MESSAGES, or BLANK.|
+
+##### security_and_analysis
+
+|Key|Required|Default|Description|
+|-|-|-|-|
+|secret_scanning.status|false|null|Enable or disable secret scanning. Either enabled or disabled.|
+|secret_scanning_push_protection.status|false|null|Enable or disable secret scanning push protection. Either enabled or disabled.|
+
+#### branches
+
+|Key|Required|Default|Description|
+|-|-|-|-|
+|name|**true**|-|Branch name.|
+
+#### branch_protection
+
+|Key|Required|Default|Description|
+|-|-|-|-|
+|enforce_admins|false|null|Apply branch protection to administrators.|
+|required_linear_history|false|null|Require linear history.|
+|allow_force_pushes|false|null|Allow force pushes.|
+|allow_deletions|false|null|Allow users with push access to delete the protected branch.|
+|required_conversation_resolution|false|null|Require conversation resolution before merging.|
+|required_reviews|false|null|Require reviews before merging.|
+|dismiss_stale_reviews|false|null|Dismiss approved reviews when new commits are pushed.|
+|require_code_owner_reviews|false|null|Require reviews from code owners.|
+|required_approving_review_count|false|null|Number of reviewers required to approve a pull request.|
+
+## Author
 
 finphie
 
-## ライセンス
+## License
 
 MIT
 
-## クレジット
+## Credits
 
-このプロジェクトでは、次のライブラリ等を使用しています。
+This project uses the following libraries, etc.
 
-### ライブラリ
+### Libraries
 
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
-- [FToolkit](https://github.com/finphie/FToolkit)
-- Microsoft.Extensions.Hosting
-- Microsoft.Extensions.Http
 
-### アナライザー
+### Analyzers
 
 - [DocumentationAnalyzers](https://github.com/DotNetAnalyzers/DocumentationAnalyzers)
 - [IDisposableAnalyzers](https://github.com/DotNetAnalyzers/IDisposableAnalyzers)

@@ -1,11 +1,13 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/nightly/sdk:9.0-noble-aot AS build
 ARG VERSION
-WORKDIR /app
-RUN apk add clang gcc lld musl-dev build-base zlib-dev
-COPY . ./
-RUN dotnet publish --configuration Release --runtime linux-musl-x64 --output out -p:Version=$VERSION
+WORKDIR /source
+COPY --link . .
+RUN --mount=type=cache,target=/root/.nuget/packages \
+    --mount=type=cache,target=/source/bin \
+    --mount=type=cache,target=/source/obj \
+    dotnet publish --runtime linux-x64 --output /app -p:Version=$VERSION
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine
+FROM mcr.microsoft.com/dotnet/nightly/runtime-deps:9.0-noble-chiseled-aot
 WORKDIR /app
-COPY --from=build /app/out/GitHubSettingsSync /app/
+COPY --link --from=build /app .
 ENTRYPOINT ["/app/GitHubSettingsSync"]
