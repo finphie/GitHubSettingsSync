@@ -159,6 +159,7 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 |dismiss_stale_reviews|false|null|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。|
 |require_code_owner_reviews|false|null|コード所有者のレビューが必須かどうか。|
 |required_approving_review_count|false|null|プルリクエストの承認に必要なレビュアーの数。|
+|require_last_push_approval|false|null|最新のプッシュを行ったユーザー以外が承認する必要があるかどうか。|
 
 ## 作者
 

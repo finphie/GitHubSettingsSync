@@ -161,6 +161,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |dismiss_stale_reviews|false|null|Dismiss approved reviews when new commits are pushed.|
 |require_code_owner_reviews|false|null|Require reviews from code owners.|
 |required_approving_review_count|false|null|Number of reviewers required to approve a pull request.|
+|require_last_push_approval|false|null|Require approval from someone other than the user who made the last push.|
 
 ## Author
 
