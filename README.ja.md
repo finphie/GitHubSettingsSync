@@ -10,11 +10,11 @@ GitHubの設定を同期するアプリケーションです。
 
 GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケーションです。
 
-- [GitHubアクション](https://github.com/marketplace/actions/github-settings-sync)
+- [アクション](https://github.com/marketplace/actions/github-settings-sync)
 - [NuGet](https://www.nuget.org/packages/GitHubSettingsSync)
 - [Azure Artifacts](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
 - [バイナリ](https://github.com/finphie/GitHubSettingsSync/releases/latest)
-- [Dockerイメージ](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
+- [Docker](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
 
 ## 使い方
 
@@ -52,6 +52,12 @@ GitHubSettingsSync \
 |-|-|-|-|
 |repository|**true**|-|「オーナー名/リポジトリ名」形式のリポジトリ名。|
 |path|**true**|-|設定ファイルのファイルパス。|
+
+## 環境変数
+
+|引数|必須|デフォルト|説明|
+|-|-|-|-|
+|GITHUB_TOKEN|**true**|-|Administrationに書き込み許可が付与されたトークン。|
 
 ## 設定ファイル
 
@@ -141,12 +147,6 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 |dismiss_stale_reviews|false|null|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。|
 |require_code_owner_reviews|false|null|コード所有者のレビューが必須かどうか。|
 |required_approving_review_count|false|null|プルリクエストの承認に必要なレビュアーの数。|
-
-## 環境変数
-
-|引数|必須|デフォルト|説明|
-|-|-|-|-|
-|GITHUB_TOKEN|**true**|-|public_repoスコープを許可したGitHub Personal Access Token。|
 
 ## 作者
 
