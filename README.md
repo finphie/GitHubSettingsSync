@@ -72,10 +72,10 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
   "repository": {
     "security_and_analysis": {
       "secret_scanning": {
-        "status": "enabled"
+        "status": "disabled"
       },
       "secret_scanning_push_protection": {
-        "status": "enabled"
+        "status": "disabled"
       }
     },
     "has_issues": true,
@@ -116,7 +116,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 
 ### Configuration Details
 
-#### Repository Settings
+#### repository
 
 |Key|Required|Default|Description|
 |-|-|-|-|
@@ -135,11 +135,23 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE.|
 |squash_merge_commit_message|false|null|Type of commit message for squash merge. Either PR_BODY, COMMIT_MESSAGES, or BLANK.|
 
-#### Branch Protection Settings
+##### security_and_analysis
 
 |Key|Required|Default|Description|
 |-|-|-|-|
-|name|**true**|-|Branch name for branch protection.|
+|secret_scanning.status|false|null|Enable or disable secret scanning. Either enabled or disabled.|
+|secret_scanning_push_protection.status|false|null|Enable or disable secret scanning push protection. Either enabled or disabled.|
+
+#### branches
+
+|Key|Required|Default|Description|
+|-|-|-|-|
+|name|**true**|-|Branch name.|
+
+#### branch_protection
+
+|Key|Required|Default|Description|
+|-|-|-|-|
 |enforce_admins|false|null|Apply branch protection to administrators.|
 |required_linear_history|false|null|Require linear history.|
 |allow_force_pushes|false|null|Allow force pushes.|

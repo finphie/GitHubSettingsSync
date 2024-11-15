@@ -70,10 +70,10 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
   "repository": {
     "security_and_analysis": {
       "secret_scanning": {
-        "status": "enabled"
+        "status": "disabled"
       },
       "secret_scanning_push_protection": {
-        "status": "enabled"
+        "status": "disabled"
       }
     },
     "has_issues": true,
@@ -114,7 +114,7 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 
 ### 設定詳細
 
-#### リポジトリ設定
+#### repository
 
 |キー|必須|デフォルト|説明|
 |-|-|-|-|
@@ -133,11 +133,23 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 |squash_merge_commit_title|false|null|スカッシュマージにおけるコミットタイトルの種類。PR_TITLE/COMMIT_OR_PR_TITLEのいずれか。|
 |squash_merge_commit_message|false|null|スカッシュマージにおけるコミットメッセージの種類。PR_BODY/COMMIT_MESSAGES/BLANKのいずれか。|
 
-#### ブランチ保護設定
+##### security_and_analysis
 
 |キー|必須|デフォルト|説明|
 |-|-|-|-|
-|name|**true**|-|ブランチ保護の対象ブランチ名。|
+|secret_scanning.status|false|null|シークレットスキャンを有効にするかどうか。enabled/disabledのいずれか。|
+|secret_scanning_push_protection.status|false|null|シークレットスキャンのプッシュ保護を有効にするかどうか。enabled/disabledのいずれか。|
+
+#### branches
+
+|キー|必須|デフォルト|説明|
+|-|-|-|-|
+|name|**true**|-|ブランチ名。|
+
+##### branch_protection
+
+|キー|必須|デフォルト|説明|
+|-|-|-|-|
 |enforce_admins|false|null|ブランチ保護を管理者にも適用するか。|
 |required_linear_history|false|null|直線状の履歴を必須にするかどうか。|
 |allow_force_pushes|false|null|強制プッシュを許可するかどうか。|
