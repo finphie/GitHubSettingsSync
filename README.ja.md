@@ -35,7 +35,7 @@ jobs:
           repository: GitHubSettingsSync
           path: github-settings.json
         env:
-          GITHUB_TOKEN: {{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 ```
 
 ### .NETツール
@@ -55,7 +55,7 @@ GitHubSettingsSync \
 
 ## 環境変数
 
-|引数|必須|デフォルト|説明|
+|変数名|必須|デフォルト|説明|
 |-|-|-|-|
 |GITHUB_TOKEN|**true**|-|Administrationに書き込み許可が付与されたトークン。|
 

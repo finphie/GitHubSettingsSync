@@ -6,11 +6,11 @@
 
 [日本語 (Japanese)](README.ja.md)
 
-GitHubの設定を同期するアプリケーションです。
+This is an application to synchronize GitHub settings.
 
 ## 説明
 
-GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケーションです。
+GitHubSettingsSync is an application for configuring GitHub repository settings.
 
 - [Action](https://github.com/marketplace/actions/github-settings-sync)
 - [NuGet](https://www.nuget.org/packages/GitHubSettingsSync)
@@ -18,9 +18,9 @@ GitHubSettingsSyncは、GitHubリポジトリの設定を行うアプリケー�
 - [Binary](https://github.com/finphie/GitHubSettingsSync/releases/latest)
 - [Docker](https://github.com/finphie/GitHubSettingsSync/pkgs/container/git-hub-settings-sync)
 
-## 使い方
+## Usage
 
-### アクション
+### Action
 
 ```yaml
 on:
@@ -37,10 +37,10 @@ jobs:
           repository: GitHubSettingsSync
           path: github-settings.json
         env:
-          GITHUB_TOKEN: {{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 ```
 
-### .NETツール
+### .NET tool
 
 ```shell
 GitHubSettingsSync \
@@ -48,24 +48,24 @@ GitHubSettingsSync \
     --path github-settings.json
 ```
 
-## 引数
+## Arguments
 
-|引数|必須|デフォルト|説明|
+|Argument|Required|Default|Description|
 |-|-|-|-|
-|repository|**true**|-|「オーナー名/リポジトリ名」形式のリポジトリ名。|
-|path|**true**|-|設定ファイルのファイルパス。|
+|repository|**true**|-|"owner/repo" format repository name.|
+|path|**true**|-|File path of the configuration file.|
 
-## 環境変数
+## Environment Variables
 
-|引数|必須|デフォルト|説明|
+|Variable Name|Required|Default|Description|
 |-|-|-|-|
-|GITHUB_TOKEN|**true**|-|Administrationに書き込み許可が付与されたトークン。|
+|GITHUB_TOKEN|**true**|-|Token with write permission to Administration.|
 
-## 設定ファイル
+## Configuration File
 
-JSON形式のファイルです。値が`null`の場合やキーを省略することで、設定を変更せずに保持します。
+The file is in JSON format. By setting the value to `null` or omitting the key, the setting will be retained without changes.
 
-### 設定例
+### Configuration Example
 
 ```json
 {
@@ -114,59 +114,59 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 }
 ```
 
-### 設定詳細
+### Configuration Details
 
-#### リポジトリ設定
+#### Repository Settings
 
-|キー|必須|デフォルト|説明|
+|Key|Required|Default|Description|
 |-|-|-|-|
-|has_issues|false|null|Issuesを有効にするかどうか。|
-|has_projects|false|null|Projectsを有効にするかどうか。|
-|has_wiki|false|null|Wikiを有効にするかどうか。|
-|has_discussions|false|null|Discussionsを有効にするかどうか。|
-|allow_merge_commit|false|null|「Create a merge commit」を有効にするか。|
-|allow_squash_merge|false|null|「Squash Merge」を有効にするかどうか。|
-|allow_rebase_merge|false|null|「Rebase and Merge」を有効にするか。|
-|allow_auto_merge|false|null|自動マージ機能を有効にするか。|
-|delete_branch_on_merge|false|null|プルリクエストマージ時に、ブランチを自動的に削除するかどうか。|
-|allow_update_branch|false|null|「Update branch」を有効にするかどうか。|
-|merge_commit_title|false|null|マージにおけるコミットタイトルの種類。PR_TITLE/MERGE_MESSAGEのいずれか。PR_TITLEでは、merge_commit_messageにPR_BODYまたはBLANKを指定してください。MERGE_MESSAGEでは、merge_commit_messageにPR_TITLEを指定してください。|
-|merge_commit_message|false|null|マージにおけるコミットメッセージの種類。PR_TITLE/PR_BODY/BLANKのいずれか。|
-|squash_merge_commit_title|false|null|スカッシュマージにおけるコミットタイトルの種類。PR_TITLE/COMMIT_OR_PR_TITLEのいずれか。|
-|squash_merge_commit_message|false|null|スカッシュマージにおけるコミットメッセージの種類。PR_BODY/COMMIT_MESSAGES/BLANKのいずれか。|
+|has_issues|false|null|Enable or disable Issues.|
+|has_projects|false|null|Enable or disable Projects.|
+|has_wiki|false|null|Enable or disable Wiki.|
+|has_discussions|false|null|Enable or disable Discussions.|
+|allow_merge_commit|false|null|Enable or disable "Create a merge commit".|
+|allow_squash_merge|false|null|Enable or disable "Squash Merge".|
+|allow_rebase_merge|false|null|Enable or disable "Rebase and Merge".|
+|allow_auto_merge|false|null|Enable or disable auto-merge feature.|
+|delete_branch_on_merge|false|null|Automatically delete branch after pull request merge.|
+|allow_update_branch|false|null|Enable or disable "Update branch".|
+|merge_commit_title|false|null|Type of commit title for merge. Either PR_TITLE or MERGE_MESSAGE. If PR_TITLE, specify PR_BODY or BLANK for merge_commit_message. If MERGE_MESSAGE, specify PR_TITLE for merge_commit_message.|
+|merge_commit_message|false|null|Type of commit message for merge. Either PR_TITLE, PR_BODY, or BLANK.|
+|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE.|
+|squash_merge_commit_message|false|null|Type of commit message for squash merge. Either PR_BODY, COMMIT_MESSAGES, or BLANK.|
 
-#### ブランチ保護設定
+#### Branch Protection Settings
 
-|キー|必須|デフォルト|説明|
+|Key|Required|Default|Description|
 |-|-|-|-|
-|name|**true**|-|ブランチ保護の対象ブランチ名。|
-|enforce_admins|false|null|ブランチ保護を管理者にも適用するか。|
-|required_linear_history|false|null|直線状の履歴を必須にするかどうか。|
-|allow_force_pushes|false|null|強制プッシュを許可するかどうか。|
-|allow_deletions|false|null|プッシュアクセス権を持つユーザーが、保護されたブランチを削除できるようにするかどうか。|
-|required_conversation_resolution|false|null|マージ前にコメントの解決を必須にするかどうか。|
-|required_reviews|false|null|レビューを必須にするかどうか。|
-|dismiss_stale_reviews|false|null|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。|
-|require_code_owner_reviews|false|null|コード所有者のレビューが必須かどうか。|
-|required_approving_review_count|false|null|プルリクエストの承認に必要なレビュアーの数。|
+|name|**true**|-|Branch name for branch protection.|
+|enforce_admins|false|null|Apply branch protection to administrators.|
+|required_linear_history|false|null|Require linear history.|
+|allow_force_pushes|false|null|Allow force pushes.|
+|allow_deletions|false|null|Allow users with push access to delete the protected branch.|
+|required_conversation_resolution|false|null|Require conversation resolution before merging.|
+|required_reviews|false|null|Require reviews before merging.|
+|dismiss_stale_reviews|false|null|Dismiss approved reviews when new commits are pushed.|
+|require_code_owner_reviews|false|null|Require reviews from code owners.|
+|required_approving_review_count|false|null|Number of reviewers required to approve a pull request.|
 
-## 作者
+## Author
 
 finphie
 
-## ライセンス
+## License
 
 MIT
 
-## クレジット
+## Credits
 
-このプロジェクトでは、次のライブラリ等を使用しています。
+This project uses the following libraries, etc.
 
-### ライブラリ
+### Libraries
 
 - [ConsoleAppFramework](https://github.com/Cysharp/ConsoleAppFramework)
 
-### アナライザー
+### Analyzers
 
 - [DocumentationAnalyzers](https://github.com/DotNetAnalyzers/DocumentationAnalyzers)
 - [IDisposableAnalyzers](https://github.com/DotNetAnalyzers/IDisposableAnalyzers)
