@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: GitHub Settings Sync
-        uses: finphie/GitHubSettingsSync@v2.0.0
+        uses: finphie/GitHubSettingsSync@v3.0.0
         with:
           repository: GitHubSettingsSync
           path: github-settings.json
@@ -130,7 +130,7 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 |allow_update_branch|false|null|「Update branch」を有効にするかどうか。|
 |merge_commit_title|false|null|マージにおけるコミットタイトルの種類。PR_TITLE/MERGE_MESSAGEのいずれか。PR_TITLEでは、merge_commit_messageにPR_BODYまたはBLANKを指定してください。MERGE_MESSAGEでは、merge_commit_messageにPR_TITLEを指定してください。|
 |merge_commit_message|false|null|マージにおけるコミットメッセージの種類。PR_TITLE/PR_BODY/BLANKのいずれか。|
-|squash_merge_commit_title|false|null|スカッシュマージにおけるコミットタイトルの種類。PR_TITLE/COMMIT_OR_PR_TITLEのいずれか。|
+|squash_merge_commit_title|false|null|スカッシュマージにおけるコミットタイトルの種類。PR_TITLE/COMMIT_OR_PR_TITLEのいずれか。PR_TITLEでは、squash_merge_commit_messageにPR_BODYやCOMMIT_MESSAGES、BLANKを指定してください。COMMIT_OR_PR_TITLEでは、COMMIT_MESSAGESを指定してください。|
 |squash_merge_commit_message|false|null|スカッシュマージにおけるコミットメッセージの種類。PR_BODY/COMMIT_MESSAGES/BLANKのいずれか。|
 
 ##### security_and_analysis
@@ -159,6 +159,7 @@ JSON形式のファイルです。値が`null`の場合やキーを省略する�
 |dismiss_stale_reviews|false|null|新しいコミットがプッシュされたときに、承認済みのレビューを却下するかどうか。|
 |require_code_owner_reviews|false|null|コード所有者のレビューが必須かどうか。|
 |required_approving_review_count|false|null|プルリクエストの承認に必要なレビュアーの数。|
+|require_last_push_approval|false|null|最新のプッシュを行ったユーザー以外が承認する必要があるかどうか。|
 
 ## 作者
 

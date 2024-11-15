@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: GitHub Settings Sync
-        uses: finphie/GitHubSettingsSync@v2.0.0
+        uses: finphie/GitHubSettingsSync@v3.0.0
         with:
           repository: GitHubSettingsSync
           path: github-settings.json
@@ -132,7 +132,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |allow_update_branch|false|null|Enable or disable "Update branch".|
 |merge_commit_title|false|null|Type of commit title for merge. Either PR_TITLE or MERGE_MESSAGE. If PR_TITLE, specify PR_BODY or BLANK for merge_commit_message. If MERGE_MESSAGE, specify PR_TITLE for merge_commit_message.|
 |merge_commit_message|false|null|Type of commit message for merge. Either PR_TITLE, PR_BODY, or BLANK.|
-|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE.|
+|squash_merge_commit_title|false|null|Type of commit title for squash merge. Either PR_TITLE or COMMIT_OR_PR_TITLE. If PR_TITLE, specify PR_BODY, COMMIT_MESSAGES, or BLANK for squash_merge_commit_message. If COMMIT_OR_PR_TITLE, specify COMMIT_MESSAGES.|
 |squash_merge_commit_message|false|null|Type of commit message for squash merge. Either PR_BODY, COMMIT_MESSAGES, or BLANK.|
 
 ##### security_and_analysis
@@ -148,7 +148,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |-|-|-|-|
 |name|**true**|-|Branch name.|
 
-#### branch_protection
+##### branch_protection
 
 |Key|Required|Default|Description|
 |-|-|-|-|
@@ -161,6 +161,7 @@ The file is in JSON format. By setting the value to `null` or omitting the key, 
 |dismiss_stale_reviews|false|null|Dismiss approved reviews when new commits are pushed.|
 |require_code_owner_reviews|false|null|Require reviews from code owners.|
 |required_approving_review_count|false|null|Number of reviewers required to approve a pull request.|
+|require_last_push_approval|false|null|Require approval from someone other than the user who made the last push.|
 
 ## Author
 
