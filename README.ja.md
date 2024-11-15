@@ -4,8 +4,6 @@
 [![NuGet](https://img.shields.io/nuget/v/GitHubSettingsSync?color=0078d4&label=NuGet)](https://www.nuget.org/packages/GitHubSettingsSync/)
 [![Azure Artifacts](https://feeds.dev.azure.com/finphie/7af9aa4d-c550-43af-87a5-01539b2d9934/_apis/public/Packaging/Feeds/DotNet/Packages/f8147011-dc70-430b-ba72-56ee4008f90e/Badge)](https://dev.azure.com/finphie/Main/_artifacts/feed/DotNet/NuGet/GitHubSettingsSync?preferRelease=true)
 
-[日本語 (Japanese)](README.ja.md)
-
 GitHubの設定を同期するアプリケーションです。
 
 ## 説明
