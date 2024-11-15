@@ -190,12 +190,21 @@ static class Commands
         var (repositoryOwner, repositoryName) = RepositoryHelper.GetRepositoryOwnerAndName(repository);
 
         var bytes = File.ReadAllBytes(path);
-        var settings = JsonSerializer.Deserialize(bytes, ApplicationContext.Default.GitHubSettings);
+        var settings = JsonSerializer.Deserialize(bytes, ApplicationContext.Default.GitHubSettings)
+            ?? throw new InvalidOperationException("Failed to deserialize the settings.");
 
         var token = GitHubEnvironment.GetGitHubToken();
         var client = GitHubClient.Create(token);
 
-        await client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings.Repository).ConfigureAwait(false);
+        if (settings.Repository is not null)
+        {
+            await client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings.Repository).ConfigureAwait(false);
+        }
+
+        if (settings.Branches is null)
+        {
+            return;
+        }
 
         foreach (var branch in settings.Branches)
         {
