@@ -22,6 +22,7 @@ static class Commands
         ArgumentException.ThrowIfNullOrEmpty(path);
 
         var (repositoryOwner, repositoryName) = RepositoryHelper.GetRepositoryOwnerAndName(repository);
+        Console.WriteLine($"Synchronizing GitHub settings to {repository}.");
 
         var bytes = File.ReadAllBytes(path);
         var settings = JsonSerializer.Deserialize(bytes, ApplicationContext.Default.GitHubSettings)
@@ -32,6 +33,7 @@ static class Commands
 
         if (settings.Repository is not null)
         {
+            Console.WriteLine("Updating repository settings.");
             await client.Repositories.UpdateAsync(repositoryOwner, repositoryName, settings.Repository, cancellationToken).ConfigureAwait(false);
         }
 
@@ -42,6 +44,7 @@ static class Commands
 
         foreach (var branch in settings.Branches)
         {
+            Console.WriteLine($"Updating branch settings for {branch.Name}.");
             await client.Branches.BranchProtection.UpdateAsync(repositoryOwner, repositoryName, branch.Name, branch.BranchProtection, cancellationToken).ConfigureAwait(false);
         }
     }
