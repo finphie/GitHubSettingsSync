@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConsoleAppFramework" Version="5.2.4" />
+    <PackageReference Include="ConsoleAppFramework" Version="5.3.3" />
     <PackageReference Include="FToolkit.Helpers.GitHub" Version="2.0.0" />
     <PackageReference Include="FToolkit.Net.GitHub.Client" Version="2.0.0" />
   </ItemGroup>
