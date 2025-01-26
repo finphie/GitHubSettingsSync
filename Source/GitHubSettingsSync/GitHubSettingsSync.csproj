@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConsoleAppFramework" Version="5.3.4" />
-    <PackageReference Include="FToolkit.Helpers.GitHub" Version="2.0.0" />
-    <PackageReference Include="FToolkit.Net.GitHub.Client" Version="2.0.0" />
+    <PackageReference Include="ConsoleAppFramework" />
+    <PackageReference Include="FToolkit.Helpers.GitHub" />
+    <PackageReference Include="FToolkit.Net.GitHub.Client" />
   </ItemGroup>
 
   <Import Project="$(BuildCommonDirectory)Exe.props" />
